@@ -127,40 +127,76 @@
             <BuildOrder>2</BuildOrder>
         </CppCompile>
         <PCHCompile Include="GraphicsLab1H.h">
+            <VirtualFolder>{E451CA24-B7FB-4CE9-88EA-605C2914227A}</VirtualFolder>
             <BuildOrder>1</BuildOrder>
         </PCHCompile>
         <CppCompile Include="GraphicsLab1Proj.cpp">
+            <VirtualFolder>{E451CA24-B7FB-4CE9-88EA-605C2914227A}</VirtualFolder>
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <None Include="Graphics\GraphicsCamera.h">
-            <BuildOrder>11</BuildOrder>
-        </None>
-        <None Include="Graphics\GraphicsModule.h">
+        <CppCompile Include="Graphics\GraphicsCamera.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>3</BuildOrder>
-        </None>
-        <None Include="Graphics\GraphicsObjectDD.h">
+        </CppCompile>
+        <None Include="Graphics\GraphicsCamera.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>4</BuildOrder>
         </None>
-        <None Include="Graphics\GraphicsObjectTD.h">
+        <CppCompile Include="Graphics\GraphicsObjectDD.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>5</BuildOrder>
-        </None>
-        <CppCompile Include="Graphics\GraphicsOrtoSystem.cpp">
-            <BuildOrder>12</BuildOrder>
         </CppCompile>
-        <None Include="Graphics\GraphicsOrtoSystem.h">
+        <None Include="Graphics\GraphicsObjectDD.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>6</BuildOrder>
         </None>
-        <None Include="Graphics\GraphicsPointDD.h">
+        <CppCompile Include="Graphics\GraphicsObjectTD.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>7</BuildOrder>
-        </None>
-        <None Include="Graphics\GraphicsPointTD.h">
+        </CppCompile>
+        <None Include="Graphics\GraphicsObjectTD.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>8</BuildOrder>
         </None>
-        <None Include="Graphics\GraphicsProjectionDD.h">
+        <CppCompile Include="Graphics\GraphicsOrtoSystem.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>9</BuildOrder>
-        </None>
-        <None Include="Graphics\GraphicsShared.h">
+        </CppCompile>
+        <None Include="Graphics\GraphicsOrtoSystem.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
             <BuildOrder>10</BuildOrder>
+        </None>
+        <CppCompile Include="Graphics\GraphicsPointDD.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>11</BuildOrder>
+        </CppCompile>
+        <None Include="Graphics\GraphicsPointDD.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>12</BuildOrder>
+        </None>
+        <CppCompile Include="Graphics\GraphicsPointTD.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>13</BuildOrder>
+        </CppCompile>
+        <None Include="Graphics\GraphicsPointTD.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>14</BuildOrder>
+        </None>
+        <CppCompile Include="Graphics\GraphicsProjectionDD.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <None Include="Graphics\GraphicsProjectionDD.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>16</BuildOrder>
+        </None>
+        <CppCompile Include="Graphics\GraphicsShared.cpp">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
+        <None Include="Graphics\GraphicsShared.h">
+            <VirtualFolder>{EADB9A97-D104-48BB-AE5A-DECA60526420}</VirtualFolder>
+            <BuildOrder>18</BuildOrder>
         </None>
         <FormResources Include="GraphicsLab1.dfm"/>
         <BuildConfiguration Include="Release">
@@ -238,10 +274,11 @@
                     <ProjectProperties Name="ManagePaths">True</ProjectProperties>
                     <ProjectProperties Name="VerifyPackages">True</ProjectProperties>
                 </ProjectProperties>
-                <Folders>
-                    <Folder Path="Graphics" Masks="*.*" ShowSubdirectories="false"/>
-                </Folders>
-                <VFOLDERS/>
+                <Folders/>
+                <VFOLDERS>
+                    <VFOLDER ID="{EADB9A97-D104-48BB-AE5A-DECA60526420}" name="Graphics"/>
+                    <VFOLDER ID="{E451CA24-B7FB-4CE9-88EA-605C2914227A}" name="Project"/>
+                </VFOLDERS>
             </CPlusPlusBuilder.Personality>
             <Deployment/>
             <Platforms>
