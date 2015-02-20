@@ -1,28 +1,23 @@
-#ifndef GraphicsCamera
-#define GraphicsCamera
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: Main Camera
+//
+// =============================================================================
+
+#ifndef GRAPCHICS_CAMERA_H_
+#define GRAPCHICS_CAMERA_H_
 
 #include "GraphicsShared.h"
 
 class OCamera {
 public:
 	OCamera(int xshift, int yshift, int zshift, float pitch, float roll,
-		float yaw) {
-		fPitch = pitch;
-		fRoll = roll;
-		fYaw = yaw;
-		iXShift = xshift;
-		iYShift = yshift;
-		iZShift = zshift;
-	}
+		float yaw);
 
-	void SetRotation(float pitch, float roll, float yaw) {
-		fPitch = pitch;
-		fRoll = roll;
-		fYaw = yaw;
-	}
+	void SetRotation(float pitch, float roll, float yaw);
 
 	float fPitch, fRoll, fYaw;
 	int iXShift, iYShift, iZShift;
 };
 
-#endif
+#endif //GRAPCHICS_CAMERA_H_

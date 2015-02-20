@@ -1,5 +1,11 @@
-#ifndef GraphicsOrtoSystem
-#define GraphicsOrtoSystem
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: Ortogonal System. Requires OCamera
+//
+// =============================================================================
+
+#ifndef GRAPCHICS_OTROSYSTEM_H_
+#define GRAPCHICS_OTROSYSTEM_H_
 
 #include "GraphicsShared.h"
 #include "GraphicsCamera.h"
@@ -25,4 +31,4 @@ public:
 	std::vector<ObjectShared*>pObjects;
 };
 
-#endif
+#endif //GRAPCHICS_OTROSYSTEM_H_

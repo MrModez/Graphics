@@ -1,5 +1,11 @@
-#ifndef GraphicsObjectTD
-#define GraphicsObjectTD
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: 3D Object
+//
+// =============================================================================
+
+#ifndef GRAPCHICS_OBJECTTD_H_
+#define GRAPCHICS_OBJECTTD_H_
 
 #include "GraphicsShared.h"
 #include "GraphicsPointTD.h"
@@ -17,4 +23,4 @@ public:
 	std::vector<PointTD*>pPointsTD;
 };
 
-#endif
+#endif //GRAPCHICS_OBJECTTD_H_

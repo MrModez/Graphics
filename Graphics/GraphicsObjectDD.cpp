@@ -1,3 +1,9 @@
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: 2D Object
+//
+// =============================================================================
+
 #include "GraphicsObjectDD.h"
 
 ObjectDD::ObjectDD(std::vector<PointDD*>Object) {
@@ -7,8 +13,15 @@ ObjectDD::ObjectDD(std::vector<PointDD*>Object) {
 ObjectDD::ObjectDD() {
 }
 
+ObjectDD::~ObjectDD() {
+	for (unsigned int i = 0; i < pPointsDD.size(); i++) {
+		delete pPointsDD[i];
+	}
+	pPointsDD.clear();
+}
+
 void ObjectDD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
-	for (int j = 0; j < pPointsDD.size(); j++) {
+	for (unsigned int j = 0; j < pPointsDD.size(); j++) {
 		PointDD* pObjectDD = pPointsDD[j];
 		switch (pObjectDD->action) {
 		case ACT_MOVE:

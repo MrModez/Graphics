@@ -11,20 +11,17 @@
 TMainForm *MainForm;
 
 #define Point(X, Y)		Ellipse(X-5, Y-5, X+5, Y+5)
-#define MainCanvas		MainPaintBox->Canvas
 #define DEBUG			ShowMessage
 #define INT				StrToInt
 #define STR				IntToStr
-#define QMoveTo			MainCanvas->MoveTo
-#define QLineTo 		MainCanvas->LineTo
 #define COS 			cos
 #define SIN 			sin
 #define PITCH 			PitchSpin->Value + 0.5
 #define ROLL 			RollSpin->Value + 0.5
 #define YAW 			YawSpin->Value + 0.5
-#define _X 				XSpin->Value
-#define _Y 				YSpin->Value
-#define _Z 				ZSpin->Value
+#define SPINX 			XSpin->Value
+#define SPINY 			YSpin->Value
+#define SPINZ 			ZSpin->Value
 
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {

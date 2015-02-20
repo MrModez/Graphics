@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 0
-  Top = 0
+  Left = 220
+  Top = 83
   BorderStyle = bsSingle
   Caption = 'MainForm'
   ClientHeight = 772
@@ -13,6 +13,7 @@ object MainForm: TMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
   ScreenSnap = True
   OnShow = FormShow
   PixelsPerInch = 96

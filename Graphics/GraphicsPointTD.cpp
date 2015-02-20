@@ -1,3 +1,9 @@
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: 3D Point
+//
+// =============================================================================
+
 #include "GraphicsPointTD.h"
 
 PointTD::PointTD(float ix, float iy, float iz, Action iA) {
@@ -36,10 +42,16 @@ PointTD::PointTD(float ix, float iy, float iz, Type T, String Text) {
 	sText = Text;
 };
 
-PointTD& PointTD:: operator = (const PointTD & rhs) {
-	x = rhs.x;
-	y = rhs.y;
-	z = rhs.z;
-	action = rhs.action;
-	return *this;
+PointTD::~PointTD() {
+	x = 0;
+	y = 0;
+	z = 0;
+	action = ACT_NONE;
+	iType = TYPE_OBJECT;
+	sText = "";
+};
+
+PointDD* PointTD::GetPointDD() {
+	PointDD* result = new PointDD();
+	return result;
 };

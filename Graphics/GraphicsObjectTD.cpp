@@ -1,3 +1,9 @@
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: 3D Object
+//
+// =============================================================================
+
 #include "GraphicsObjectTD.h"
 #include "GraphicsProjectionDD.h"
 
@@ -9,12 +15,15 @@ ObjectTD::ObjectTD() {
 }
 
 ObjectTD::~ObjectTD() {
-
+	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
+		delete pPointsTD[i];
+	}
+	pPointsTD.clear();
 }
 
 void ObjectTD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
 	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
-	for (int j = 0; j < pProjection->pPointsDD.size(); j++) {
+	for (unsigned int j = 0; j < pProjection->pPointsDD.size(); j++) {
 		PointDD* pObjectDD = pProjection->pPointsDD[j];
 		switch (pObjectDD->action) {
 		case ACT_MOVE:

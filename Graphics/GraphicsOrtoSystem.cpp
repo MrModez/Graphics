@@ -1,4 +1,8 @@
-// Ortogonal System
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: Ortogonal System. Requires OCamera
+//
+// =============================================================================
 
 #include "GraphicsOrtoSystem.h"
 
@@ -7,7 +11,7 @@ OrtoSystem::OrtoSystem(OCamera* Camera) {
 };
 
 OrtoSystem::~OrtoSystem() {
-	for (int i = 0; i < pObjects.size(); i++) {
+	for (unsigned int i = 0; i < pObjects.size(); i++) {
 		delete pObjects[i];
 	}
 	pObjects.clear();
@@ -15,7 +19,7 @@ OrtoSystem::~OrtoSystem() {
 
 void OrtoSystem::Paint(TCanvas* pCanvas) {
 
-	for (int i = 0; i < pObjects.size(); i++) {
+	for (unsigned int i = 0; i < pObjects.size(); i++) {
 		pObjects[i]->Paint(pCanvas, pCamera);
 	}
 

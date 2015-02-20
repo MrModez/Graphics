@@ -1,5 +1,11 @@
-#ifndef GraphicsPointDD
-#define GraphicsPointDD
+// ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
+//
+// Purpose: 2D Point
+//
+// =============================================================================
+
+#ifndef GRAPCHICS_POINTDD_H_
+#define GRAPCHICS_POINTDD_H_
 
 #include "GraphicsShared.h"
 // #include "GraphicsPointTD.h"
@@ -12,6 +18,9 @@ public:
 	PointDD(float ix, float iy, Action iA, Type T);
 	PointDD(float ix, float iy, Type T);
 	PointDD(float ix, float iy, Type T, String Text);
+	~PointDD();
+
+	void AddShift(float iXShift, float iYShift, float iZShift);
 
 	float x;
 	float y;
@@ -20,4 +29,4 @@ public:
 	String sText;
 };
 
-#endif
+#endif //GRAPCHICS_POINTDD_H_
