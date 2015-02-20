@@ -43,7 +43,9 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	Coords->AddPoint(new PointTD(0, L, 0, draw));
 	Coords->AddPoint(new PointTD(0, 0, 0, move));
 	Coords->AddPoint(new PointTD(0, 0, L, draw));
-	pSystem->AddObject(Coords);
+	ObjectShared* CoordsShared = (ObjectShared*)Coords;
+	pSystem->AddObject(CoordsShared);
+
 	ObjectTD *Cube = new ObjectTD();
 	Cube->AddPoint(new PointTD(0, 0, 0, move));
 	Cube->AddPoint(new PointTD(100, 0, 0, draw));
@@ -61,11 +63,25 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	Cube->AddPoint(new PointTD(0, 100, 100, draw));
 	Cube->AddPoint(new PointTD(100, 100, 0, move));
 	Cube->AddPoint(new PointTD(100, 100, 100, draw));
-	pSystem->AddObject(Cube);
-	ObjectTD *Point = new ObjectTD();
-	Cube->AddPoint(new PointTD(_X, _Y, _Z, move));
-	Cube->AddPoint(new PointTD(_X, _Y, _Z + 2, draw));
-	pSystem->AddObject(Point);
+	ObjectShared* CubeShared = (ObjectShared*)Cube;
+	pSystem->AddObject(CubeShared);
+
+	L = MainForm->Width / 2;
+	ObjectDD *Crosshair = new ObjectDD();
+	Crosshair->AddPoint(new PointDD(L, L, move));
+	Crosshair->AddPoint(new PointDD(L, L - 10, draw));
+	Crosshair->AddPoint(new PointDD(L, L, move));
+	Crosshair->AddPoint(new PointDD(L, L + 10, draw));
+	Crosshair->AddPoint(new PointDD(L, L, move));
+	Crosshair->AddPoint(new PointDD(L - 10, L, draw));
+	Crosshair->AddPoint(new PointDD(L, L, move));
+	Crosshair->AddPoint(new PointDD(L + 10, L, draw));
+	ObjectShared* CrosshairShared = (ObjectShared*)Crosshair;
+	pSystem->AddObject(CrosshairShared);
+	// ObjectTD *Point = new ObjectTD();
+	// Cube->AddPoint(new PointTD(_X, _Y, _Z, move));
+	// Cube->AddPoint(new PointTD(_X, _Y, _Z + 2, draw));
+	// pSystem->AddObject(Point);
 }
 
 // ---------------------------------------------------------------------------

@@ -5,23 +5,34 @@
 #include <Direct2D.hpp>
 #define Pi 3.1415926536
 
-
-enum Action
-{
+enum Action {
 	none, move, draw
 };
 
-enum Axis
-{
+enum Axis {
 	AxisX, AxisY, AxisZ, AxisCount
 };
 
-class GraphicsBase
-{
-public:
-	GraphicsBase()
-	{
+class OCamera;
 
+class GraphicsBase {
+public:
+	GraphicsBase() {
+
+	}
+};
+
+class ObjectShared {
+public:
+	ObjectShared() {
+
+	}
+
+	virtual void Paint(TDirect2DCanvas* pCanvas, OCamera* pCamera) {
+		return;
+	}
+
+	virtual void qwe() {
 	}
 };
 

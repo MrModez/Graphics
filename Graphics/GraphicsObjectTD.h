@@ -3,24 +3,16 @@
 
 #include "GraphicsShared.h"
 #include "GraphicsPointTD.h"
+#include "GraphicsCamera.h"
 
-class ObjectTD {
+class ObjectTD : ObjectShared {
 public:
-	ObjectTD(std::vector<PointTD*>Object) {
-		pPointsTD = Object;
-	}
+	ObjectTD(std::vector<PointTD*>Object);
+	ObjectTD();
+	~ObjectTD();
 
-	ObjectTD() {
-	}
-
-	~ObjectTD() {
-		// for (int i = pPointsTD.; i < 10; i++) {
-		// }
-	}
-
-	void AddPoint(PointTD * Point) {
-		pPointsTD.push_back(Point);
-	}
+	virtual void Paint(TDirect2DCanvas* pCanvas, OCamera* pCamera);
+	void AddPoint(PointTD * Point);
 
 	std::vector<PointTD*>pPointsTD;
 };

@@ -3,7 +3,7 @@
 
 #include "GraphicsShared.h"
 #include "GraphicsCamera.h"
-#include "GraphicsProjectionDD.h"
+// #include "GraphicsProjectionDD.h"
 // Ortogonal System
 
 #include "GraphicsObjectTD.h"
@@ -17,11 +17,12 @@ public:
 	~OrtoSystem();
 
 	void Paint(TDirect2DCanvas* pCanvas);
-	void AddObject(ObjectTD * pObject);
+	void AddObject(ObjectShared * pObject);
 
 	OCamera* pCamera;
 
-	std::vector<ObjectTD*>pObjectsTD;
+	// std::vector<ObjectTD*>pObjectsTD;
+	std::vector<ObjectShared*>pObjects;
 };
 
 #endif
