@@ -90,12 +90,12 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	pSystem->AddObject(TextShared);
 
 	ObjectDD *TextDD = new ObjectDD();
-	TextDD->AddPoint(new PointDD(200, 100, TYPE_TEXT, "Text2D"));
+	TextDD->AddPoint(new PointDD(500, 500, TYPE_TEXT, "Text2D"));
 	ObjectShared* TextDDShared = (ObjectShared*)TextDD;
 	pSystem->AddObject(TextDDShared);
 
 	ObjectDD *PointDDD = new ObjectDD();
-	PointDDD->AddPoint(new PointDD(180, 120, TYPE_POINT));
+	PointDDD->AddPoint(new PointDD(500, 250, TYPE_POINT));
 	ObjectShared* PointDDShared = (ObjectShared*)PointDDD;
 	pSystem->AddObject(PointDDShared);
 
