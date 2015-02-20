@@ -15,11 +15,11 @@ public:
 
 	// PointDD* Projection(PointTD* pPointTD, OCamera* pCamera);
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, OCamera* pCamera);
-	PointTD Multiple(float m[AxisCount][AxisCount], PointTD m2);
+	PointTD Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
 	PointTD Rotate3D(PointTD oPointTD, float fPitch, float fRoll, float fYaw);
 	float DegToRad(float in);
 
-	static float matrix[AxisCount][AxisCount];
+	static float matrix[AXIS_COUNT][AXIS_COUNT];
 
 	std::vector<PointDD*>pPointsDD;
 };

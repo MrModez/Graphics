@@ -3,13 +3,42 @@
 
 #include "GraphicsShared.h"
 
-class PointTD : GraphicsBase {
+class PointTD {
 public:
 	PointTD(float ix, float iy, float iz, Action iA) {
 		x = ix;
 		y = iy;
 		z = iz;
 		action = iA;
+		iType = TYPE_OBJECT;
+		sText = "";
+	};
+
+	PointTD(float ix, float iy, float iz, Action iA, Type T) {
+		x = ix;
+		y = iy;
+		z = iz;
+		action = iA;
+		iType = T;
+		sText = "";
+	};
+
+	PointTD(float ix, float iy, float iz, Type T) {
+		x = ix;
+		y = iy;
+		z = iz;
+		action = ACT_NONE;
+		iType = T;
+		sText = "";
+	};
+
+	PointTD(float ix, float iy, float iz, Type T, String Text) {
+		x = ix;
+		y = iy;
+		z = iz;
+		action = ACT_NONE;
+		iType = T;
+		sText = Text;
 	};
 
 	PointTD & operator = (const PointTD & rhs) {
@@ -24,6 +53,8 @@ public:
 	float y;
 	float z;
 	Action action;
+	Type iType;
+	String sText;
 };
 
 #endif

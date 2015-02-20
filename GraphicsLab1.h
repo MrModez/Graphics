@@ -13,13 +13,11 @@
 #include <vector>
 #define Pi 3.1415926536
 
-#include "GraphicsPointDD.h"
-#include "GraphicsPointTD.h"
 #include "GraphicsObjectDD.h"
 #include "GraphicsObjectTD.h"
-#include "GraphicsProjectionDD.h"
 #include "GraphicsCamera.h"
 #include "GraphicsOrtoSystem.h"
+#include "GraphicsShared.h"
 
 // ---------------------------------------------------------------------------
 class TMainForm : public TForm {

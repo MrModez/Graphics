@@ -41,7 +41,7 @@ std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 	return result->pPointsDD;
 };
 
-PointTD ProjectionDD::Multiple(float m[AxisCount][AxisCount], PointTD m2) {
+PointTD ProjectionDD::Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2) {
 	int X = m[0][0] * m2.x + m[0][1] * m2.y + m[0][2] * m2.z;
 	int Y = m[1][0] * m2.x + m[1][1] * m2.y + m[1][2] * m2.z;
 	int Z = m[2][0] * m2.x + m[2][1] * m2.y + m[2][2] * m2.z;
@@ -52,10 +52,10 @@ PointTD ProjectionDD::Multiple(float m[AxisCount][AxisCount], PointTD m2) {
 PointTD ProjectionDD::Rotate3D(PointTD oPointTD, float fPitch, float fRoll,
 	float fYaw) {
 	PointTD result = oPointTD;
-	for (int i = AxisX; i < AxisCount; i++) {
-		float matrix[AxisCount][AxisCount];
+	for (int i = AXIS_X; i < AXIS_COUNT; i++) {
+		float matrix[AXIS_COUNT][AXIS_COUNT];
 		switch (i) {
-		case AxisX:
+		case AXIS_X:
 			matrix[0][0] = 1.0;
 			matrix[0][1] = 0;
 			matrix[0][2] = 0;
@@ -66,7 +66,7 @@ PointTD ProjectionDD::Rotate3D(PointTD oPointTD, float fPitch, float fRoll,
 			matrix[2][1] = -sin(fPitch);
 			matrix[2][2] = cos(fPitch);
 			break;
-		case AxisY:
+		case AXIS_Y:
 			matrix[0][0] = cos(fRoll);
 			matrix[0][1] = 0;
 			matrix[0][2] = -sin(fRoll);
@@ -77,7 +77,7 @@ PointTD ProjectionDD::Rotate3D(PointTD oPointTD, float fPitch, float fRoll,
 			matrix[2][1] = 0;
 			matrix[2][2] = cos(fRoll);
 			break;
-		case AxisZ:
+		case AXIS_Z:
 			matrix[0][0] = cos(fYaw);
 			matrix[0][1] = sin(fYaw);
 			matrix[0][2] = 0;

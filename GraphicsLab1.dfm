@@ -99,7 +99,8 @@ object MainForm: TMainForm
     OnChange = YawSpinChange
   end
   object DrawTimer: TTimer
-    Interval = 10
+    Enabled = False
+    Interval = 100
     OnTimer = DrawTimerTimer
     Left = 736
     Top = 16

@@ -9,7 +9,7 @@ public:
 	PointDD() {
 		x = 0;
 		y = 0;
-		action = none;
+		action = ACT_NONE;
 	};
 
 	PointDD(float ix, float iy, Action iA) {

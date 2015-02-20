@@ -6,21 +6,22 @@
 #define Pi 3.1415926536
 
 enum Action {
-	none, move, draw
+	ACT_NONE, ACT_MOVE, ACT_DRAW
 };
 
 enum Axis {
-	AxisX, AxisY, AxisZ, AxisCount
+	AXIS_X, AXIS_Y, AXIS_Z, AXIS_COUNT
+};
+
+enum Dim {
+	DIM_DD, DIM_TD
+};
+
+enum Type {
+	TYPE_OBJECT, TYPE_POINT, TYPE_TEXT
 };
 
 class OCamera;
-
-class GraphicsBase {
-public:
-	GraphicsBase() {
-
-	}
-};
 
 class ObjectShared {
 public:
@@ -34,6 +35,7 @@ public:
 
 	virtual void qwe() {
 	}
+
 };
 
 #endif
