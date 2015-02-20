@@ -32,6 +32,9 @@ __published: // IDE-managed Components
 	TSpinEdit *PitchSpin;
 	TSpinEdit *RollSpin;
 	TSpinEdit *YawSpin;
+	TLabel *Pitch;
+	TLabel *Label1;
+	TLabel *Label2;
 
 	void __fastcall MainPaintBoxPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);
@@ -39,6 +42,7 @@ __published: // IDE-managed Components
 	void __fastcall RollSpinChange(TObject * Sender);
 	void __fastcall YawSpinChange(TObject * Sender);
 	void __fastcall FormShow(TObject *Sender);
+	void __fastcall AAButClick(TObject *Sender);
 
 private: // User declarations
 

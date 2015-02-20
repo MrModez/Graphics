@@ -1,9 +1,10 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'MainForm'
-  ClientHeight = 762
-  ClientWidth = 784
+  ClientHeight = 772
+  ClientWidth = 794
   Color = clBtnHighlight
   DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
@@ -12,18 +13,42 @@ object MainForm: TMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  ScreenSnap = True
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object MainPaintBox: TPaintBox
     Left = 0
     Top = 0
-    Width = 784
-    Height = 762
+    Width = 794
+    Height = 772
     Align = alClient
     OnPaint = MainPaintBoxPaint
     ExplicitLeft = -8
     ExplicitTop = 8
+    ExplicitWidth = 784
+    ExplicitHeight = 762
+  end
+  object Pitch: TLabel
+    Left = 205
+    Top = 8
+    Width = 23
+    Height = 13
+    Caption = 'Pitch'
+  end
+  object Label1: TLabel
+    Left = 251
+    Top = 8
+    Width = 17
+    Height = 13
+    Caption = 'Roll'
+  end
+  object Label2: TLabel
+    Left = 297
+    Top = 8
+    Width = 20
+    Height = 13
+    Caption = 'Yaw'
   end
   object XSpin: TSpinEdit
     Left = 24
@@ -64,6 +89,7 @@ object MainForm: TMainForm
     Checked = True
     State = cbChecked
     TabOrder = 3
+    OnClick = AAButClick
   end
   object PitchSpin: TSpinEdit
     Left = 205
@@ -73,7 +99,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 4
-    Value = 64
+    Value = 116
     OnChange = PitchSpinChange
   end
   object RollSpin: TSpinEdit
@@ -84,7 +110,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 5
-    Value = -22
+    Value = 180
     OnChange = RollSpinChange
   end
   object YawSpin: TSpinEdit
@@ -95,7 +121,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 6
-    Value = 57
+    Value = 64
     OnChange = YawSpinChange
   end
   object DrawTimer: TTimer

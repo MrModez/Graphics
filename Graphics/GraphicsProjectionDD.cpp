@@ -4,24 +4,6 @@ ProjectionDD::ProjectionDD(ObjectTD* pObjectTD, OCamera* pCamera) {
 	pPointsDD = Projection(pObjectTD, pCamera);
 }
 
-// ProjectionDD::ProjectionDD(PointTD* pPointTD, OCamera* pCamera) {
-// pProjection->AddPoint(Projection(pPointTD, pCamera));
-// }
-
-/*
- PointDD* ProjectionDD::Projection(PointTD* pPointTD, OCamera* pCamera) {
- PointTD oPointTD(*pPointTD);
- oPointTD = Rotate3D(oPointTD, DegToRad(pCamera->fPitch),
- DegToRad(pCamera->fRoll), DegToRad(pCamera->fYaw));
-
- PointDD* pPointDD = new PointDD();
- pPointDD->x = pCamera->iZShift * oPointTD.x + pCamera->iXShift;
- pPointDD->y = pCamera->iZShift * oPointTD.y + pCamera->iYShift;
- pPointDD->action = oPointTD.action;
-
- return pPointDD;
- }; */
-
 std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 	OCamera* pCamera) {
 	ObjectDD* result = new ObjectDD();
@@ -42,9 +24,9 @@ std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 };
 
 PointTD ProjectionDD::Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2) {
-	int X = m[0][0] * m2.x + m[0][1] * m2.y + m[0][2] * m2.z;
-	int Y = m[1][0] * m2.x + m[1][1] * m2.y + m[1][2] * m2.z;
-	int Z = m[2][0] * m2.x + m[2][1] * m2.y + m[2][2] * m2.z;
+	float X = m[0][0] * m2.x + m[0][1] * m2.y + m[0][2] * m2.z;
+	float Y = m[1][0] * m2.x + m[1][1] * m2.y + m[1][2] * m2.z;
+	float Z = m[2][0] * m2.x + m[2][1] * m2.y + m[2][2] * m2.z;
 	PointTD Result(X, Y, Z, m2.action);
 	return Result;
 }
@@ -55,7 +37,7 @@ PointTD ProjectionDD::Rotate3D(PointTD oPointTD, float fPitch, float fRoll,
 	for (int i = AXIS_X; i < AXIS_COUNT; i++) {
 		float matrix[AXIS_COUNT][AXIS_COUNT];
 		switch (i) {
-		case AXIS_X:
+		case AXIS_Z:
 			matrix[0][0] = 1.0;
 			matrix[0][1] = 0;
 			matrix[0][2] = 0;
@@ -77,7 +59,7 @@ PointTD ProjectionDD::Rotate3D(PointTD oPointTD, float fPitch, float fRoll,
 			matrix[2][1] = 0;
 			matrix[2][2] = cos(fRoll);
 			break;
-		case AXIS_Z:
+		case AXIS_X:
 			matrix[0][0] = cos(fYaw);
 			matrix[0][1] = sin(fYaw);
 			matrix[0][2] = 0;

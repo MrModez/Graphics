@@ -46,6 +46,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	Coords->AddPoint(new PointTD(L, 0, 0, TYPE_TEXT, "X"));
 	Coords->AddPoint(new PointTD(0, L, 0, TYPE_TEXT, "Y"));
 	Coords->AddPoint(new PointTD(0, 0, L, TYPE_TEXT, "Z"));
+	Coords->AddPoint(new PointTD(0, 0, 0, TYPE_POINT));
 	ObjectShared* CoordsShared = (ObjectShared*)Coords;
 	pSystem->AddObject(CoordsShared);
 
@@ -147,4 +148,8 @@ void __fastcall TMainForm::YawSpinChange(TObject *Sender) {
 	MainPaintBox->Refresh();
 }
 
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::AAButClick(TObject *Sender) {
+	MainPaintBox->Refresh();
+}
 // ---------------------------------------------------------------------------
