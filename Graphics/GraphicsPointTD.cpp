@@ -50,8 +50,3 @@ PointTD::~PointTD() {
 	iType = TYPE_OBJECT;
 	sText = "";
 };
-
-PointDD* PointTD::GetPointDD() {
-	// PointDD* result = new PointDD();
-	return new PointDD();
-};

@@ -18,8 +18,6 @@ public:
 	PointTD(float X, float Y, float Z, Type T, String Text);
 	~PointTD();
 
-	PointDD* GetPointDD();
-
 	float fZ;
 };
 
