@@ -18,9 +18,12 @@ public:
 	~ObjectTD();
 
 	virtual void Paint(TCanvas* pCanvas, OCamera* pCamera);
+	// void SetParameter(Param iP);
 	void AddPoint(PointTD * Point);
 
 	std::vector<PointTD*>pPointsTD;
+
+	// Param iParam;
 };
 
 #endif //GRAPCHICS_OBJECTTD_H_

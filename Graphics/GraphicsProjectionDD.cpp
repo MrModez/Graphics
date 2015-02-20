@@ -47,37 +47,37 @@ PointTD* ProjectionDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 		float matrix[AXIS_COUNT][AXIS_COUNT];
 		switch (i) {
 		case AXIS_X:
-			matrix[0][0] = 1.0;
-			matrix[0][1] = 0;
-			matrix[0][2] = 0;
-			matrix[1][0] = 0;
-			matrix[1][1] = cos(fPitch);
-			matrix[1][2] = sin(fPitch);
-			matrix[2][0] = 0;
-			matrix[2][1] = -sin(fPitch);
-			matrix[2][2] = cos(fPitch);
-			break;
-		case AXIS_Y:
-			matrix[0][0] = cos(fRoll);
-			matrix[0][1] = 0;
-			matrix[0][2] = -sin(fRoll);
-			matrix[1][0] = 0;
-			matrix[1][1] = 1.0;
-			matrix[1][2] = 0;
-			matrix[2][0] = sin(fRoll);
-			matrix[2][1] = 0;
-			matrix[2][2] = cos(fRoll);
-			break;
-		case AXIS_Z:
 			matrix[0][0] = cos(fYaw);
 			matrix[0][1] = sin(fYaw);
-			matrix[0][2] = 0;
+			matrix[0][2] = 0.0;
 			matrix[1][0] = -sin(fYaw);
 			matrix[1][1] = cos(fYaw);
-			matrix[1][2] = 0;
-			matrix[2][0] = 0;
-			matrix[2][1] = 0;
+			matrix[1][2] = 0.0;
+			matrix[2][0] = 0.0;
+			matrix[2][1] = 0.0;
 			matrix[2][2] = 1.0;
+			break;
+		case AXIS_Y:
+			matrix[0][0] = cos(fPitch);
+			matrix[0][1] = 0.0;
+			matrix[0][2] = -sin(fPitch);
+			matrix[1][0] = 0.0;
+			matrix[1][1] = 1.0;
+			matrix[1][2] = 0.0;
+			matrix[2][0] = sin(fPitch);
+			matrix[2][1] = 0.0;
+			matrix[2][2] = cos(fPitch);
+			break;
+		case AXIS_Z:
+			matrix[0][0] = 1.0;
+			matrix[0][1] = 0.0;
+			matrix[0][2] = 0.0;
+			matrix[1][0] = 0.0;
+			matrix[1][1] = cos(fRoll);
+			matrix[1][2] = sin(fRoll);
+			matrix[2][0] = 0.0;
+			matrix[2][1] = -sin(fRoll);
+			matrix[2][2] = cos(fRoll);
 			break;
 		default:
 			break;
@@ -87,7 +87,7 @@ PointTD* ProjectionDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 	return new PointTD(pPointTD);
 }
 
-float ProjectionDD::DegToRad(float in) {
-	float a = in * Pi / 180.0;
-	return tan(a);
+float ProjectionDD::DegToRad(float fDeg) {
+	float fRad = fDeg * Pi / 180.0;
+	return tan(fRad);
 };

@@ -21,6 +21,8 @@ public:
 	void AddPoint(PointDD * Point);
 
 	std::vector<PointDD*>pPointsDD;
+
+	// Param iParam;
 };
 
 #endif //GRAPCHICS_OBJECTDD_H_

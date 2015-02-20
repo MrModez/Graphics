@@ -25,6 +25,9 @@ void ObjectTD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
 	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
 	for (unsigned int j = 0; j < pProjection->pPointsDD.size(); j++) {
 		PointDD* pObjectDD = pProjection->pPointsDD[j];
+		// if (iParam == PAR_BOLD) {
+		// pCanvas->Pen->Width = 2;
+		// }
 		switch (pObjectDD->iAction) {
 		case ACT_MOVE:
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
@@ -49,9 +52,14 @@ void ObjectTD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
 		default:
 			break;
 		}
+		// pCanvas->Pen->Width = 1;
 	}
 	delete pProjection;
 }
+
+// void ObjectTD::SetParameter(Param iP) {
+// iParam = iP;
+// };
 
 void ObjectTD::AddPoint(PointTD * Point) {
 	pPointsTD.push_back(Point);

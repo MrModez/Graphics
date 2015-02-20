@@ -20,6 +20,7 @@ OrtoSystem::~OrtoSystem() {
 void OrtoSystem::Paint(TCanvas* pCanvas) {
 
 	for (unsigned int i = 0; i < pObjects.size(); i++) {
+		//int qwe = pCanvas->Pen->Width;
 		pObjects[i]->Paint(pCanvas, pCamera);
 	}
 

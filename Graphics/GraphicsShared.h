@@ -23,6 +23,10 @@ enum Dim { // unused
 	DIM_DD, DIM_TD
 };
 
+enum Param {
+	PAR_NONE, PAR_BOLD
+};
+
 enum Type {
 	TYPE_OBJECT, TYPE_POINT, TYPE_TEXT
 };

@@ -16,9 +16,9 @@ TMainForm *MainForm;
 #define STR				IntToStr
 #define COS 			cos
 #define SIN 			sin
-#define PITCH 			PitchSpin->Value + 0.5
-#define ROLL 			RollSpin->Value + 0.5
-#define YAW 			YawSpin->Value + 0.5
+#define PITCH 			PitchSpin->Value
+#define ROLL 			RollSpin->Value
+#define YAW 			YawSpin->Value
 #define SPINX 			XSpin->Value
 #define SPINY 			YSpin->Value
 #define SPINZ 			ZSpin->Value
@@ -26,7 +26,7 @@ TMainForm *MainForm;
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 	MainForm->ControlStyle << csOpaque;
-	pCamera = new OCamera(350, 500, 2.5, PITCH, ROLL, YAW);
+	pCamera = new OCamera(300, 500, 2, PITCH, ROLL, YAW);
 	pSystem = new OrtoSystem(pCamera);
 }
 
@@ -44,6 +44,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	Coords->AddPoint(new PointTD(0, L, 0, TYPE_TEXT, "Y"));
 	Coords->AddPoint(new PointTD(0, 0, L, TYPE_TEXT, "Z"));
 	Coords->AddPoint(new PointTD(0, 0, 0, TYPE_POINT));
+	// Coords->SetParameter(PAR_BOLD);
 	ObjectShared* CoordsShared = (ObjectShared*)Coords;
 	pSystem->AddObject(CoordsShared);
 
