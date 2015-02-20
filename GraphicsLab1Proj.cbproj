@@ -6,7 +6,7 @@
         <AppType>Application</AppType>
         <MainSource>GraphicsLab1Proj.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
     </PropertyGroup>
@@ -52,7 +52,6 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <BCC_PCHInject>Graphics\GraphicsCamera.h</BCC_PCHInject>
         <ILINK_LibraryPath>Graphics\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <IncludePath>Graphics\;$(IncludePath)</IncludePath>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
@@ -145,6 +144,9 @@
         <None Include="Graphics\GraphicsObjectTD.h">
             <BuildOrder>5</BuildOrder>
         </None>
+        <CppCompile Include="Graphics\GraphicsOrtoSystem.cpp">
+            <BuildOrder>12</BuildOrder>
+        </CppCompile>
         <None Include="Graphics\GraphicsOrtoSystem.h">
             <BuildOrder>6</BuildOrder>
         </None>

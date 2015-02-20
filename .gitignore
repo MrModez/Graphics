@@ -21,6 +21,8 @@ $RECYCLE.BIN/
 *.~*~
 *.#*
 *.obj
+*.local
+*.cbproj.local
 Debug/
 Release/
 
