@@ -6,52 +6,52 @@
 
 #include "GraphicsPointTD.h"
 
-PointTD::PointTD(float ix, float iy, float iz, Action iA) {
-	x = ix;
-	y = iy;
-	z = iz;
-	action = iA;
+PointTD::PointTD(float X, float Y, float Z, Action iA) {
+	fX = X;
+	fY = Y;
+	fZ = Z;
+	iAction = iA;
 	iType = TYPE_OBJECT;
 	sText = "";
 };
 
-PointTD::PointTD(float ix, float iy, float iz, Action iA, Type T) {
-	x = ix;
-	y = iy;
-	z = iz;
-	action = iA;
+PointTD::PointTD(float X, float Y, float Z, Action iA, Type T) {
+	fX = X;
+	fY = Y;
+	fZ = Z;
+	iAction = iA;
 	iType = T;
 	sText = "";
 };
 
-PointTD::PointTD(float ix, float iy, float iz, Type T) {
-	x = ix;
-	y = iy;
-	z = iz;
-	action = ACT_NONE;
+PointTD::PointTD(float X, float Y, float Z, Type T) {
+	fX = X;
+	fY = Y;
+	fZ = Z;
+	iAction = ACT_NONE;
 	iType = T;
 	sText = "";
 };
 
-PointTD::PointTD(float ix, float iy, float iz, Type T, String Text) {
-	x = ix;
-	y = iy;
-	z = iz;
-	action = ACT_NONE;
+PointTD::PointTD(float X, float Y, float Z, Type T, String Text) {
+	fX = X;
+	fY = Y;
+	fZ = Z;
+	iAction = ACT_NONE;
 	iType = T;
 	sText = Text;
 };
 
 PointTD::~PointTD() {
-	x = 0;
-	y = 0;
-	z = 0;
-	action = ACT_NONE;
+	fX = 0.0;
+	fY = 0.0;
+	fZ = 0.0;
+	iAction = ACT_NONE;
 	iType = TYPE_OBJECT;
 	sText = "";
 };
 
 PointDD* PointTD::GetPointDD() {
-	PointDD* result = new PointDD();
-	return result;
+	// PointDD* result = new PointDD();
+	return new PointDD();
 };

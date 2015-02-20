@@ -34,10 +34,10 @@ std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 
 PointTD ProjectionDD::Multiple(float mat[AXIS_COUNT][AXIS_COUNT], PointTD pPTD)
 {
-	float X = mat[0][0] * pPTD.x + mat[0][1] * pPTD.y + mat[0][2] * pPTD.z;
-	float Y = mat[1][0] * pPTD.x + mat[1][1] * pPTD.y + mat[1][2] * pPTD.z;
-	float Z = mat[2][0] * pPTD.x + mat[2][1] * pPTD.y + mat[2][2] * pPTD.z;
-	PointTD Result(X, Y, Z, pPTD.action);
+	float X = mat[0][0] * pPTD.fX + mat[0][1] * pPTD.fY + mat[0][2] * pPTD.fZ;
+	float Y = mat[1][0] * pPTD.fX + mat[1][1] * pPTD.fY + mat[1][2] * pPTD.fZ;
+	float Z = mat[2][0] * pPTD.fX + mat[2][1] * pPTD.fY + mat[2][2] * pPTD.fZ;
+	PointTD Result(X, Y, Z, pPTD.iAction);
 	return Result;
 }
 

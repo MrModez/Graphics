@@ -16,8 +16,12 @@ public:
 
 	void SetRotation(float pitch, float roll, float yaw);
 
-	float fPitch, fRoll, fYaw;
-	int iXShift, iYShift, iZShift;
+	float fPitch;
+	float fRoll;
+	float fYaw;
+	int iXShift;
+	int iYShift;
+	int iZShift;
 };
 
 #endif //GRAPCHICS_CAMERA_H_

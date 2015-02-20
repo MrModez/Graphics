@@ -12,15 +12,15 @@
 
 class PointTD : public PointDD {
 public:
-	PointTD(float ix, float iy, float iz, Action iA);
-	PointTD(float ix, float iy, float iz, Action iA, Type T);
-	PointTD(float ix, float iy, float iz, Type T);
-	PointTD(float ix, float iy, float iz, Type T, String Text);
+	PointTD(float X, float Y, float Z, Action iA);
+	PointTD(float X, float Y, float Z, Action iA, Type T);
+	PointTD(float X, float Y, float Z, Type T);
+	PointTD(float X, float Y, float Z, Type T, String Text);
 	~PointTD();
 
 	PointDD* GetPointDD();
 
-	float z;
+	float fZ;
 };
 
 #endif //GRAPCHICS_POINTTD_H_

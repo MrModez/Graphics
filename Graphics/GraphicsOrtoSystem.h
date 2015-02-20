@@ -27,7 +27,6 @@ public:
 
 	OCamera* pCamera;
 
-	// std::vector<ObjectTD*>pObjectsTD;
 	std::vector<ObjectShared*>pObjects;
 };
 

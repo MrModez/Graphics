@@ -14,17 +14,17 @@ class PointDD {
 public:
 	PointDD();
 
-	PointDD(float ix, float iy, Action iA);
-	PointDD(float ix, float iy, Action iA, Type T);
-	PointDD(float ix, float iy, Type T);
-	PointDD(float ix, float iy, Type T, String Text);
+	PointDD(float X, float Y, Action iA);
+	PointDD(float X, float Y, Action iA, Type T);
+	PointDD(float X, float Y, Type T);
+	PointDD(float X, float Y, Type T, String Text);
 	~PointDD();
 
 	void AddShift(float iXShift, float iYShift, float iZShift);
 
-	float x;
-	float y;
-	Action action;
+	float fX;
+	float fY;
+	Action iAction;
 	Type iType;
 	String sText;
 };
