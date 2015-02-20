@@ -99,7 +99,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 4
-    Value = 116
+    Value = -33
     OnChange = PitchSpinChange
   end
   object RollSpin: TSpinEdit
@@ -110,7 +110,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 5
-    Value = 180
+    Value = 25
     OnChange = RollSpinChange
   end
   object YawSpin: TSpinEdit
@@ -121,7 +121,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 6
-    Value = 64
+    Value = 57
     OnChange = YawSpinChange
   end
   object DrawTimer: TTimer

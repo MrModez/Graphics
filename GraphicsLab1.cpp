@@ -20,7 +20,7 @@ TMainForm *MainForm;
 #define COS 			cos
 #define SIN 			sin
 #define PITCH 			PitchSpin->Value + 0.5
-#define ROLL 			RollSpin->Value
+#define ROLL 			RollSpin->Value + 0.5
 #define YAW 			YawSpin->Value + 0.5
 #define _X 				XSpin->Value
 #define _Y 				YSpin->Value
@@ -29,7 +29,7 @@ TMainForm *MainForm;
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 	MainForm->ControlStyle << csOpaque;
-	pCamera = new OCamera(300, 500, 2.5, PITCH, ROLL, YAW);
+	pCamera = new OCamera(350, 500, 2.5, PITCH, ROLL, YAW);
 	pSystem = new OrtoSystem(pCamera);
 }
 
@@ -70,23 +70,34 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	ObjectShared* CubeShared = (ObjectShared*)Cube;
 	pSystem->AddObject(CubeShared);
 
-	L = MainForm->Width / 2;
+	int X = MainForm->Width / 2;
+	int Y = MainForm->Height / 2;
 	ObjectDD *Crosshair = new ObjectDD();
-	Crosshair->AddPoint(new PointDD(L, L, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(L, L - 10, ACT_DRAW));
-	Crosshair->AddPoint(new PointDD(L, L, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(L, L + 10, ACT_DRAW));
-	Crosshair->AddPoint(new PointDD(L, L, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(L - 10, L, ACT_DRAW));
-	Crosshair->AddPoint(new PointDD(L, L, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(L + 10, L, ACT_DRAW));
+	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
+	Crosshair->AddPoint(new PointDD(X, Y - 10, ACT_DRAW));
+	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
+	Crosshair->AddPoint(new PointDD(X, Y + 10, ACT_DRAW));
+	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
+	Crosshair->AddPoint(new PointDD(X - 10, Y, ACT_DRAW));
+	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
+	Crosshair->AddPoint(new PointDD(X + 10, Y, ACT_DRAW));
 	ObjectShared* CrosshairShared = (ObjectShared*)Crosshair;
 	pSystem->AddObject(CrosshairShared);
 
 	ObjectTD *Text = new ObjectTD();
-	Text->AddPoint(new PointTD(100, 100, 100, TYPE_TEXT, "Text"));
+	Text->AddPoint(new PointTD(100, 100, 100, TYPE_TEXT, "Text3D"));
 	ObjectShared* TextShared = (ObjectShared*)Text;
 	pSystem->AddObject(TextShared);
+
+	ObjectDD *TextDD = new ObjectDD();
+	TextDD->AddPoint(new PointDD(200, 100, TYPE_TEXT, "Text2D"));
+	ObjectShared* TextDDShared = (ObjectShared*)TextDD;
+	pSystem->AddObject(TextDDShared);
+
+	ObjectDD *PointDDD = new ObjectDD();
+	PointDDD->AddPoint(new PointDD(180, 120, TYPE_POINT));
+	ObjectShared* PointDDShared = (ObjectShared*)PointDDD;
+	pSystem->AddObject(PointDDShared);
 
 	ObjectTD *Point = new ObjectTD();
 	Text->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
@@ -98,11 +109,6 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	Text->AddPoint(new PointTD(50, 50, 50, TYPE_POINT));
 	ObjectShared* PointShared = (ObjectShared*)Point;
 	pSystem->AddObject(PointShared);
-
-	// ObjectTD *Point = new ObjectTD();
-	// Cube->AddPoint(new PointTD(_X, _Y, _Z, ACT_MOVE));
-	// Cube->AddPoint(new PointTD(_X, _Y, _Z + 2, ACT_DRAW));
-	// pSystem->AddObject(Point);
 }
 
 // ---------------------------------------------------------------------------

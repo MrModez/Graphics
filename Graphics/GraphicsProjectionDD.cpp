@@ -37,7 +37,7 @@ PointTD ProjectionDD::Rotate3D(PointTD oPointTD, float fPitch, float fRoll,
 	for (int i = AXIS_X; i < AXIS_COUNT; i++) {
 		float matrix[AXIS_COUNT][AXIS_COUNT];
 		switch (i) {
-		case AXIS_Z:
+		case AXIS_X:
 			matrix[0][0] = 1.0;
 			matrix[0][1] = 0;
 			matrix[0][2] = 0;
@@ -59,7 +59,7 @@ PointTD ProjectionDD::Rotate3D(PointTD oPointTD, float fPitch, float fRoll,
 			matrix[2][1] = 0;
 			matrix[2][2] = cos(fRoll);
 			break;
-		case AXIS_X:
+		case AXIS_Z:
 			matrix[0][0] = cos(fYaw);
 			matrix[0][1] = sin(fYaw);
 			matrix[0][2] = 0;
