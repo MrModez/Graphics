@@ -11,7 +11,7 @@ public:
 	ObjectTD();
 	~ObjectTD();
 
-	virtual void Paint(TDirect2DCanvas* pCanvas, OCamera* pCamera);
+	virtual void Paint(TCanvas* pCanvas, OCamera* pCamera);
 	void AddPoint(PointTD * Point);
 
 	std::vector<PointTD*>pPointsTD;

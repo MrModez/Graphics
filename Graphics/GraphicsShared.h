@@ -29,7 +29,7 @@ public:
 
 	}
 
-	virtual void Paint(TDirect2DCanvas* pCanvas, OCamera* pCamera) {
+	virtual void Paint(TCanvas* pCanvas, OCamera* pCamera) {
 		return;
 	}
 

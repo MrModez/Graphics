@@ -10,7 +10,7 @@ public:
 	ObjectDD(std::vector<PointDD*>Object);
 	ObjectDD();
 
-	virtual void Paint(TDirect2DCanvas* pCanvas, OCamera* pCamera);
+	virtual void Paint(TCanvas* pCanvas, OCamera* pCamera);
 	void AddPoint(PointDD * Point);
 
 	std::vector<PointDD*>pPointsDD;

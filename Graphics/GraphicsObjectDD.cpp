@@ -7,7 +7,7 @@ ObjectDD::ObjectDD(std::vector<PointDD*>Object) {
 ObjectDD::ObjectDD() {
 }
 
-void ObjectDD::Paint(TDirect2DCanvas* pCanvas, OCamera* pCamera) {
+void ObjectDD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
 	for (int j = 0; j < pPointsDD.size(); j++) {
 		PointDD* pObjectDD = pPointsDD[j];
 		switch (pObjectDD->action) {

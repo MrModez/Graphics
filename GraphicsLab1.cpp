@@ -123,7 +123,7 @@ void __fastcall TMainForm::MainPaintBoxPaint(TObject *Sender) {
 		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
 	LCanvas->BeginDraw();
 	try {
-		pSystem->Paint(LCanvas);
+		pSystem->Paint((TCanvas*)LCanvas);
 	}
 	__finally {
 		LCanvas->EndDraw();

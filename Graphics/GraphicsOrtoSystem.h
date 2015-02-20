@@ -16,7 +16,7 @@ public:
 	OrtoSystem(OCamera* Camera);
 	~OrtoSystem();
 
-	void Paint(TDirect2DCanvas* pCanvas);
+	void Paint(TCanvas* pCanvas);
 	void AddObject(ObjectShared * pObject);
 
 	OCamera* pCamera;
