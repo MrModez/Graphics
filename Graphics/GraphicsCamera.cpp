@@ -21,3 +21,9 @@ void OCamera::SetRotation(float pitch, float roll, float yaw) {
 	fRoll = roll;
 	fYaw = yaw;
 }
+
+void OCamera::SetPosition(int xshift, int yshift, int zshift) {
+	iXShift = xshift;
+	iYShift = yshift;
+	iZShift = zshift;
+}

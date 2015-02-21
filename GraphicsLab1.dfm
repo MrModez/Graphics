@@ -25,35 +25,60 @@ object MainForm: TMainForm
     Height = 772
     Align = alClient
     OnPaint = MainPaintBoxPaint
-    ExplicitLeft = -8
     ExplicitTop = 8
-    ExplicitWidth = 784
-    ExplicitHeight = 762
   end
   object Pitch: TLabel
-    Left = 205
+    Left = 269
     Top = 8
     Width = 23
     Height = 13
     Caption = 'Pitch'
   end
   object Label1: TLabel
-    Left = 251
+    Left = 315
     Top = 8
     Width = 17
     Height = 13
     Caption = 'Roll'
   end
   object Label2: TLabel
-    Left = 297
+    Left = 361
     Top = 8
     Width = 20
     Height = 13
     Caption = 'Yaw'
   end
+  object Label3: TLabel
+    Left = 421
+    Top = 8
+    Width = 23
+    Height = 13
+    Caption = 'XPos'
+  end
+  object Label4: TLabel
+    Left = 467
+    Top = 8
+    Width = 23
+    Height = 13
+    Caption = 'YPos'
+  end
+  object Label5: TLabel
+    Left = 513
+    Top = 8
+    Width = 23
+    Height = 13
+    Caption = 'ZPos'
+  end
+  object Label6: TLabel
+    Left = 222
+    Top = 30
+    Width = 41
+    Height = 13
+    Caption = 'Camera:'
+  end
   object XSpin: TSpinEdit
     Left = 24
-    Top = 24
+    Top = 27
     Width = 40
     Height = 22
     MaxValue = 0
@@ -63,7 +88,7 @@ object MainForm: TMainForm
   end
   object YSpin: TSpinEdit
     Left = 71
-    Top = 24
+    Top = 27
     Width = 40
     Height = 22
     MaxValue = 0
@@ -73,7 +98,7 @@ object MainForm: TMainForm
   end
   object ZSpin: TSpinEdit
     Left = 119
-    Top = 24
+    Top = 27
     Width = 40
     Height = 22
     MaxValue = 0
@@ -93,8 +118,8 @@ object MainForm: TMainForm
     OnClick = AAButClick
   end
   object PitchSpin: TSpinEdit
-    Left = 205
-    Top = 24
+    Left = 269
+    Top = 27
     Width = 40
     Height = 22
     MaxValue = 0
@@ -104,26 +129,59 @@ object MainForm: TMainForm
     OnChange = PitchSpinChange
   end
   object RollSpin: TSpinEdit
-    Left = 251
-    Top = 24
+    Left = 315
+    Top = 27
     Width = 40
     Height = 22
     MaxValue = 0
     MinValue = 0
     TabOrder = 5
     Value = -46
-    OnChange = RollSpinChange
+    OnChange = PitchSpinChange
   end
   object YawSpin: TSpinEdit
-    Left = 297
-    Top = 24
+    Left = 361
+    Top = 27
     Width = 40
     Height = 22
     MaxValue = 0
     MinValue = 0
     TabOrder = 6
     Value = -26
-    OnChange = YawSpinChange
+    OnChange = PitchSpinChange
+  end
+  object XShiftSpin: TSpinEdit
+    Left = 421
+    Top = 27
+    Width = 40
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 7
+    Value = 300
+    OnChange = XShiftSpinChange
+  end
+  object YShiftSpin: TSpinEdit
+    Left = 467
+    Top = 27
+    Width = 40
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 8
+    Value = 500
+    OnChange = XShiftSpinChange
+  end
+  object ZShiftSpin: TSpinEdit
+    Left = 513
+    Top = 27
+    Width = 40
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 9
+    Value = 20
+    OnChange = XShiftSpinChange
   end
   object DrawTimer: TTimer
     Enabled = False

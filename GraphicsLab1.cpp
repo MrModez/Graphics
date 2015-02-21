@@ -22,11 +22,14 @@ TMainForm *MainForm;
 #define SPINX 			XSpin->Value
 #define SPINY 			YSpin->Value
 #define SPINZ 			ZSpin->Value
+#define SHIFTX 			XShiftSpin->Value
+#define SHIFTY 			YShiftSpin->Value
+#define SHIFTZ 			ZShiftSpin->Value
 
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 	MainForm->ControlStyle << csOpaque;
-	pCamera = new OCamera(300, 500, 2, PITCH, ROLL, YAW);
+	pCamera = new OCamera(SHIFTX, SHIFTY, SHIFTZ, PITCH, ROLL, YAW);
 	pSystem = new OrtoSystem(pCamera);
 }
 
@@ -44,7 +47,6 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	Coords->AddPoint(new PointTD(0, L, 0, TYPE_TEXT, "Y"));
 	Coords->AddPoint(new PointTD(0, 0, L, TYPE_TEXT, "Z"));
 	Coords->AddPoint(new PointTD(0, 0, 0, TYPE_POINT));
-	// Coords->SetParameter(PAR_BOLD);
 	ObjectShared* CoordsShared = (ObjectShared*)Coords;
 	pSystem->AddObject(CoordsShared);
 
@@ -65,6 +67,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	Cube->AddPoint(new PointTD(0, 100, 100, ACT_DRAW));
 	Cube->AddPoint(new PointTD(100, 100, 0, ACT_MOVE));
 	Cube->AddPoint(new PointTD(100, 100, 100, ACT_DRAW));
+	Cube->SetParameters(DrawPar(clBlue, psDashDot, 2));
 	ObjectShared* CubeShared = (ObjectShared*)Cube;
 	pSystem->AddObject(CubeShared);
 
@@ -98,13 +101,14 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	pSystem->AddObject(PointDDShared);
 
 	ObjectTD *Point = new ObjectTD();
-	Text->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
-	Text->AddPoint(new PointTD(0, 50, 50, ACT_DRAW));
-	Text->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
-	Text->AddPoint(new PointTD(50, 0, 50, ACT_DRAW));
-	Text->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
-	Text->AddPoint(new PointTD(50, 50, 0, ACT_DRAW));
-	Text->AddPoint(new PointTD(50, 50, 50, TYPE_POINT));
+	Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
+	Point->AddPoint(new PointTD(0, 50, 50, ACT_DRAW));
+	Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
+	Point->AddPoint(new PointTD(50, 0, 50, ACT_DRAW));
+	Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
+	Point->AddPoint(new PointTD(50, 50, 0, ACT_DRAW));
+	Point->AddPoint(new PointTD(50, 50, 50, TYPE_POINT));
+	Point->SetParameters(DrawPar(clRed, psDot, 3));
 	ObjectShared* PointShared = (ObjectShared*)Point;
 	pSystem->AddObject(PointShared);
 }
@@ -121,7 +125,7 @@ void __fastcall TMainForm::MainPaintBoxPaint(TObject *Sender) {
 		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
 	LCanvas->BeginDraw();
 	try {
-		pSystem->Paint((TCanvas*)LCanvas);
+		pSystem->Paint( /* (TCanvas*) */ LCanvas);
 	}
 	__finally {
 		LCanvas->EndDraw();
@@ -141,19 +145,14 @@ void __fastcall TMainForm::PitchSpinChange(TObject *Sender) {
 }
 
 // ---------------------------------------------------------------------------
-void __fastcall TMainForm::RollSpinChange(TObject *Sender) {
-	pSystem->pCamera->SetRotation(PITCH, ROLL, YAW);
-	MainPaintBox->Refresh();
-}
-// ---------------------------------------------------------------------------
 
-void __fastcall TMainForm::YawSpinChange(TObject *Sender) {
-	pSystem->pCamera->SetRotation(PITCH, ROLL, YAW);
-	MainPaintBox->Refresh();
-}
-
-// ---------------------------------------------------------------------------
 void __fastcall TMainForm::AAButClick(TObject *Sender) {
+	MainPaintBox->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::XShiftSpinChange(TObject *Sender) {
+	pSystem->pCamera->SetPosition(SHIFTX, SHIFTY, SHIFTZ);
 	MainPaintBox->Refresh();
 }
 // ---------------------------------------------------------------------------

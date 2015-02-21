@@ -20,7 +20,7 @@ ObjectDD::~ObjectDD() {
 	pPointsDD.clear();
 }
 
-void ObjectDD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
+void ObjectDD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 	for (unsigned int j = 0; j < pPointsDD.size(); j++) {
 		PointDD* pObjectDD = pPointsDD[j];
 		switch (pObjectDD->iAction) {

@@ -35,14 +35,20 @@ __published: // IDE-managed Components
 	TLabel *Pitch;
 	TLabel *Label1;
 	TLabel *Label2;
+	TSpinEdit *XShiftSpin;
+	TLabel *Label3;
+	TSpinEdit *YShiftSpin;
+	TLabel *Label4;
+	TSpinEdit *ZShiftSpin;
+	TLabel *Label5;
+	TLabel *Label6;
 
 	void __fastcall MainPaintBoxPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);
 	void __fastcall PitchSpinChange(TObject * Sender);
-	void __fastcall RollSpinChange(TObject * Sender);
-	void __fastcall YawSpinChange(TObject * Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall AAButClick(TObject *Sender);
+	void __fastcall XShiftSpinChange(TObject *Sender);
 
 private: // User declarations
 

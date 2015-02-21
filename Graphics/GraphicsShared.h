@@ -9,7 +9,14 @@
 
 #include <vector>
 #include <Direct2D.hpp>
-#define Pi 3.1415926536
+
+#define Pi			3.1415926536
+#define DefCanvas 	TDirect2DCanvas
+// #define DefCanvas TCanvas
+
+#define DEFAULT_WIDTH  	1
+#define DEFAULT_COLOR 	clBlack
+#define DEFAULT_STYLE 	psSolid
 
 enum Action {
 	ACT_NONE, ACT_MOVE, ACT_DRAW
@@ -23,8 +30,23 @@ enum Dim { // unused
 	DIM_DD, DIM_TD
 };
 
-enum Param {
-	PAR_NONE, PAR_BOLD
+class DrawPar {
+public:
+	DrawPar() {
+		iColor = clBlack;
+		iStyle = psSolid;
+		iWidth = 1;
+	};
+
+	DrawPar(TColor Color, TPenStyle Style, int Width) {
+		iColor = Color;
+		iStyle = Style;
+		iWidth = Width;
+	};
+
+	TColor iColor;
+	TPenStyle iStyle;
+	int iWidth;
 };
 
 enum Type {
@@ -41,7 +63,7 @@ public:
 	~ObjectShared() {
 	}
 
-	virtual void Paint(TCanvas* pCanvas, OCamera* pCamera) {
+	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 		return;
 	}
 };

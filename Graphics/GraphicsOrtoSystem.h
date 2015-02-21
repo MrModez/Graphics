@@ -22,7 +22,7 @@ public:
 	OrtoSystem(OCamera* Camera);
 	~OrtoSystem();
 
-	void Paint(TCanvas* pCanvas);
+	void Paint(DefCanvas* pCanvas);
 	void AddObject(ObjectShared * pObject);
 
 	OCamera* pCamera;

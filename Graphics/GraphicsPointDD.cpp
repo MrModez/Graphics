@@ -54,6 +54,6 @@ PointDD::~PointDD() {
 }
 
 void PointDD::AddShift(float iXShift, float iYShift, float iZShift) {
-	fX = iZShift * fX + iXShift;
-	fY = iZShift * fY + iYShift;
+	fX = iZShift/10.0 * fX + iXShift;
+	fY = iZShift/10.0 * fY + iYShift;
 };

@@ -17,13 +17,16 @@ public:
 	ObjectTD();
 	~ObjectTD();
 
-	virtual void Paint(TCanvas* pCanvas, OCamera* pCamera);
-	// void SetParameter(Param iP);
+	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
 	void AddPoint(PointTD * Point);
+	void SetParameters(DrawPar Par);
+
+	void SetCanvasSettings(DefCanvas* pCanvas);
+	void SetCanvasDefaults(DefCanvas* pCanvas);
 
 	std::vector<PointTD*>pPointsTD;
 
-	// Param iParam;
+	DrawPar Par;
 };
 
 #endif //GRAPCHICS_OBJECTTD_H_

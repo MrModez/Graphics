@@ -21,13 +21,11 @@ ObjectTD::~ObjectTD() {
 	pPointsTD.clear();
 }
 
-void ObjectTD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
+void ObjectTD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
 	for (unsigned int j = 0; j < pProjection->pPointsDD.size(); j++) {
 		PointDD* pObjectDD = pProjection->pPointsDD[j];
-		// if (iParam == PAR_BOLD) {
-		// pCanvas->Pen->Width = 2;
-		// }
+		SetCanvasSettings(pCanvas);
 		switch (pObjectDD->iAction) {
 		case ACT_MOVE:
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
@@ -52,15 +50,27 @@ void ObjectTD::Paint(TCanvas* pCanvas, OCamera* pCamera) {
 		default:
 			break;
 		}
-		// pCanvas->Pen->Width = 1;
+		SetCanvasDefaults(pCanvas);
 	}
 	delete pProjection;
 }
 
-// void ObjectTD::SetParameter(Param iP) {
-// iParam = iP;
-// };
+void ObjectTD::SetParameters(DrawPar P) {
+	Par = P;
+};
 
 void ObjectTD::AddPoint(PointTD * Point) {
 	pPointsTD.push_back(Point);
+}
+
+void ObjectTD::SetCanvasSettings(DefCanvas* pCanvas) {
+	pCanvas->Pen->Width = Par.iWidth;
+	pCanvas->Pen->Color = Par.iColor;
+	pCanvas->Pen->Style = Par.iStyle;
+}
+
+void ObjectTD::SetCanvasDefaults(DefCanvas* pCanvas) {
+	pCanvas->Pen->Width = DEFAULT_WIDTH;
+	pCanvas->Pen->Color = DEFAULT_COLOR;
+	pCanvas->Pen->Style = DEFAULT_STYLE;
 }

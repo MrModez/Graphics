@@ -15,6 +15,7 @@ public:
 		float yaw);
 
 	void SetRotation(float pitch, float roll, float yaw);
+	void SetPosition(int xshift, int yshift, int zshift);
 
 	float fPitch;
 	float fRoll;

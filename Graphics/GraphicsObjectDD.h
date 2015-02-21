@@ -17,12 +17,10 @@ public:
 	ObjectDD();
 	~ObjectDD();
 
-	virtual void Paint(TCanvas* pCanvas, OCamera* pCamera);
+	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
 	void AddPoint(PointDD * Point);
 
 	std::vector<PointDD*>pPointsDD;
-
-	// Param iParam;
 };
 
 #endif //GRAPCHICS_OBJECTDD_H_
