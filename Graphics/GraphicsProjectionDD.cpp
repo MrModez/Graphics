@@ -23,7 +23,6 @@ std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 	OCamera* pCamera) {
 	std::vector<PointDD*>result;
 	for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
-		// pObjectTD->pPointsTD[i]->fX = 0;
 		PointTD* pPointTD = Rotate3D(*pObjectTD->pPointsTD[i],
 			DegToRad(pCamera->fPitch), DegToRad(pCamera->fRoll),
 			DegToRad(pCamera->fYaw));

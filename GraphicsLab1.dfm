@@ -10,15 +10,15 @@ object MainForm: TMainForm
   DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
   ScreenSnap = True
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
   object MainPaintBox: TPaintBox
     Left = 0
     Top = 0
@@ -27,8 +27,8 @@ object MainForm: TMainForm
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
     OnPaint = MainPaintBoxPaint
@@ -37,85 +37,97 @@ object MainForm: TMainForm
   object Pitch: TLabel
     Left = 269
     Top = 8
-    Width = 23
-    Height = 13
+    Width = 27
+    Height = 17
     Caption = 'Pitch'
   end
   object Label1: TLabel
     Left = 315
     Top = 8
-    Width = 17
-    Height = 13
+    Width = 22
+    Height = 17
     Caption = 'Roll'
   end
   object Label2: TLabel
     Left = 361
     Top = 8
-    Width = 20
-    Height = 13
+    Width = 23
+    Height = 17
     Caption = 'Yaw'
   end
   object Label3: TLabel
     Left = 421
     Top = 8
-    Width = 23
-    Height = 13
+    Width = 29
+    Height = 17
     Caption = 'XPos'
   end
   object Label4: TLabel
     Left = 467
     Top = 8
-    Width = 23
-    Height = 13
+    Width = 28
+    Height = 17
     Caption = 'YPos'
   end
   object Label5: TLabel
     Left = 513
     Top = 8
-    Width = 23
-    Height = 13
+    Width = 28
+    Height = 17
     Caption = 'ZPos'
   end
   object Label6: TLabel
-    Left = 222
-    Top = 30
-    Width = 41
-    Height = 13
+    Left = 215
+    Top = 31
+    Width = 48
+    Height = 17
     Caption = 'Camera:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object Label7: TLabel
     Left = 49
     Top = 8
-    Width = 23
-    Height = 13
+    Width = 29
+    Height = 17
     Caption = 'XPos'
   end
   object Label8: TLabel
     Left = 95
     Top = 8
-    Width = 23
-    Height = 13
+    Width = 28
+    Height = 17
     Caption = 'YPos'
   end
   object Label9: TLabel
     Left = 141
     Top = 8
-    Width = 23
-    Height = 13
+    Width = 28
+    Height = 17
     Caption = 'ZPos'
   end
   object Label10: TLabel
-    Left = 16
-    Top = 30
-    Width = 28
-    Height = 13
+    Left = 11
+    Top = 31
+    Width = 32
+    Height = 17
     Caption = 'Point:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object XSpin: TSpinEdit
     Left = 49
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 0
@@ -125,8 +137,8 @@ object MainForm: TMainForm
   object YSpin: TSpinEdit
     Left = 95
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 1
@@ -136,8 +148,8 @@ object MainForm: TMainForm
   object ZSpin: TSpinEdit
     Left = 143
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 2
@@ -145,12 +157,18 @@ object MainForm: TMainForm
     OnChange = XSpinChange
   end
   object AABut: TCheckBox
-    Left = 568
-    Top = 29
+    Left = 576
+    Top = 31
     Width = 97
     Height = 17
     Caption = 'Anti-Aliasing'
     Checked = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     State = cbChecked
     TabOrder = 3
     OnClick = AAButClick
@@ -158,8 +176,8 @@ object MainForm: TMainForm
   object PitchSpin: TSpinEdit
     Left = 269
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 4
@@ -169,8 +187,8 @@ object MainForm: TMainForm
   object RollSpin: TSpinEdit
     Left = 315
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 5
@@ -180,8 +198,8 @@ object MainForm: TMainForm
   object YawSpin: TSpinEdit
     Left = 361
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 6
@@ -191,8 +209,8 @@ object MainForm: TMainForm
   object XShiftSpin: TSpinEdit
     Left = 421
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 7
@@ -202,8 +220,8 @@ object MainForm: TMainForm
   object YShiftSpin: TSpinEdit
     Left = 467
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 8
@@ -213,8 +231,8 @@ object MainForm: TMainForm
   object ZShiftSpin: TSpinEdit
     Left = 513
     Top = 27
-    Width = 40
-    Height = 22
+    Width = 45
+    Height = 27
     MaxValue = 0
     MinValue = 0
     TabOrder = 9
