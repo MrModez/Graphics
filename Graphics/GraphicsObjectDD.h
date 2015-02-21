@@ -11,16 +11,24 @@
 #include "GraphicsObjectTD.h"
 #include "GraphicsPointDD.h"
 
-class ObjectDD : ObjectShared {
+class ObjectDD : public ObjectShared {
 public:
 	ObjectDD(std::vector<PointDD*>Object);
 	ObjectDD();
+	ObjectDD(String ID);
 	~ObjectDD();
 
 	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
 	void AddPoint(PointDD * Point);
+	void SetParameters(DrawPar Par);
+
+	void SetCanvasSettings(DefCanvas* pCanvas);
+	void SetCanvasDefaults(DefCanvas* pCanvas);
 
 	std::vector<PointDD*>pPointsDD;
+
+	DrawPar Par;
+	String ObjectID;
 };
 
 #endif //GRAPCHICS_OBJECTDD_H_

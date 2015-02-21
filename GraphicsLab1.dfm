@@ -77,14 +77,15 @@ object MainForm: TMainForm
     Caption = 'Camera:'
   end
   object XSpin: TSpinEdit
-    Left = 24
+    Left = 25
     Top = 27
     Width = 40
     Height = 22
     MaxValue = 0
     MinValue = 0
     TabOrder = 0
-    Value = 20
+    Value = 50
+    OnChange = XSpinChange
   end
   object YSpin: TSpinEdit
     Left = 71
@@ -94,7 +95,8 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 1
-    Value = 30
+    Value = 50
+    OnChange = XSpinChange
   end
   object ZSpin: TSpinEdit
     Left = 119
@@ -104,7 +106,8 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 2
-    Value = 40
+    Value = 50
+    OnChange = XSpinChange
   end
   object AABut: TCheckBox
     Left = 616
@@ -180,7 +183,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 9
-    Value = 20
+    Value = 16
     OnChange = XShiftSpinChange
   end
   object DrawTimer: TTimer

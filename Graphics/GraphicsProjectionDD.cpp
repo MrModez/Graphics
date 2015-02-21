@@ -7,6 +7,8 @@
 #include "GraphicsProjectionDD.h"
 
 ProjectionDD::ProjectionDD(ObjectTD* pObjectTD, OCamera* pCamera) {
+	Par = pObjectTD->Par;
+	ObjectID = pObjectTD->ObjectID;
 	pPointsDD = Projection(pObjectTD, pCamera);
 }
 
@@ -32,12 +34,23 @@ std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 	return result;
 };
 
+ObjectDD* ProjectionDD::ToObject() {
+	ObjectDD* result = new ObjectDD();
+	result->pPointsDD = this->pPointsDD;
+	result->ObjectID = this->ObjectID;
+	result->Par = this->Par;
+	return result;
+};
+
+void ProjectionDD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
+}
+
 PointTD ProjectionDD::Multiple(float mat[AXIS_COUNT][AXIS_COUNT], PointTD pPTD)
 {
 	float X = mat[0][0] * pPTD.fX + mat[0][1] * pPTD.fY + mat[0][2] * pPTD.fZ;
 	float Y = mat[1][0] * pPTD.fX + mat[1][1] * pPTD.fY + mat[1][2] * pPTD.fZ;
 	float Z = mat[2][0] * pPTD.fX + mat[2][1] * pPTD.fY + mat[2][2] * pPTD.fZ;
-	PointTD Result(X, Y, Z, pPTD.iAction);
+	PointTD Result(X, Y, Z, pPTD.iAction, pPTD.iType, pPTD.sText);
 	return Result;
 }
 

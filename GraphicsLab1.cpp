@@ -36,80 +36,115 @@ __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormShow(TObject *Sender) {
 	float L = 250;
+	for (int i = 7; i >= 0; i--) {
+		float lX, lY, lZ;
+		switch (i) {
+		case 0:
+			lX = 1, lY = 1, lZ = 1;
+			break;
+		case 1:
+			lX = 1, lY = -1, lZ = 1;
+			break;
+		case 2:
+			lX = 1, lY = -1, lZ = -1;
+			break;
+		case 3:
+			lX = 1, lY = 1, lZ = -1;
+			break;
+		case 4:
+			lX = -1, lY = 1, lZ = 1;
+			break;
+		case 5:
+			lX = -1, lY = -1, lZ = 1;
+			break;
+		case 6:
+			lX = -1, lY = -1, lZ = -1;
+			break;
+		case 7:
+			lX = -1, lY = 1, lZ = -1;
+			break;
+		default:
+			break;
+		}
+		float X = lX * (L - 20);
+		float Y = lY * (L - 20);
+		float Z = lZ * (L - 20);
+		ObjectTD *Cube = new ObjectTD();
+		Cube->AddPoint(new PointTD(0, 0, 0, ACT_MOVE));
+		Cube->AddPoint(new PointTD(X, 0, 0, ACT_DRAW));
+		Cube->AddPoint(new PointTD(X, Y, 0, ACT_DRAW));
+		Cube->AddPoint(new PointTD(0, Y, 0, ACT_DRAW));
+		Cube->AddPoint(new PointTD(0, 0, 0, ACT_DRAW));
+		Cube->AddPoint(new PointTD(0, 0, Z, ACT_DRAW));
+		Cube->AddPoint(new PointTD(X, 0, Z, ACT_DRAW));
+		Cube->AddPoint(new PointTD(X, Y, Z, ACT_DRAW));
+		Cube->AddPoint(new PointTD(0, Y, Z, ACT_DRAW));
+		Cube->AddPoint(new PointTD(0, 0, Z, ACT_DRAW));
+		Cube->AddPoint(new PointTD(X, 0, 0, ACT_MOVE));
+		Cube->AddPoint(new PointTD(X, 0, Z, ACT_DRAW));
+		Cube->AddPoint(new PointTD(0, Y, 0, ACT_MOVE));
+		Cube->AddPoint(new PointTD(0, Y, Z, ACT_DRAW));
+		Cube->AddPoint(new PointTD(X, Y, 0, ACT_MOVE));
+		Cube->AddPoint(new PointTD(X, Y, Z, ACT_DRAW));
+		if (i == 0)
+			Cube->SetParameters(DrawPar(clBlue, psDashDot, 2));
+		else
+			Cube->SetParameters(DrawPar(clMenu, psSolid, 1));
+		ObjectShared* CubeShared = (ObjectShared*)Cube;
+		pSystem->AddObject(CubeShared);
+	}
+
 	ObjectTD *Coords = new ObjectTD();
-	Coords->AddPoint(new PointTD(0, 0, 0, ACT_MOVE));
+	Coords->AddPoint(new PointTD(-L, 0, 0, ACT_MOVE));
 	Coords->AddPoint(new PointTD(L, 0, 0, ACT_DRAW));
-	Coords->AddPoint(new PointTD(0, 0, 0, ACT_MOVE));
+	Coords->AddPoint(new PointTD(L - 5, -5, 0, ACT_DRAW));
+	Coords->AddPoint(new PointTD(L, 0, 0, ACT_MOVE));
+	Coords->AddPoint(new PointTD(L - 5, 5, 0, ACT_DRAW));
+
+	Coords->AddPoint(new PointTD(0, -L, 0, ACT_MOVE));
 	Coords->AddPoint(new PointTD(0, L, 0, ACT_DRAW));
-	Coords->AddPoint(new PointTD(0, 0, 0, ACT_MOVE));
+	Coords->AddPoint(new PointTD(-5, L - 5, 0, ACT_DRAW));
+	Coords->AddPoint(new PointTD(0, L, 0, ACT_MOVE));
+	Coords->AddPoint(new PointTD(5, L - 5, 0, ACT_DRAW));
+
+	Coords->AddPoint(new PointTD(0, 0, -L, ACT_MOVE));
 	Coords->AddPoint(new PointTD(0, 0, L, ACT_DRAW));
-	Coords->AddPoint(new PointTD(L, 0, 0, TYPE_TEXT, "X"));
-	Coords->AddPoint(new PointTD(0, L, 0, TYPE_TEXT, "Y"));
-	Coords->AddPoint(new PointTD(0, 0, L, TYPE_TEXT, "Z"));
+	Coords->AddPoint(new PointTD(-5, 0, L - 5, ACT_DRAW));
+	Coords->AddPoint(new PointTD(0, 0, L, ACT_MOVE));
+	Coords->AddPoint(new PointTD(5, 0, L - 5, ACT_DRAW));
+
+	Coords->AddPoint(new PointTD(L + 10, 0, 0, TYPE_TEXT, "X"));
+	Coords->AddPoint(new PointTD(0, L + 10, 0, TYPE_TEXT, "Y"));
+	Coords->AddPoint(new PointTD(0, 0, L + 10, TYPE_TEXT, "Z"));
 	Coords->AddPoint(new PointTD(0, 0, 0, TYPE_POINT));
 	ObjectShared* CoordsShared = (ObjectShared*)Coords;
 	pSystem->AddObject(CoordsShared);
 
-	ObjectTD *Cube = new ObjectTD();
-	Cube->AddPoint(new PointTD(0, 0, 0, ACT_MOVE));
-	Cube->AddPoint(new PointTD(100, 0, 0, ACT_DRAW));
-	Cube->AddPoint(new PointTD(100, 100, 0, ACT_DRAW));
-	Cube->AddPoint(new PointTD(0, 100, 0, ACT_DRAW));
-	Cube->AddPoint(new PointTD(0, 0, 0, ACT_DRAW));
-	Cube->AddPoint(new PointTD(0, 0, 100, ACT_DRAW));
-	Cube->AddPoint(new PointTD(100, 0, 100, ACT_DRAW));
-	Cube->AddPoint(new PointTD(100, 100, 100, ACT_DRAW));
-	Cube->AddPoint(new PointTD(0, 100, 100, ACT_DRAW));
-	Cube->AddPoint(new PointTD(0, 0, 100, ACT_DRAW));
-	Cube->AddPoint(new PointTD(100, 0, 0, ACT_MOVE));
-	Cube->AddPoint(new PointTD(100, 0, 100, ACT_DRAW));
-	Cube->AddPoint(new PointTD(0, 100, 0, ACT_MOVE));
-	Cube->AddPoint(new PointTD(0, 100, 100, ACT_DRAW));
-	Cube->AddPoint(new PointTD(100, 100, 0, ACT_MOVE));
-	Cube->AddPoint(new PointTD(100, 100, 100, ACT_DRAW));
-	Cube->SetParameters(DrawPar(clBlue, psDashDot, 2));
-	ObjectShared* CubeShared = (ObjectShared*)Cube;
-	pSystem->AddObject(CubeShared);
-
-	int X = MainForm->Width / 2;
-	int Y = MainForm->Height / 2;
-	ObjectDD *Crosshair = new ObjectDD();
-	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(X, Y - 10, ACT_DRAW));
-	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(X, Y + 10, ACT_DRAW));
-	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(X - 10, Y, ACT_DRAW));
-	Crosshair->AddPoint(new PointDD(X, Y, ACT_MOVE));
-	Crosshair->AddPoint(new PointDD(X + 10, Y, ACT_DRAW));
-	ObjectShared* CrosshairShared = (ObjectShared*)Crosshair;
-	pSystem->AddObject(CrosshairShared);
-
-	ObjectTD *Text = new ObjectTD();
-	Text->AddPoint(new PointTD(100, 100, 100, TYPE_TEXT, "Text3D"));
-	ObjectShared* TextShared = (ObjectShared*)Text;
-	pSystem->AddObject(TextShared);
-
 	ObjectDD *TextDD = new ObjectDD();
-	TextDD->AddPoint(new PointDD(500, 500, TYPE_TEXT, "Text2D"));
+	TextDD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "Laba1"));
 	ObjectShared* TextDDShared = (ObjectShared*)TextDD;
 	pSystem->AddObject(TextDDShared);
 
 	ObjectDD *PointDDD = new ObjectDD();
-	PointDDD->AddPoint(new PointDD(500, 250, TYPE_POINT));
+	PointDDD->AddPoint(new PointDD(45, 107, TYPE_POINT));
 	ObjectShared* PointDDShared = (ObjectShared*)PointDDD;
 	pSystem->AddObject(PointDDShared);
 
-	ObjectTD *Point = new ObjectTD();
-	Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
-	Point->AddPoint(new PointTD(0, 50, 50, ACT_DRAW));
-	Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
-	Point->AddPoint(new PointTD(50, 0, 50, ACT_DRAW));
-	Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
-	Point->AddPoint(new PointTD(50, 50, 0, ACT_DRAW));
-	Point->AddPoint(new PointTD(50, 50, 50, TYPE_POINT));
-	Point->SetParameters(DrawPar(clRed, psDot, 3));
-	ObjectShared* PointShared = (ObjectShared*)Point;
+	ObjectTD *Text = new ObjectTD();
+	Text->AddPoint(new PointTD(55, 55, 60, TYPE_TEXT, "Point3D"));
+	ObjectShared* TextShared = (ObjectShared*)Text;
+	pSystem->AddObject(TextShared);
+
+	LabPoint = new ObjectTD("LabaPoint");
+	/* Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
+	 Point->AddPoint(new PointTD(0, 50, 50, ACT_DRAW));
+	 Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
+	 Point->AddPoint(new PointTD(50, 0, 50, ACT_DRAW));
+	 Point->AddPoint(new PointTD(50, 50, 50, ACT_MOVE));
+	 Point->AddPoint(new PointTD(50, 50, 0, ACT_DRAW)); */
+	LabPoint->AddPoint(new PointTD(50, 50, 50, TYPE_POINT));
+	LabPoint->SetParameters(DrawPar(clRed, psDot, 3));
+	ObjectShared* PointShared = (ObjectShared*)LabPoint;
 	pSystem->AddObject(PointShared);
 }
 
@@ -125,7 +160,7 @@ void __fastcall TMainForm::MainPaintBoxPaint(TObject *Sender) {
 		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
 	LCanvas->BeginDraw();
 	try {
-		pSystem->Paint( /* (TCanvas*) */ LCanvas);
+		pSystem->Paint(LCanvas); // (TCanvas*)
 	}
 	__finally {
 		LCanvas->EndDraw();
@@ -153,6 +188,17 @@ void __fastcall TMainForm::AAButClick(TObject *Sender) {
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::XShiftSpinChange(TObject *Sender) {
 	pSystem->pCamera->SetPosition(SHIFTX, SHIFTY, SHIFTZ);
+	MainPaintBox->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::XSpinChange(TObject *Sender) {
+	/* ObjectTD* pPoint = dynamic_cast<ObjectTD*>
+	 (pSystem->FindObject("LabaPoint"));
+	 if (!pPoint)
+	 return;
+	 DEBUG("Found"); */
+	LabPoint->SetPos(SPINX, SPINY, SPINZ);
 	MainPaintBox->Refresh();
 }
 // ---------------------------------------------------------------------------

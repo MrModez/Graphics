@@ -26,3 +26,12 @@ void OrtoSystem::Paint(DefCanvas* pCanvas) {
 void OrtoSystem::AddObject(ObjectShared * pObject) {
 	pObjects.push_back(pObject);
 };
+
+ObjectShared* OrtoSystem::FindObject(String ID) {
+	for (unsigned int i = 0; i < pObjects.size(); i++) {
+		if (pObjects[i]->ObjectID == ID) {
+			return pObjects[i];
+		}
+	}
+	return NULL;
+};

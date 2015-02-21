@@ -49,11 +49,13 @@ __published: // IDE-managed Components
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall AAButClick(TObject *Sender);
 	void __fastcall XShiftSpinChange(TObject *Sender);
+	void __fastcall XSpinChange(TObject *Sender);
 
 private: // User declarations
 
 	OrtoSystem *pSystem;
 	OCamera *pCamera;
+	ObjectTD *LabPoint;
 
 public: // User declarations
 

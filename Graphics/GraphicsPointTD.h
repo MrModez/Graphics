@@ -16,7 +16,10 @@ public:
 	PointTD(float X, float Y, float Z, Action iA, Type T);
 	PointTD(float X, float Y, float Z, Type T);
 	PointTD(float X, float Y, float Z, Type T, String Text);
+	PointTD(float X, float Y, float Z, Action iA, Type T, String Text);
 	~PointTD();
+
+	void SetPos(float X, float Y, float Z);
 
 	float fZ;
 };

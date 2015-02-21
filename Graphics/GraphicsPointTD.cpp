@@ -42,6 +42,15 @@ PointTD::PointTD(float X, float Y, float Z, Type T, String Text) {
 	sText = Text;
 };
 
+PointTD::PointTD(float X, float Y, float Z, Action iA, Type T, String Text) {
+	fX = X;
+	fY = Y;
+	fZ = Z;
+	iAction = iA;
+	iType = T;
+	sText = Text;
+};
+
 PointTD::~PointTD() {
 	fX = 0.0;
 	fY = 0.0;
@@ -49,4 +58,10 @@ PointTD::~PointTD() {
 	iAction = ACT_NONE;
 	iType = TYPE_OBJECT;
 	sText = "";
+};
+
+void PointTD::SetPos(float X, float Y, float Z) {
+	fX = X;
+	fY = Y;
+	fZ = Z;
 };

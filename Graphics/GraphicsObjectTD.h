@@ -11,10 +11,11 @@
 #include "GraphicsPointTD.h"
 #include "GraphicsCamera.h"
 
-class ObjectTD : ObjectShared {
+class ObjectTD : public  ObjectShared {
 public:
 	ObjectTD(std::vector<PointTD*>Object);
 	ObjectTD();
+	ObjectTD(String ID);
 	~ObjectTD();
 
 	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
@@ -24,9 +25,12 @@ public:
 	void SetCanvasSettings(DefCanvas* pCanvas);
 	void SetCanvasDefaults(DefCanvas* pCanvas);
 
+	void SetPos(float X, float Y, float Z);
+
 	std::vector<PointTD*>pPointsTD;
 
 	DrawPar Par;
+	String ObjectID;
 };
 
 #endif //GRAPCHICS_OBJECTTD_H_

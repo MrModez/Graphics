@@ -23,7 +23,8 @@ public:
 	~OrtoSystem();
 
 	void Paint(DefCanvas* pCanvas);
-	void AddObject(ObjectShared * pObject);
+	void AddObject(ObjectShared* pObject);
+	ObjectShared* FindObject(String ID);
 
 	OCamera* pCamera;
 

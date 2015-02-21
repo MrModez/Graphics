@@ -14,19 +14,21 @@
 #include "GraphicsPointTD.h"
 #include "GraphicsPointDD.h"
 
-class ProjectionDD : ObjectDD {
+class ProjectionDD : public ObjectDD {
 public:
 	ProjectionDD(ObjectTD* pObjectTD, OCamera* pCamera);
 	~ProjectionDD();
 
+	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, OCamera* pCamera);
 	PointTD Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
 	PointTD* Rotate3D(PointTD pPointTD, float fPitch, float fRoll, float fYaw);
+	ObjectDD* ToObject();
 	float DegToRad(float in);
 
 	static float matrix[AXIS_COUNT][AXIS_COUNT];
 
-	std::vector<PointDD*>pPointsDD;
+	// std::vector<PointDD*>pPointsDD;
 };
 
 #endif //GRAPCHICS_PROJECTIONDD_H_

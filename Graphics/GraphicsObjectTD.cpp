@@ -14,6 +14,10 @@ ObjectTD::ObjectTD(std::vector<PointTD*>Object) {
 ObjectTD::ObjectTD() {
 }
 
+ObjectTD::ObjectTD(String ID) {
+	ObjectID = ID;
+}
+
 ObjectTD::~ObjectTD() {
 	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
 		delete pPointsTD[i];
@@ -23,36 +27,10 @@ ObjectTD::~ObjectTD() {
 
 void ObjectTD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
-	for (unsigned int j = 0; j < pProjection->pPointsDD.size(); j++) {
-		PointDD* pObjectDD = pProjection->pPointsDD[j];
-		SetCanvasSettings(pCanvas);
-		switch (pObjectDD->iAction) {
-		case ACT_MOVE:
-			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
-			break;
-		case ACT_DRAW:
-			pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
-			break;
-		case ACT_NONE:
-			switch (pPointsTD[j]->iType) {
-			case TYPE_TEXT:
-				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY,
-					pPointsTD[j]->sText);
-				break;
-			case TYPE_POINT:
-				pCanvas->Ellipse(pObjectDD->fX - 2, pObjectDD->fY - 2,
-					pObjectDD->fX + 2, pObjectDD->fY + 2);
-				break;
-			default:
-				break;
-			}
-			break;
-		default:
-			break;
-		}
-		SetCanvasDefaults(pCanvas);
-	}
+	ObjectDD* pObjectDD = pProjection->ToObject();
+	pObjectDD->Paint(pCanvas, pCamera);
 	delete pProjection;
+	delete pObjectDD;
 }
 
 void ObjectTD::SetParameters(DrawPar P) {
@@ -74,3 +52,11 @@ void ObjectTD::SetCanvasDefaults(DefCanvas* pCanvas) {
 	pCanvas->Pen->Color = DEFAULT_COLOR;
 	pCanvas->Pen->Style = DEFAULT_STYLE;
 }
+
+void ObjectTD::SetPos(float X, float Y, float Z) {
+	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
+		if (pPointsTD[i]->iType == TYPE_POINT) {
+			pPointsTD[i]->SetPos(X, Y, Z);
+		}
+	}
+};

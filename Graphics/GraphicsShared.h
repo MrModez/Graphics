@@ -15,6 +15,7 @@
 // #define DefCanvas TCanvas
 
 #define DEFAULT_WIDTH  	1
+#define DEFAULT_RADIUS 	2
 #define DEFAULT_COLOR 	clBlack
 #define DEFAULT_STYLE 	psSolid
 
@@ -28,6 +29,10 @@ enum Axis {
 
 enum Dim { // unused
 	DIM_DD, DIM_TD
+};
+
+enum Type {
+	TYPE_OBJECT, TYPE_POINT, TYPE_TEXT
 };
 
 class DrawPar {
@@ -49,10 +54,6 @@ public:
 	int iWidth;
 };
 
-enum Type {
-	TYPE_OBJECT, TYPE_POINT, TYPE_TEXT
-};
-
 class OCamera;
 
 class ObjectShared {
@@ -66,6 +67,8 @@ public:
 	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 		return;
 	}
+
+	String ObjectID;
 };
 
 #endif //GRAPCHICS_SHARED_H_
