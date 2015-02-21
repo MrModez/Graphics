@@ -10,6 +10,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Samples.Spin.hpp>
 #include <Direct2D.hpp>
+#include <Vcl.ComCtrls.hpp>
 #include <vector>
 #define Pi 3.1415926536
 
@@ -42,6 +43,10 @@ __published: // IDE-managed Components
 	TSpinEdit *ZShiftSpin;
 	TLabel *Label5;
 	TLabel *Label6;
+	TLabel *Label7;
+	TLabel *Label8;
+	TLabel *Label9;
+	TLabel *Label10;
 
 	void __fastcall MainPaintBoxPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);

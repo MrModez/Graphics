@@ -41,6 +41,7 @@ public:
 		iColor = clBlack;
 		iStyle = psSolid;
 		iWidth = 1;
+		bProj = false;
 	};
 
 	DrawPar(TColor Color, TPenStyle Style, int Width) {
@@ -52,6 +53,7 @@ public:
 	TColor iColor;
 	TPenStyle iStyle;
 	int iWidth;
+	bool bProj;
 };
 
 class OCamera;

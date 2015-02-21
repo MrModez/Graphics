@@ -40,6 +40,7 @@ void ObjectDD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 			case TYPE_TEXT:
 				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY,
 					pPointsDD[j]->sText);
+				pCanvas->Font->Size = 8 + pCamera->iZShift / 10.0;
 				break;
 			case TYPE_POINT:
 				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS,

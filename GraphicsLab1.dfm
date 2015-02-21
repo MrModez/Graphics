@@ -1,6 +1,7 @@
 object MainForm: TMainForm
   Left = 220
   Top = 83
+  BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'MainForm'
   ClientHeight = 772
@@ -24,6 +25,12 @@ object MainForm: TMainForm
     Width = 794
     Height = 772
     Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     OnPaint = MainPaintBoxPaint
     ExplicitTop = 8
   end
@@ -76,8 +83,36 @@ object MainForm: TMainForm
     Height = 13
     Caption = 'Camera:'
   end
+  object Label7: TLabel
+    Left = 49
+    Top = 8
+    Width = 23
+    Height = 13
+    Caption = 'XPos'
+  end
+  object Label8: TLabel
+    Left = 95
+    Top = 8
+    Width = 23
+    Height = 13
+    Caption = 'YPos'
+  end
+  object Label9: TLabel
+    Left = 141
+    Top = 8
+    Width = 23
+    Height = 13
+    Caption = 'ZPos'
+  end
+  object Label10: TLabel
+    Left = 16
+    Top = 30
+    Width = 28
+    Height = 13
+    Caption = 'Point:'
+  end
   object XSpin: TSpinEdit
-    Left = 25
+    Left = 49
     Top = 27
     Width = 40
     Height = 22
@@ -88,7 +123,7 @@ object MainForm: TMainForm
     OnChange = XSpinChange
   end
   object YSpin: TSpinEdit
-    Left = 71
+    Left = 95
     Top = 27
     Width = 40
     Height = 22
@@ -99,7 +134,7 @@ object MainForm: TMainForm
     OnChange = XSpinChange
   end
   object ZSpin: TSpinEdit
-    Left = 119
+    Left = 143
     Top = 27
     Width = 40
     Height = 22
@@ -110,11 +145,11 @@ object MainForm: TMainForm
     OnChange = XSpinChange
   end
   object AABut: TCheckBox
-    Left = 616
-    Top = 16
+    Left = 568
+    Top = 29
     Width = 97
     Height = 17
-    Caption = 'AABut'
+    Caption = 'Anti-Aliasing'
     Checked = True
     State = cbChecked
     TabOrder = 3

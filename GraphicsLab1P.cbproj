@@ -4,9 +4,9 @@
         <ProjectVersion>15.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <AppType>Application</AppType>
-        <MainSource>GraphicsLab1Proj.cpp</MainSource>
+        <MainSource>GraphicsLab1P.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
     </PropertyGroup>
@@ -41,12 +41,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
         <Cfg_2_Win32>true</Cfg_2_Win32>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-        <Cfg_2_Win64>true</Cfg_2_Win64>
         <CfgParent>Cfg_2</CfgParent>
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
@@ -119,9 +113,6 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <LinkPackageImports>rtl.bpi;vcl.bpi;VclSmp.bpi;vclx.bpi</LinkPackageImports>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <BCC_PCHName_Clang>GraphicsLab1H.h</BCC_PCHName_Clang>
-    </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="GraphicsLab1.cpp">
             <Form>MainForm</Form>
@@ -133,7 +124,7 @@
             <VirtualFolder>{E451CA24-B7FB-4CE9-88EA-605C2914227A}</VirtualFolder>
             <BuildOrder>1</BuildOrder>
         </PCHCompile>
-        <CppCompile Include="GraphicsLab1Proj.cpp">
+        <CppCompile Include="GraphicsLab1P.cpp">
             <VirtualFolder>{E451CA24-B7FB-4CE9-88EA-605C2914227A}</VirtualFolder>
             <BuildOrder>0</BuildOrder>
         </CppCompile>
@@ -220,7 +211,7 @@
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Source>
-                    <Source Name="MainSource">GraphicsLab1Proj.cpp</Source>
+                    <Source Name="MainSource">GraphicsLab1P.cpp</Source>
                 </Source>
                 <VersionInfo>
                     <VersionInfo Name="IncludeVerInfo">False</VersionInfo>

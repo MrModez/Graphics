@@ -144,6 +144,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	 Point->AddPoint(new PointTD(50, 50, 0, ACT_DRAW)); */
 	LabPoint->AddPoint(new PointTD(50, 50, 50, TYPE_POINT));
 	LabPoint->SetParameters(DrawPar(clRed, psDot, 3));
+	LabPoint->SetDrawProj(true);
 	ObjectShared* PointShared = (ObjectShared*)LabPoint;
 	pSystem->AddObject(PointShared);
 }
@@ -201,4 +202,5 @@ void __fastcall TMainForm::XSpinChange(TObject *Sender) {
 	LabPoint->SetPos(SPINX, SPINY, SPINZ);
 	MainPaintBox->Refresh();
 }
+
 // ---------------------------------------------------------------------------
