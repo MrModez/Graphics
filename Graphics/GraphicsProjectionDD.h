@@ -26,7 +26,6 @@ public:
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraTD* pCamera);
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraDD* pCamera);
 	PointTD Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
-	PointTD MultipleW(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
 	PointTD* Rotate3D(PointTD pPointTD, float fPitch, float fRoll, float fYaw);
 	PointTD* Rotate3D(PointTD pPointTD);
 	PointTD* Rotate3D(PointTD pPointTD, Quarter Quart);

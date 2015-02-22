@@ -57,15 +57,36 @@ void ObjectTD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 }
 
 void ObjectTD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
-	// ObjectTD* pObjectTD = new ObjectTD(*this);
-	// ObjectDD* pObjectDD = static_cast<ObjectDD*>(pObjectTD);
-	// PaintDD(pCanvas, static_cast<CameraTD*>(pCamera));
+	if (Par.bProj == 1) {
+		ObjectTD* Obj = new ObjectTD(*this);
+		Obj->Par.iColor = clSilver;
+		Obj->Par.iStyle = psDash;
+		Obj->Par.iWidth = 2;
+		Obj->Par.iProjStyle = PROJ_LINES;
+		ProjectionDD* pProjection = new ProjectionDD(Obj, pCamera);
+		ObjectDD* pObjectDD = pProjection->ToObject();
+		pObjectDD->PaintDD(pCanvas, pCamera);
+		delete pProjection;
+		delete pObjectDD;
 
-	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
-	ObjectDD* pObjectDD = pProjection->ToObject();
-	pObjectDD->PaintDD(pCanvas, pCamera);
-	delete pProjection;
-	delete pObjectDD;
+		Obj = new ObjectTD(*this);
+		Obj->Par.iColor = clRed;
+		Obj->Par.iStyle = psDash;
+		Obj->Par.iWidth = 3;
+		Obj->Par.iProjStyle = PROJ_DOTS;
+		pProjection = new ProjectionDD(Obj, pCamera);
+		pObjectDD = pProjection->ToObject();
+		pObjectDD->PaintDD(pCanvas, pCamera);
+		delete pProjection;
+		delete pObjectDD;
+	}
+	else {
+		ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
+		ObjectDD* pObjectDD = pProjection->ToObject();
+		pObjectDD->PaintDD(pCanvas, pCamera);
+		delete pProjection;
+		delete pObjectDD;
+	}
 
 	/* if (Par.bProj == 1) {
 	 ObjectTD* Obj = GetAxisProjection();

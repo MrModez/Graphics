@@ -44,14 +44,14 @@ std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 	CameraDD* pCamera) {
 	std::vector<PointDD*>result;
 	for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
-		if (pObjectTD->pPointsTD[i]->iType != TYPE_POINT) {
+		if (this->Par.iProjStyle == PROJ_NONE) {
 			PointTD* pPointTD = Rotate3D(*pObjectTD->pPointsTD[i]);
 			PointDD* pPointDD = static_cast<PointDD*>(pPointTD);
 			pPointDD->AddShift(pCamera->iXShift, pCamera->iYShift,
 				pCamera->iZShift);
 			result.push_back(pPointDD);
 		}
-		if (pObjectTD->pPointsTD[i]->iType == TYPE_POINT) {
+		if (this->Par.iProjStyle == PROJ_LINES) {
 			PointTD* pPointTDXZ = Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
 			PointTD* pPointTDXY = Rotate3D(*pObjectTD->pPointsTD[i], QXY);
 			PointTD* pPointTDYY = Rotate3D(*pObjectTD->pPointsTD[i], QYY);
@@ -136,7 +136,25 @@ std::vector<PointDD*>ProjectionDD::Projection(ObjectTD* pObjectTD,
 			result.push_back(pPointDDYY2);
 			result.push_back(pPointDDYZ);
 			result.push_back(pPointDDYZ2);
+		}
+		if (this->Par.iProjStyle == PROJ_DOTS) {
+			PointTD* pPointTDXZ = Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
+			PointTD* pPointTDXY = Rotate3D(*pObjectTD->pPointsTD[i], QXY);
+			PointTD* pPointTDYZ = Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
 
+			PointDD* pPointDDXZ = static_cast<PointDD*>(pPointTDXZ);
+			pPointDDXZ->AddShift(pCamera->iXShift, pCamera->iYShift,
+				pCamera->iZShift);
+			PointDD* pPointDDXY = static_cast<PointDD*>(pPointTDXY);
+			pPointDDXY->AddShift(pCamera->iXShift, pCamera->iYShift,
+				pCamera->iZShift);
+			PointDD* pPointDDYZ = static_cast<PointDD*>(pPointTDYZ);
+			pPointDDYZ->AddShift(pCamera->iXShift, pCamera->iYShift,
+				pCamera->iZShift);
+
+			result.push_back(pPointDDXZ);
+			result.push_back(pPointDDXY);
+			result.push_back(pPointDDYZ);
 		}
 	}
 	return result;
@@ -241,14 +259,6 @@ PointTD* ProjectionDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 		pPointTD = Multiple(matrix, pPointTD);
 	}
 	return new PointTD(pPointTD);
-}
-
-PointTD ProjectionDD::MultipleW(float mat[AXIS_COUNT][AXIS_COUNT], PointTD pPTD)
-{
-	float X = 1.0 * pPTD.fX + 0.0 * pPTD.fY + 0.0 * pPTD.fZ;
-	float Y = 0.0 * pPTD.fX + 1.0 * pPTD.fY + 0.0 * pPTD.fZ;
-	PointTD Result(X, Y, 0, pPTD.iAction, pPTD.iType, pPTD.sText);
-	return Result;
 }
 
 float ProjectionDD::DegToRad(float fDeg) {

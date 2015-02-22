@@ -5,7 +5,7 @@ object MainForm: TMainForm
   BorderStyle = bsSingle
   Caption = 'MainForm'
   ClientHeight = 772
-  ClientWidth = 1118
+  ClientWidth = 1114
   Color = clBtnHighlight
   DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
@@ -19,19 +19,32 @@ object MainForm: TMainForm
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 17
-  object Pitch: TLabel
-    Left = 269
-    Top = 8
-    Width = 27
-    Height = 17
-    Caption = 'Pitch'
-  end
   object Label1: TLabel
     Left = 315
     Top = 8
     Width = 22
     Height = 17
     Caption = 'Roll'
+  end
+  object Label10: TLabel
+    Left = 11
+    Top = 31
+    Width = 32
+    Height = 17
+    Caption = 'Point:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label11: TLabel
+    Left = 269
+    Top = 8
+    Width = 27
+    Height = 17
+    Caption = 'Pitch'
   end
   object Label2: TLabel
     Left = 361
@@ -95,12 +108,49 @@ object MainForm: TMainForm
     Height = 17
     Caption = 'ZPos'
   end
-  object Label10: TLabel
-    Left = 11
-    Top = 31
-    Width = 32
+  object PaintBoxDD: TPaintBox
+    Left = 560
+    Top = 0
+    Width = 554
+    Height = 772
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnPaint = PaintBoxDDPaint
+    ExplicitLeft = 535
+    ExplicitWidth = 589
+  end
+  object Label13: TLabel
+    Left = 906
+    Top = 7
+    Width = 28
     Height = 17
-    Caption = 'Point:'
+    Caption = 'YPos'
+  end
+  object Label14: TLabel
+    Left = 953
+    Top = 7
+    Width = 28
+    Height = 17
+    Caption = 'ZPos'
+  end
+  object Label12: TLabel
+    Left = 861
+    Top = 7
+    Width = 29
+    Height = 17
+    Caption = 'XPos'
+  end
+  object Label15: TLabel
+    Left = 807
+    Top = 30
+    Width = 48
+    Height = 17
+    Caption = 'Camera:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -108,111 +158,22 @@ object MainForm: TMainForm
     Font.Style = []
     ParentFont = False
   end
-  object Splitter1: TSplitter
-    Left = 541
-    Top = 0
-    Width = 5
-    Height = 772
-    AutoSnap = False
-    Beveled = True
-    Color = clBtnHighlight
-    MinSize = 50
-    ParentColor = False
-    ResizeStyle = rsUpdate
-    ExplicitLeft = 518
-  end
-  object PanelDD: TPanel
-    Left = 546
-    Top = 0
-    Width = 572
-    Height = 772
-    Align = alClient
-    BevelOuter = bvNone
-    Caption = 'PanelDD'
-    ShowCaption = False
-    TabOrder = 10
-    ExplicitLeft = 517
-    ExplicitWidth = 601
-    object PaintBoxDD: TPaintBox
-      Left = 0
-      Top = 0
-      Width = 572
-      Height = 772
-      Align = alClient
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      OnPaint = PaintBoxTDPaint
-      ExplicitLeft = -33
-      ExplicitTop = 8
-      ExplicitWidth = 584
-    end
-  end
-  object PanelTD: TPanel
+  object PaintBoxTD: TPaintBox
     Left = 0
     Top = 0
-    Width = 541
+    Width = 560
     Height = 772
     Align = alLeft
-    BevelOuter = bvNone
-    Caption = 'PanelTD'
-    ShowCaption = False
-    TabOrder = 11
-    object PaintBoxTD: TPaintBox
-      Left = 0
-      Top = 0
-      Width = 541
-      Height = 772
-      Align = alClient
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
-      OnPaint = PaintBoxTDPaint
-      ExplicitWidth = 772
-      ExplicitHeight = 584
-    end
-  end
-  object XSpin: TSpinEdit
-    Left = 49
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 0
-    Value = 50
-    OnChange = XSpinChange
-  end
-  object YSpin: TSpinEdit
-    Left = 95
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 1
-    Value = 10
-    OnChange = XSpinChange
-  end
-  object ZSpin: TSpinEdit
-    Left = 141
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 2
-    Value = 20
-    OnChange = XSpinChange
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnPaint = PaintBoxTDPaint
   end
   object AABut: TCheckBox
-    Left = 576
+    Left = 1013
     Top = 31
     Width = 97
     Height = 17
@@ -225,8 +186,41 @@ object MainForm: TMainForm
     Font.Style = []
     ParentFont = False
     State = cbChecked
-    TabOrder = 3
+    TabOrder = 0
     OnClick = AAButClick
+  end
+  object XShiftSpinDD: TSpinEdit
+    Left = 861
+    Top = 26
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 1
+    Value = 250
+    OnChange = XShiftSpinChange
+  end
+  object YShiftSpinDD: TSpinEdit
+    Left = 907
+    Top = 26
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 2
+    Value = 400
+    OnChange = XShiftSpinChange
+  end
+  object ZShiftSpinDD: TSpinEdit
+    Left = 953
+    Top = 26
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 3
+    Value = 20
+    OnChange = XShiftSpinChange
   end
   object PitchSpin: TSpinEdit
     Left = 269
@@ -250,17 +244,6 @@ object MainForm: TMainForm
     Value = -46
     OnChange = PitchSpinChange
   end
-  object YawSpin: TSpinEdit
-    Left = 361
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 6
-    Value = -26
-    OnChange = PitchSpinChange
-  end
   object XShiftSpin: TSpinEdit
     Left = 421
     Top = 27
@@ -268,9 +251,31 @@ object MainForm: TMainForm
     Height = 27
     MaxValue = 0
     MinValue = 0
-    TabOrder = 7
+    TabOrder = 6
     Value = 200
     OnChange = XShiftSpinChange
+  end
+  object XSpin: TSpinEdit
+    Left = 49
+    Top = 27
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 7
+    Value = 50
+    OnChange = XSpinChange
+  end
+  object YawSpin: TSpinEdit
+    Left = 361
+    Top = 27
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 8
+    Value = -26
+    OnChange = PitchSpinChange
   end
   object YShiftSpin: TSpinEdit
     Left = 467
@@ -279,9 +284,20 @@ object MainForm: TMainForm
     Height = 27
     MaxValue = 0
     MinValue = 0
-    TabOrder = 8
+    TabOrder = 9
     Value = 400
     OnChange = XShiftSpinChange
+  end
+  object YSpin: TSpinEdit
+    Left = 95
+    Top = 27
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 10
+    Value = 10
+    OnChange = XSpinChange
   end
   object ZShiftSpin: TSpinEdit
     Left = 513
@@ -290,15 +306,26 @@ object MainForm: TMainForm
     Height = 27
     MaxValue = 0
     MinValue = 0
-    TabOrder = 9
+    TabOrder = 11
     Value = 12
     OnChange = XShiftSpinChange
+  end
+  object ZSpin: TSpinEdit
+    Left = 141
+    Top = 27
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 12
+    Value = 20
+    OnChange = XSpinChange
   end
   object DrawTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = DrawTimerTimer
-    Left = 736
-    Top = 16
+    Left = 1072
+    Top = 56
   end
 end

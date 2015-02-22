@@ -33,7 +33,7 @@ __published: // IDE-managed Components
 	TSpinEdit *PitchSpin;
 	TSpinEdit *RollSpin;
 	TSpinEdit *YawSpin;
-	TLabel *Pitch;
+	TLabel *Label11;
 	TLabel *Label1;
 	TLabel *Label2;
 	TSpinEdit *XShiftSpin;
@@ -47,10 +47,14 @@ __published: // IDE-managed Components
 	TLabel *Label8;
 	TLabel *Label9;
 	TLabel *Label10;
-	TSplitter *Splitter1;
-	TPanel *PanelDD;
 	TPaintBox *PaintBoxDD;
-	TPanel *PanelTD;
+	TSpinEdit *ZShiftSpinDD;
+	TSpinEdit *YShiftSpinDD;
+	TSpinEdit *XShiftSpinDD;
+	TLabel *Label12;
+	TLabel *Label13;
+	TLabel *Label14;
+	TLabel *Label15;
 	TPaintBox *PaintBoxTD;
 
 	void __fastcall PaintBoxDDPaint(TObject * Sender);

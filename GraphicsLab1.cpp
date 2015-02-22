@@ -25,18 +25,22 @@ TMainForm *MainForm;
 #define SHIFTX 			XShiftSpin->Value
 #define SHIFTY 			YShiftSpin->Value
 #define SHIFTZ 			ZShiftSpin->Value
+#define SHIFTXDD 		XShiftSpinDD->Value
+#define SHIFTYDD 		YShiftSpinDD->Value
+#define SHIFTZDD 		ZShiftSpinDD->Value
 
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 	MainForm->ControlStyle << csOpaque;
 	pCameraTD = new CameraTD(SHIFTX, SHIFTY, SHIFTZ, PITCH, ROLL, YAW);
-	pCameraDD = new CameraDD(SHIFTX, SHIFTY, SHIFTZ);
+	pCameraDD = new CameraDD(SHIFTXDD, SHIFTYDD, SHIFTZDD);
 	pOrtoSystem = new OrtoSystem(pCameraTD);
 	pCompSystem = new ComplexSystem(pCameraDD);
 }
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormShow(TObject *Sender) {
+	// 3D stuff
 	float L = 250;
 	for (int i = 7; i >= 0; i--) {
 		float lX, lY, lZ;
@@ -122,6 +126,27 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	ObjectShared* CoordsShared = (ObjectShared*)Coords;
 	pOrtoSystem->AddObject(CoordsShared);
 
+	ObjectDD *TextViewTD = new ObjectDD();
+	TextViewTD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "3D view"));
+	ObjectShared* TextViewTDShared = (ObjectShared*)TextViewTD;
+	pOrtoSystem->AddObject(TextViewTDShared);
+
+	ObjectDD *PointViewTD = new ObjectDD();
+	PointViewTD->AddPoint(new PointDD(45, 107, TYPE_POINT));
+	ObjectShared* PointViewTDShared = (ObjectShared*)PointViewTD;
+	pOrtoSystem->AddObject(PointViewTDShared);
+
+	LabPoint = new ObjectTD("LabaPoint");
+	// LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_TEXT, "Point3D"));
+	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_POINT));
+	LabPoint->SetParameters(DrawPar(clRed, psDot, 3));
+	LabPoint->SetDrawProj(true);
+	ObjectShared* PointShared = (ObjectShared*)LabPoint;
+	pOrtoSystem->AddObject(PointShared);
+	pCompSystem->AddObject(PointShared);
+
+	// 2D stuff
+	L = 200;
 	ObjectTD *CoordsDD = new ObjectTD();
 	CoordsDD->AddPoint(new PointTD(-L, 0, 0, ACT_MOVE));
 	CoordsDD->AddPoint(new PointTD(-L + 5, -5, 0, ACT_DRAW));
@@ -151,24 +176,16 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	ObjectShared* CoordsDDShared = (ObjectShared*)CoordsDD;
 	pCompSystem->AddObject(CoordsDDShared);
 
-	ObjectDD *TextDD = new ObjectDD();
-	TextDD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "Laba1"));
-	ObjectShared* TextDDShared = (ObjectShared*)TextDD;
-	pOrtoSystem->AddObject(TextDDShared);
+	ObjectDD *TextViewDD = new ObjectDD();
+	TextViewDD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "2D view"));
+	ObjectShared* TextViewDDShared = (ObjectShared*)TextViewDD;
+	pCompSystem->AddObject(TextViewDDShared);
 
-	ObjectDD *PointDDD = new ObjectDD();
-	PointDDD->AddPoint(new PointDD(45, 107, TYPE_POINT));
-	ObjectShared* PointDDShared = (ObjectShared*)PointDDD;
-	pOrtoSystem->AddObject(PointDDShared);
+	ObjectDD *PointViewDD = new ObjectDD();
+	PointViewDD->AddPoint(new PointDD(45, 107, TYPE_POINT));
+	ObjectShared* PointViewDDShared = (ObjectShared*)PointViewDD;
+	pCompSystem->AddObject(PointViewDDShared);
 
-	LabPoint = new ObjectTD("LabaPoint");
-	// LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_TEXT, "Point3D"));
-	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_POINT));
-	LabPoint->SetParameters(DrawPar(clRed, psDot, 3));
-	LabPoint->SetDrawProj(true);
-	ObjectShared* PointShared = (ObjectShared*)LabPoint;
-	pOrtoSystem->AddObject(PointShared);
-	pCompSystem->AddObject(PointShared);
 }
 
 // ---------------------------------------------------------------------------
@@ -182,8 +199,8 @@ void __fastcall TMainForm::PaintBoxDDPaint(TObject *Sender) {
 		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
 	LCanvas->BeginDraw();
 	try {
-		pOrtoSystem->Paint(LCanvas); // (TCanvas*)
-		// pCompSystem->Paint(LCanvas);
+		// pOrtoSystem->Paint(LCanvas); // (TCanvas*)
+		pCompSystem->Paint(LCanvas);
 	}
 	__finally {
 		LCanvas->EndDraw();
@@ -234,7 +251,7 @@ void __fastcall TMainForm::AAButClick(TObject *Sender) {
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::XShiftSpinChange(TObject *Sender) {
 	pOrtoSystem->pCamera->SetPosition(SHIFTX, SHIFTY, SHIFTZ);
-	pCompSystem->pCamera->SetPosition(SHIFTX, SHIFTY, SHIFTZ);
+	pCompSystem->pCamera->SetPosition(SHIFTXDD, SHIFTYDD, SHIFTZDD);
 	PaintBoxTD->Refresh();
 	PaintBoxDD->Refresh();
 }

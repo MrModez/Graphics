@@ -35,6 +35,10 @@ enum Type {
 	TYPE_OBJECT, TYPE_POINT, TYPE_TEXT
 };
 
+enum ProjStyle {
+	PROJ_NONE, PROJ_LINES, PROJ_DOTS
+};
+
 enum Quarter {
 	QXZ, QXY, QYY, QYZ
 };
@@ -46,18 +50,22 @@ public:
 		iStyle = psSolid;
 		iWidth = 1;
 		bProj = false;
+		iProjStyle = PROJ_NONE;
 	};
 
 	DrawPar(TColor Color, TPenStyle Style, int Width) {
 		iColor = Color;
 		iStyle = Style;
 		iWidth = Width;
+		bProj = false;
+		iProjStyle = PROJ_NONE;
 	};
 
 	TColor iColor;
 	TPenStyle iStyle;
 	int iWidth;
 	bool bProj;
+	ProjStyle iProjStyle;
 };
 
 class CameraTD;
