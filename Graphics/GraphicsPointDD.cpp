@@ -54,6 +54,12 @@ PointDD::~PointDD() {
 }
 
 void PointDD::AddShift(float iXShift, float iYShift, float iZShift) {
-	fX = iZShift/10.0 * fX + iXShift;
-	fY = iZShift/10.0 * fY + iYShift;
+	fX = iZShift / 10.0 * fX + iXShift;
+	fY = iZShift / 10.0 * fY + iYShift;
+};
+
+void PointDD::SetSettings(Action iA, Type T, String Text) {
+	iAction = iA;
+	iType = T;
+	sText = Text;
 };

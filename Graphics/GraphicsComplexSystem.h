@@ -1,31 +1,31 @@
 // ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
 //
-// Purpose: Ortogonal System. Requires CameraTD
+// Purpose: Ortogonal System. Requires CameraDD
 //
 // =============================================================================
 
-#ifndef GRAPCHICS_OTROSYSTEM_H_
-#define GRAPCHICS_OTROSYSTEM_H_
+#ifndef GRAPCHICS_COMPLEXSYSTEM_H_
+#define GRAPCHICS_COMPLEXSYSTEM_H_
 
 #include "GraphicsShared.h"
-#include "GraphicsCameraTD.h"
+#include "GraphicsCameraDD.h"
 #include "GraphicsObjectTD.h"
 
-class OrtoSystem {
+class ComplexSystem {
 public:
-	OrtoSystem() {
+	ComplexSystem() {
 	};
 
-	OrtoSystem(CameraTD* Camera);
-	~OrtoSystem();
+	ComplexSystem(CameraDD* Camera);
+	~ComplexSystem();
 
 	void Paint(DefCanvas* pCanvas);
 	void AddObject(ObjectShared* pObject);
 	ObjectShared* FindObject(String ID);
 
-	CameraTD* pCamera;
+	CameraDD* pCamera;
 
 	std::vector<ObjectShared*>pObjects;
 };
 
-#endif //GRAPCHICS_OTROSYSTEM_H_
+#endif //GRAPCHICS_COMPLEXSYSTEM_H_

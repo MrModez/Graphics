@@ -24,7 +24,7 @@ ObjectDD::~ObjectDD() {
 	pPointsDD.clear();
 }
 
-void ObjectDD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
+void ObjectDD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 	for (unsigned int j = 0; j < pPointsDD.size(); j++) {
 		PointDD* pObjectDD = pPointsDD[j];
 		SetCanvasSettings(pCanvas);
@@ -34,6 +34,52 @@ void ObjectDD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 			break;
 		case ACT_DRAW:
 			pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
+			break;
+		case ACT_NONE:
+			switch (pPointsDD[j]->iType) {
+			case TYPE_TEXT:
+				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY,
+					pPointsDD[j]->sText);
+				pCanvas->Font->Size = 8 + pCamera->iZShift / 10.0;
+				break;
+			case TYPE_POINT:
+				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS,
+					pObjectDD->fY - DEFAULT_RADIUS,
+					pObjectDD->fX + DEFAULT_RADIUS,
+					pObjectDD->fY + DEFAULT_RADIUS);
+				break;
+			default:
+				// pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, this->ObjectID);
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+		SetCanvasDefaults(pCanvas);
+	}
+}
+
+void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
+	for (unsigned int j = 0; j < pPointsDD.size(); j++) {
+		PointDD* pObjectDDL = pPointsDD[j - 1];
+		PointDD* pObjectDD = pPointsDD[j];
+		TPoint points[] = {
+			Point(pObjectDDL->fX, pObjectDDL->fY),
+				Point(pObjectDD->fX, pObjectDDL->fY),
+				Point(pObjectDD->fX, pObjectDDL->fY),
+				Point(pObjectDD->fX, pObjectDD->fY)};
+		SetCanvasSettings(pCanvas);
+		switch (pObjectDD->iAction) {
+		case ACT_MOVE:
+			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
+			break;
+		case ACT_DRAW:
+			pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
+			break;
+		case ACT_ARC:
+			pCanvas->PolyBezier(points, 3);
+			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_NONE:
 			switch (pPointsDD[j]->iType) {

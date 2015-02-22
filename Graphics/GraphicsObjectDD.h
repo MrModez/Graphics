@@ -18,7 +18,8 @@ public:
 	ObjectDD(String ID);
 	~ObjectDD();
 
-	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
+	virtual void PaintTD(DefCanvas* pCanvas, CameraTD* pCamera);
+	virtual void PaintDD(DefCanvas* pCanvas, CameraDD* pCamera);
 	void AddPoint(PointDD * Point);
 	void SetParameters(DrawPar Par);
 

@@ -20,7 +20,7 @@
 #define DEFAULT_STYLE 	psSolid
 
 enum Action {
-	ACT_NONE, ACT_MOVE, ACT_DRAW
+	ACT_NONE, ACT_MOVE, ACT_DRAW, ACT_ARC, ACT_COUNT
 };
 
 enum Axis {
@@ -33,6 +33,10 @@ enum Dim { // unused
 
 enum Type {
 	TYPE_OBJECT, TYPE_POINT, TYPE_TEXT
+};
+
+enum Quarter {
+	QXZ, QXY, QYY, QYZ
 };
 
 class DrawPar {
@@ -56,7 +60,8 @@ public:
 	bool bProj;
 };
 
-class OCamera;
+class CameraTD;
+class CameraDD;
 
 class ObjectShared {
 public:
@@ -66,7 +71,11 @@ public:
 	~ObjectShared() {
 	}
 
-	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera) {
+	virtual void PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
+		return;
+	}
+
+	virtual void PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 		return;
 	}
 

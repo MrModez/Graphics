@@ -8,7 +8,8 @@
 #define GRAPCHICS_PROJECTIONDD_H_
 
 #include "GraphicsShared.h"
-#include "GraphicsCamera.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsCameraTD.h"
 #include "GraphicsObjectTD.h"
 #include "GraphicsObjectDD.h"
 #include "GraphicsPointTD.h"
@@ -16,13 +17,19 @@
 
 class ProjectionDD : public ObjectDD {
 public:
-	ProjectionDD(ObjectTD* pObjectTD, OCamera* pCamera);
+	ProjectionDD(ObjectTD* pObjectTD, CameraTD* pCamera);
+	ProjectionDD(ObjectTD* pObjectTD, CameraDD* pCamera);
 	~ProjectionDD();
 
-	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
-	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, OCamera* pCamera);
+	virtual void Paint(DefCanvas* pCanvas, CameraTD* pCamera);
+	virtual void Paint(DefCanvas* pCanvas, CameraDD* pCamera);
+	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraTD* pCamera);
+	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraDD* pCamera);
 	PointTD Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
+	PointTD MultipleW(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
 	PointTD* Rotate3D(PointTD pPointTD, float fPitch, float fRoll, float fYaw);
+	PointTD* Rotate3D(PointTD pPointTD);
+	PointTD* Rotate3D(PointTD pPointTD, Quarter Quart);
 	ObjectDD* ToObject();
 	float DegToRad(float in);
 

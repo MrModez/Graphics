@@ -16,15 +16,15 @@
 
 #include "GraphicsObjectDD.h"
 #include "GraphicsObjectTD.h"
-#include "GraphicsCamera.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsCameraTD.h"
 #include "GraphicsOrtoSystem.h"
+#include "GraphicsComplexSystem.h"
 #include "GraphicsShared.h"
 
 // ---------------------------------------------------------------------------
 class TMainForm : public TForm {
 __published: // IDE-managed Components
-
-	TPaintBox *MainPaintBox;
 	TSpinEdit *XSpin;
 	TSpinEdit *YSpin;
 	TSpinEdit *ZSpin;
@@ -47,19 +47,28 @@ __published: // IDE-managed Components
 	TLabel *Label8;
 	TLabel *Label9;
 	TLabel *Label10;
+	TSplitter *Splitter1;
+	TPanel *PanelDD;
+	TPaintBox *PaintBoxDD;
+	TPanel *PanelTD;
+	TPaintBox *PaintBoxTD;
 
-	void __fastcall MainPaintBoxPaint(TObject * Sender);
+	void __fastcall PaintBoxDDPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);
 	void __fastcall PitchSpinChange(TObject * Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall AAButClick(TObject *Sender);
 	void __fastcall XShiftSpinChange(TObject *Sender);
 	void __fastcall XSpinChange(TObject *Sender);
+	void __fastcall PaintBoxTDPaint(TObject *Sender);
+
 
 private: // User declarations
 
-	OrtoSystem *pSystem;
-	OCamera *pCamera;
+	OrtoSystem *pOrtoSystem;
+	ComplexSystem *pCompSystem;
+	CameraTD *pCameraTD;
+	CameraDD *pCameraDD;
 	ObjectTD *LabPoint;
 
 public: // User declarations

@@ -36,14 +36,14 @@ ObjectTD* ObjectTD::CopyObjectTD() {
 	return CopyTD;
 }
 
-void ObjectTD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
+void ObjectTD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 	if (Par.bProj == 1) {
 		ObjectTD* Obj = GetAxisProjection();
 		if (!Obj)
 			return;
 		ProjectionDD* pObjProjection = new ProjectionDD(Obj, pCamera);
 		ObjectDD* pObjectObjDD = pObjProjection->ToObject();
-		pObjectObjDD->Paint(pCanvas, pCamera);
+		pObjectObjDD->PaintTD(pCanvas, pCamera);
 		delete Obj;
 		delete pObjProjection;
 		delete pObjectObjDD;
@@ -51,33 +51,68 @@ void ObjectTD::Paint(DefCanvas* pCanvas, OCamera* pCamera) {
 
 	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
 	ObjectDD* pObjectDD = pProjection->ToObject();
-	pObjectDD->Paint(pCanvas, pCamera);
+	pObjectDD->PaintTD(pCanvas, pCamera);
 	delete pProjection;
 	delete pObjectDD;
+}
+
+void ObjectTD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
+	// ObjectTD* pObjectTD = new ObjectTD(*this);
+	// ObjectDD* pObjectDD = static_cast<ObjectDD*>(pObjectTD);
+	// PaintDD(pCanvas, static_cast<CameraTD*>(pCamera));
+
+	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
+	ObjectDD* pObjectDD = pProjection->ToObject();
+	pObjectDD->PaintDD(pCanvas, pCamera);
+	delete pProjection;
+	delete pObjectDD;
+
+	/* if (Par.bProj == 1) {
+	 ObjectTD* Obj = GetAxisProjection();
+	 if (!Obj)
+	 return;
+	 ProjectionDD* pObjProjection = new ProjectionDD(Obj, pCamera);
+	 ObjectDD* pObjectObjDD = pObjProjection->ToObject();
+	 pObjectObjDD->PaintDD(pCanvas, pCamera);
+	 delete Obj;
+	 delete pObjProjection;
+	 delete pObjectObjDD;
+	 }
+	 else {
+	 ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
+	 ObjectDD* pObjectDD = pProjection->ToObject();
+	 pObjectDD->PaintDD(pCanvas, pCamera);
+	 delete pProjection;
+	 delete pObjectDD;
+	 } */
 }
 
 ObjectTD* ObjectTD::GetAxisProjection() {
 	ObjectTD* Obj = new ObjectTD(ObjectID);
 	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
-		Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
-			pPointsTD[i]->fZ, ACT_MOVE));
-		Obj->AddPoint(new PointTD(0, pPointsTD[i]->fY, pPointsTD[i]->fZ,
-			ACT_DRAW));
-		Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
-			pPointsTD[i]->fZ, ACT_MOVE));
-		Obj->AddPoint(new PointTD(pPointsTD[i]->fX, 0, pPointsTD[i]->fZ,
-			ACT_DRAW));
-		Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
-			pPointsTD[i]->fZ, ACT_MOVE));
-		Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY, 0,
-			ACT_DRAW));
-
-		Obj->AddPoint(new PointTD(0, pPointsTD[i]->fY, pPointsTD[i]->fZ,
-			pPointsTD[i]->iAction, pPointsTD[i]->iType, pPointsTD[i]->sText));
-		Obj->AddPoint(new PointTD(pPointsTD[i]->fX, 0, pPointsTD[i]->fZ,
-			pPointsTD[i]->iAction, pPointsTD[i]->iType, pPointsTD[i]->sText));
-		Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY, 0,
-			pPointsTD[i]->iAction, pPointsTD[i]->iType, pPointsTD[i]->sText));
+		if (pPointsTD[i]->iType == TYPE_POINT) {
+			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
+				pPointsTD[i]->fZ, ACT_MOVE));
+			Obj->AddPoint(new PointTD(0, pPointsTD[i]->fY, pPointsTD[i]->fZ,
+				ACT_DRAW));
+			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
+				pPointsTD[i]->fZ, ACT_MOVE));
+			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, 0, pPointsTD[i]->fZ,
+				ACT_DRAW));
+			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
+				pPointsTD[i]->fZ, ACT_MOVE));
+			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY, 0,
+				ACT_DRAW));
+			Obj->AddPoint(new PointTD(0, pPointsTD[i]->fY, pPointsTD[i]->fZ,
+				pPointsTD[i]->iAction, pPointsTD[i]->iType,
+				pPointsTD[i]->sText));
+			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, 0, pPointsTD[i]->fZ,
+				pPointsTD[i]->iAction, pPointsTD[i]->iType,
+				pPointsTD[i]->sText));
+			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY, 0,
+				pPointsTD[i]->iAction, pPointsTD[i]->iType,
+				pPointsTD[i]->sText));
+		}
 	}
 	Obj->Par.iColor = clSilver;
 	Obj->Par.iStyle = psDash;
@@ -112,7 +147,8 @@ void ObjectTD::SetCanvasDefaults(DefCanvas* pCanvas) {
 
 void ObjectTD::SetPos(float X, float Y, float Z) {
 	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
-		if (pPointsTD[i]->iType == TYPE_POINT) {
+		if (pPointsTD[i]->iType == TYPE_POINT ||
+			pPointsTD[i]->iType == TYPE_TEXT) {
 			pPointsTD[i]->SetPos(X, Y, Z);
 		}
 	}

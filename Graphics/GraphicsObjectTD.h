@@ -9,7 +9,8 @@
 
 #include "GraphicsShared.h"
 #include "GraphicsPointTD.h"
-#include "GraphicsCamera.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsCameraTD.h"
 
 class ObjectTD : public ObjectShared {
 public:
@@ -20,7 +21,8 @@ public:
 
 	ObjectTD* CopyObjectTD();
 
-	virtual void Paint(DefCanvas* pCanvas, OCamera* pCamera);
+	virtual void PaintTD(DefCanvas* pCanvas, CameraTD* pCamera);
+	virtual void PaintDD(DefCanvas* pCanvas, CameraDD* pCamera);
 	void AddPoint(PointTD * Point);
 	void SetParameters(DrawPar Par);
 	void SetDrawProj(bool bDraw);

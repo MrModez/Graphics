@@ -1,33 +1,33 @@
 // ====== Copyright © 2015, MrModez (Zagir Fabarisov), All rights reserved. ====
 //
-// Purpose: Ortogonal System. Requires CameraTD
+// Purpose: Ortogonal System. Requires CameraDD
 //
 // =============================================================================
 
-#include "GraphicsOrtoSystem.h"
+#include "GraphicsComplexSystem.h"
 
-OrtoSystem::OrtoSystem(CameraTD* Camera) {
+ComplexSystem::ComplexSystem(CameraDD* Camera) {
 	pCamera = Camera;
 };
 
-OrtoSystem::~OrtoSystem() {
+ComplexSystem::~ComplexSystem() {
 	for (unsigned int i = 0; i < pObjects.size(); i++) {
 		delete pObjects[i];
 	}
 	pObjects.clear();
 };
 
-void OrtoSystem::Paint(DefCanvas* pCanvas) {
+void ComplexSystem::Paint(DefCanvas* pCanvas) {
 	for (unsigned int i = 0; i < pObjects.size(); i++) {
-		pObjects[i]->PaintTD(pCanvas, pCamera);
+		pObjects[i]->PaintDD(pCanvas, pCamera);
 	}
 }
 
-void OrtoSystem::AddObject(ObjectShared * pObject) {
+void ComplexSystem::AddObject(ObjectShared * pObject) {
 	pObjects.push_back(pObject);
 };
 
-ObjectShared* OrtoSystem::FindObject(String ID) {
+ObjectShared* ComplexSystem::FindObject(String ID) {
 	for (unsigned int i = 0; i < pObjects.size(); i++) {
 		if (pObjects[i]->ObjectID == ID) {
 			return pObjects[i];
