@@ -196,7 +196,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 void __fastcall TMainForm::PaintBoxDDPaint(TObject *Sender) {
 	TDirect2DCanvas* LCanvas;
 	LCanvas = new TDirect2DCanvas(PaintBoxDD->Canvas, PaintBoxDD->ClientRect);
-	if (AABut->Checked)
+	if (AACheck->Checked)
 		LCanvas->RenderTarget->SetAntialiasMode
 			(D2D1_ANTIALIAS_MODE_FORCE_DWORD);
 	else
@@ -215,7 +215,7 @@ void __fastcall TMainForm::PaintBoxDDPaint(TObject *Sender) {
 void __fastcall TMainForm::PaintBoxTDPaint(TObject *Sender) {
 	TDirect2DCanvas* LCanvas;
 	LCanvas = new TDirect2DCanvas(PaintBoxTD->Canvas, PaintBoxTD->ClientRect);
-	if (AABut->Checked)
+	if (AACheck->Checked)
 		LCanvas->RenderTarget->SetAntialiasMode
 			(D2D1_ANTIALIAS_MODE_FORCE_DWORD);
 	else
@@ -245,7 +245,7 @@ void __fastcall TMainForm::PitchSpinChange(TObject *Sender) {
 
 // ---------------------------------------------------------------------------
 
-void __fastcall TMainForm::AAButClick(TObject *Sender) {
+void __fastcall TMainForm::AACheckClick(TObject *Sender) {
 	PaintBoxTD->Refresh();
 	PaintBoxDD->Refresh();
 }
@@ -260,11 +260,6 @@ void __fastcall TMainForm::XShiftSpinChange(TObject *Sender) {
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::XSpinChange(TObject *Sender) {
-	/* ObjectTD* pPoint = dynamic_cast<ObjectTD*>
-	 (pSystem->FindObject("LabaPoint"));
-	 if (!pPoint)
-	 return;
-	 DEBUG("Found"); */
 	LabPoint->SetPos(SPINX, SPINY, SPINZ);
 	PaintBoxTD->Refresh();
 	PaintBoxDD->Refresh();
@@ -277,5 +272,12 @@ void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose) {
 	delete pCameraTD;
 	delete pCameraDD;
 	delete LabPoint;
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::ProjCheckClick(TObject *Sender) {
+	LabPoint->Par.bProj = ProjCheck->Checked;
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
 }
 // ---------------------------------------------------------------------------

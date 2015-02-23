@@ -173,7 +173,7 @@ object MainForm: TMainForm
     ParentFont = False
     OnPaint = PaintBoxTDPaint
   end
-  object AABut: TCheckBox
+  object AACheck: TCheckBox
     Left = 1013
     Top = 31
     Width = 97
@@ -188,7 +188,7 @@ object MainForm: TMainForm
     ParentFont = False
     State = cbChecked
     TabOrder = 0
-    OnClick = AAButClick
+    OnClick = AACheckClick
   end
   object XShiftSpinDD: TSpinEdit
     Left = 861
@@ -321,6 +321,23 @@ object MainForm: TMainForm
     TabOrder = 12
     Value = 20
     OnChange = XSpinChange
+  end
+  object ProjCheck: TCheckBox
+    Left = 49
+    Top = 60
+    Width = 86
+    Height = 17
+    Caption = 'Projection'
+    Checked = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    State = cbChecked
+    TabOrder = 13
+    OnClick = ProjCheckClick
   end
   object DrawTimer: TTimer
     Enabled = False
