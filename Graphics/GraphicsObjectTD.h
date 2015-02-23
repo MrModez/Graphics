@@ -17,7 +17,7 @@ public:
 	ObjectTD(std::vector<PointTD*>Object);
 	ObjectTD();
 	ObjectTD(String ID);
-	~ObjectTD();
+	virtual ~ObjectTD();
 
 	ObjectTD* CopyObjectTD();
 
@@ -26,7 +26,6 @@ public:
 	void AddPoint(PointTD * Point);
 	void SetParameters(DrawPar Par);
 	void SetDrawProj(bool bDraw);
-	ObjectTD* GetAxisProjection();
 
 	void SetCanvasSettings(DefCanvas* pCanvas);
 	void SetCanvasDefaults(DefCanvas* pCanvas);

@@ -65,6 +65,7 @@ __published: // IDE-managed Components
 	void __fastcall XShiftSpinChange(TObject *Sender);
 	void __fastcall XSpinChange(TObject *Sender);
 	void __fastcall PaintBoxTDPaint(TObject *Sender);
+	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 
 
 private: // User declarations

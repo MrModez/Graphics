@@ -4,8 +4,8 @@
 //
 // =============================================================================
 
-#ifndef GRAPCHICS_PROJECTIONDD_H_
-#define GRAPCHICS_PROJECTIONDD_H_
+#ifndef GRAPCHICS_PROJECTIONORTODD_H_
+#define GRAPCHICS_PROJECTIONORTODD_H_
 
 #include "GraphicsShared.h"
 #include "GraphicsCameraDD.h"
@@ -15,20 +15,15 @@
 #include "GraphicsPointTD.h"
 #include "GraphicsPointDD.h"
 
-class ProjectionDD : public ObjectDD {
+class ProjectionOrtoDD : public ObjectDD {
 public:
-	ProjectionDD(ObjectTD* pObjectTD, CameraTD* pCamera);
-	ProjectionDD(ObjectTD* pObjectTD, CameraDD* pCamera);
-	~ProjectionDD();
+	ProjectionOrtoDD(ObjectTD* pObjectTD, CameraTD* pCamera);
+	virtual ~ProjectionOrtoDD();
 
 	virtual void Paint(DefCanvas* pCanvas, CameraTD* pCamera);
-	virtual void Paint(DefCanvas* pCanvas, CameraDD* pCamera);
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraTD* pCamera);
-	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraDD* pCamera);
 	PointTD Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
 	PointTD* Rotate3D(PointTD pPointTD, float fPitch, float fRoll, float fYaw);
-	PointTD* Rotate3D(PointTD pPointTD);
-	PointTD* Rotate3D(PointTD pPointTD, Quarter Quart);
 	ObjectDD* ToObject();
 	float DegToRad(float in);
 
@@ -37,4 +32,4 @@ public:
 	// std::vector<PointDD*>pPointsDD;
 };
 
-#endif //GRAPCHICS_PROJECTIONDD_H_
+#endif //GRAPCHICS_PROJECTIONORTODD_H_

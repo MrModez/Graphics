@@ -5,7 +5,8 @@
 // =============================================================================
 
 #include "GraphicsObjectTD.h"
-#include "GraphicsProjectionDD.h"
+#include "GraphicsProjectionOrtoDD.h"
+#include "GraphicsProjectionComplexDD.h"
 
 ObjectTD::ObjectTD(std::vector<PointTD*>Object) {
 	pPointsTD = Object;
@@ -38,109 +39,58 @@ ObjectTD* ObjectTD::CopyObjectTD() {
 
 void ObjectTD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 	if (Par.bProj == 1) {
-		ObjectTD* Obj = GetAxisProjection();
-		if (!Obj)
-			return;
-		ProjectionDD* pObjProjection = new ProjectionDD(Obj, pCamera);
-		ObjectDD* pObjectObjDD = pObjProjection->ToObject();
-		pObjectObjDD->PaintTD(pCanvas, pCamera);
-		delete Obj;
-		delete pObjProjection;
-		delete pObjectObjDD;
-	}
+		ProjectionOrtoDD* pProjection;
 
-	ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
-	ObjectDD* pObjectDD = pProjection->ToObject();
-	pObjectDD->PaintTD(pCanvas, pCamera);
+		Par.iProjStyle = PROJ_LINES;
+		pProjection = new ProjectionOrtoDD(this, pCamera);
+		pProjection->Par.iColor = clSilver;
+		pProjection->Par.iStyle = psDash;
+		pProjection->Par.iWidth = 2;
+		pProjection->PaintTD(pCanvas, pCamera);
+		delete pProjection;
+
+		Par.iProjStyle = PROJ_DOTS;
+		pProjection = new ProjectionOrtoDD(this, pCamera);
+		pProjection->Par.iColor = clSilver;
+		pProjection->Par.iStyle = psDash;
+		pProjection->Par.iWidth = 3;
+		pProjection->PaintTD(pCanvas, pCamera);
+		delete pProjection;
+	}
+	Par.iProjStyle = PROJ_NONE;
+	ProjectionOrtoDD* pProjection = new ProjectionOrtoDD(this, pCamera);
+	pProjection->PaintTD(pCanvas, pCamera);
 	delete pProjection;
-	delete pObjectDD;
 }
 
 void ObjectTD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 	if (Par.bProj == 1) {
-		ObjectTD* Obj = new ObjectTD(*this);
-		Obj->Par.iColor = clSilver;
-		Obj->Par.iStyle = psDash;
-		Obj->Par.iWidth = 2;
-		Obj->Par.iProjStyle = PROJ_LINES;
-		ProjectionDD* pProjection = new ProjectionDD(Obj, pCamera);
-		ObjectDD* pObjectDD = pProjection->ToObject();
-		pObjectDD->PaintDD(pCanvas, pCamera);
-		delete pProjection;
-		delete pObjectDD;
+		ProjectionComplexDD* pProjection;
 
-		Obj = new ObjectTD(*this);
-		Obj->Par.iColor = clRed;
-		Obj->Par.iStyle = psDash;
-		Obj->Par.iWidth = 3;
-		Obj->Par.iProjStyle = PROJ_DOTS;
-		pProjection = new ProjectionDD(Obj, pCamera);
-		pObjectDD = pProjection->ToObject();
-		pObjectDD->PaintDD(pCanvas, pCamera);
+		Par.iProjStyle = PROJ_LINES;
+		pProjection = new ProjectionComplexDD(this, pCamera);
+		pProjection->Par.iColor = clSilver;
+		pProjection->Par.iStyle = psDash;
+		pProjection->Par.iWidth = 2;
+		pProjection->PaintDD(pCanvas, pCamera);
 		delete pProjection;
-		delete pObjectDD;
+
+		Par.iProjStyle = PROJ_DOTS;
+		pProjection = new ProjectionComplexDD(this, pCamera);
+		pProjection->Par.iColor = clRed;
+		pProjection->Par.iStyle = psDash;
+		pProjection->Par.iWidth = 3;
+		pProjection->PaintDD(pCanvas, pCamera);
+		delete pProjection;
 	}
 	else {
-		ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
-		ObjectDD* pObjectDD = pProjection->ToObject();
-		pObjectDD->PaintDD(pCanvas, pCamera);
+		Par.iProjStyle = PROJ_NONE;
+		ProjectionComplexDD* pProjection =
+			new ProjectionComplexDD(this, pCamera);
+		pProjection->PaintDD(pCanvas, pCamera);
 		delete pProjection;
-		delete pObjectDD;
 	}
-
-	/* if (Par.bProj == 1) {
-	 ObjectTD* Obj = GetAxisProjection();
-	 if (!Obj)
-	 return;
-	 ProjectionDD* pObjProjection = new ProjectionDD(Obj, pCamera);
-	 ObjectDD* pObjectObjDD = pObjProjection->ToObject();
-	 pObjectObjDD->PaintDD(pCanvas, pCamera);
-	 delete Obj;
-	 delete pObjProjection;
-	 delete pObjectObjDD;
-	 }
-	 else {
-	 ProjectionDD* pProjection = new ProjectionDD(this, pCamera);
-	 ObjectDD* pObjectDD = pProjection->ToObject();
-	 pObjectDD->PaintDD(pCanvas, pCamera);
-	 delete pProjection;
-	 delete pObjectDD;
-	 } */
 }
-
-ObjectTD* ObjectTD::GetAxisProjection() {
-	ObjectTD* Obj = new ObjectTD(ObjectID);
-	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
-		if (pPointsTD[i]->iType == TYPE_POINT) {
-			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
-				pPointsTD[i]->fZ, ACT_MOVE));
-			Obj->AddPoint(new PointTD(0, pPointsTD[i]->fY, pPointsTD[i]->fZ,
-				ACT_DRAW));
-			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
-				pPointsTD[i]->fZ, ACT_MOVE));
-			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, 0, pPointsTD[i]->fZ,
-				ACT_DRAW));
-			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
-				pPointsTD[i]->fZ, ACT_MOVE));
-			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY, 0,
-				ACT_DRAW));
-			Obj->AddPoint(new PointTD(0, pPointsTD[i]->fY, pPointsTD[i]->fZ,
-				pPointsTD[i]->iAction, pPointsTD[i]->iType,
-				pPointsTD[i]->sText));
-			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, 0, pPointsTD[i]->fZ,
-				pPointsTD[i]->iAction, pPointsTD[i]->iType,
-				pPointsTD[i]->sText));
-			Obj->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY, 0,
-				pPointsTD[i]->iAction, pPointsTD[i]->iType,
-				pPointsTD[i]->sText));
-		}
-	}
-	Obj->Par.iColor = clSilver;
-	Obj->Par.iStyle = psDash;
-	Obj->Par.iWidth = 2;
-
-	return Obj;
-};
 
 void ObjectTD::SetParameters(DrawPar P) {
 	Par = P;

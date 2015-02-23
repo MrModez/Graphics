@@ -18,6 +18,7 @@ public:
 	PointDD(float X, float Y, Action iA, Type T);
 	PointDD(float X, float Y, Type T);
 	PointDD(float X, float Y, Type T, String Text);
+	PointDD(float X, float Y, Action iA, Type T, String Text);
 	~PointDD();
 
 	virtual void AddShift(float iXShift, float iYShift, float iZShift);

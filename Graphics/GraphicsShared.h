@@ -76,7 +76,7 @@ public:
 	ObjectShared() {
 	}
 
-	~ObjectShared() {
+	virtual ~ObjectShared() {
 	}
 
 	virtual void PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {

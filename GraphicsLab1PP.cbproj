@@ -4,7 +4,7 @@
         <ProjectVersion>15.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <AppType>Application</AppType>
-        <MainSource>GraphicsLab1P.cpp</MainSource>
+        <MainSource>GraphicsLab1PP.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -126,7 +126,7 @@
             <VirtualFolder>{E451CA24-B7FB-4CE9-88EA-605C2914227A}</VirtualFolder>
             <BuildOrder>1</BuildOrder>
         </PCHCompile>
-        <CppCompile Include="GraphicsLab1P.cpp">
+        <CppCompile Include="GraphicsLab1PP.cpp">
             <VirtualFolder>{E451CA24-B7FB-4CE9-88EA-605C2914227A}</VirtualFolder>
             <BuildOrder>0</BuildOrder>
         </CppCompile>
@@ -194,13 +194,21 @@
             <VirtualFolder>{DA537C1C-5073-4217-B99A-54B4BAF3C6F8}</VirtualFolder>
             <BuildOrder>16</BuildOrder>
         </None>
-        <CppCompile Include="Graphics\GraphicsProjectionDD.cpp">
+        <CppCompile Include="Graphics\GraphicsProjectionComplexDD.cpp">
             <VirtualFolder>{DA537C1C-5073-4217-B99A-54B4BAF3C6F8}</VirtualFolder>
-            <BuildOrder>17</BuildOrder>
+            <BuildOrder>21</BuildOrder>
         </CppCompile>
-        <None Include="Graphics\GraphicsProjectionDD.h">
+        <None Include="Graphics\GraphicsProjectionComplexDD.h">
             <VirtualFolder>{DA537C1C-5073-4217-B99A-54B4BAF3C6F8}</VirtualFolder>
-            <BuildOrder>18</BuildOrder>
+            <BuildOrder>22</BuildOrder>
+        </None>
+        <CppCompile Include="Graphics\GraphicsProjectionOrtoDD.cpp">
+            <VirtualFolder>{DA537C1C-5073-4217-B99A-54B4BAF3C6F8}</VirtualFolder>
+            <BuildOrder>23</BuildOrder>
+        </CppCompile>
+        <None Include="Graphics\GraphicsProjectionOrtoDD.h">
+            <VirtualFolder>{DA537C1C-5073-4217-B99A-54B4BAF3C6F8}</VirtualFolder>
+            <BuildOrder>24</BuildOrder>
         </None>
         <CppCompile Include="Graphics\GraphicsShared.cpp">
             <VirtualFolder>{DA537C1C-5073-4217-B99A-54B4BAF3C6F8}</VirtualFolder>
@@ -229,7 +237,7 @@
         <BorlandProject>
             <CPlusPlusBuilder.Personality>
                 <Source>
-                    <Source Name="MainSource">GraphicsLab1P.cpp</Source>
+                    <Source Name="MainSource">GraphicsLab1PP.cpp</Source>
                 </Source>
                 <VersionInfo>
                     <VersionInfo Name="IncludeVerInfo">False</VersionInfo>

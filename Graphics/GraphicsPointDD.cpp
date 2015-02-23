@@ -45,6 +45,14 @@ PointDD::PointDD(float X, float Y, Type T, String Text) {
 	sText = Text;
 };
 
+PointDD::PointDD(float X, float Y, Action iA, Type T, String Text) {
+	fX = X;
+	fY = Y;
+	iAction = iA;
+	iType = T;
+	sText = Text;
+};
+
 PointDD::~PointDD() {
 	fX = 0;
 	fX = 0;

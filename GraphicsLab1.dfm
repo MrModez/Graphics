@@ -16,6 +16,7 @@ object MainForm: TMainForm
   OldCreateOrder = False
   Position = poDesigned
   ScreenSnap = True
+  OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 17

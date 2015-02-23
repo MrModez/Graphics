@@ -16,7 +16,7 @@ public:
 	ObjectDD(std::vector<PointDD*>Object);
 	ObjectDD();
 	ObjectDD(String ID);
-	~ObjectDD();
+	virtual ~ObjectDD();
 
 	virtual void PaintTD(DefCanvas* pCanvas, CameraTD* pCamera);
 	virtual void PaintDD(DefCanvas* pCanvas, CameraDD* pCamera);
