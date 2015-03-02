@@ -51,7 +51,7 @@ void ObjectTD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 
 		Par.iProjStyle = PROJ_DOTS;
 		pProjection = new ProjectionOrtoDD(this, pCamera);
-		pProjection->Par.iColor = clSilver;
+		pProjection->Par.iColor = clRed;
 		pProjection->Par.iStyle = psDash;
 		pProjection->Par.iWidth = 3;
 		pProjection->PaintTD(pCanvas, pCamera);

@@ -20,6 +20,37 @@ object MainForm: TMainForm
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 17
+  object PaintBoxDD: TPaintBox
+    Left = 560
+    Top = 0
+    Width = 554
+    Height = 772
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnPaint = PaintBoxDDPaint
+    ExplicitLeft = 535
+    ExplicitWidth = 589
+  end
+  object PaintBoxTD: TPaintBox
+    Left = 0
+    Top = 0
+    Width = 560
+    Height = 772
+    Align = alLeft
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    OnPaint = PaintBoxTDPaint
+    ExplicitLeft = -2
+  end
   object Label1: TLabel
     Left = 315
     Top = 8
@@ -109,22 +140,6 @@ object MainForm: TMainForm
     Height = 17
     Caption = 'ZPos'
   end
-  object PaintBoxDD: TPaintBox
-    Left = 560
-    Top = 0
-    Width = 554
-    Height = 772
-    Align = alClient
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    OnPaint = PaintBoxDDPaint
-    ExplicitLeft = 535
-    ExplicitWidth = 589
-  end
   object Label13: TLabel
     Left = 906
     Top = 7
@@ -158,20 +173,6 @@ object MainForm: TMainForm
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-  end
-  object PaintBoxTD: TPaintBox
-    Left = 0
-    Top = 0
-    Width = 560
-    Height = 772
-    Align = alLeft
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    OnPaint = PaintBoxTDPaint
   end
   object AACheck: TCheckBox
     Left = 1013
@@ -220,7 +221,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 3
-    Value = 20
+    Value = 14
     OnChange = XShiftSpinChange
   end
   object PitchSpin: TSpinEdit
@@ -264,7 +265,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 7
-    Value = 50
+    Value = 100
     OnChange = XSpinChange
   end
   object YawSpin: TSpinEdit
@@ -275,7 +276,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 8
-    Value = -26
+    Value = 0
     OnChange = PitchSpinChange
   end
   object YShiftSpin: TSpinEdit
@@ -297,7 +298,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 10
-    Value = 10
+    Value = 80
     OnChange = XSpinChange
   end
   object ZShiftSpin: TSpinEdit
@@ -319,7 +320,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 12
-    Value = 20
+    Value = 80
     OnChange = XSpinChange
   end
   object ProjCheck: TCheckBox

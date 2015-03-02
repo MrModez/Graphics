@@ -35,74 +35,108 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 	}
 	if (this->Par.iProjStyle == PROJ_LINES) {
 		for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
-			PointDD* pPointTDXZ = Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
-			PointDD* pPointTDXY = Rotate3D(*pObjectTD->pPointsTD[i], QXY);
-			PointDD* pPointTDYY = Rotate3D(*pObjectTD->pPointsTD[i], QYY);
-			PointDD* pPointTDYZ = Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
+			if (pObjectTD->pPointsTD[i]->iType != TYPE_TEXT) {
+				PointDD* pPointTDXZ = Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
+				PointDD* pPointTDXY = Rotate3D(*pObjectTD->pPointsTD[i], QXY);
+				PointDD* pPointTDYY = Rotate3D(*pObjectTD->pPointsTD[i], QYY);
+				PointDD* pPointTDYZ = Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
 
-			// Lines
-			PointDD* pPointDDXZ1 = new PointDD(*pPointTDXZ);
-			PointDD* pPointDDXY1 = new PointDD(*pPointTDXY);
-			PointDD* pPointDDYY3 = new PointDD(*pPointTDYY);
-			PointDD* pPointDDYZ1 = new PointDD(*pPointTDYZ);
-			PointDD* pPointDDYZ3 = new PointDD(*pPointTDYZ);
+				// Lines
+				PointDD* pPointDDXZ1 = new PointDD(*pPointTDXZ);
+				PointDD* pPointDDXY1 = new PointDD(*pPointTDXY);
+				PointDD* pPointDDYY3 = new PointDD(*pPointTDYY);
+				PointDD* pPointDDYZ1 = new PointDD(*pPointTDYZ);
+				PointDD* pPointDDYZ3 = new PointDD(*pPointTDYZ);
 
-			pPointDDXZ1->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
-			pPointDDXY1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-			pPointDDYY3->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-			pPointDDYZ3->SetSettings(ACT_ARC, TYPE_OBJECT, "");
-			pPointDDYZ1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointDDXZ1->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
+				pPointDDXY1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointDDYY3->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointDDYZ3->SetSettings(ACT_ARC, TYPE_OBJECT, "");
+				pPointDDYZ1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
 
-			pPointDDXZ1->AddShift(fX, fY, fZ);
-			pPointDDXY1->AddShift(fX, fY, fZ);
-			pPointDDYY3->fX = 0;
-			pPointDDYY3->AddShift(fX, fY, fZ);
-			pPointDDYZ1->AddShift(fX, fY, fZ);
-			pPointDDYZ3->fY = 0;
-			pPointDDYZ3->AddShift(fX, fY, fZ);
+				pPointDDYY3->fX = 0;
+				pPointDDYZ3->fY = 0;
 
-			result.push_back(pPointDDXZ1);
-			result.push_back(pPointDDXY1);
-			result.push_back(pPointDDYY3);
-			result.push_back(pPointDDYZ3);
-			result.push_back(pPointDDYZ1);
-			result.push_back(pPointDDXZ1);
-			result.push_back(pPointDDYZ1);
+				pPointDDXZ1->AddShift(fX, fY, fZ);
+				pPointDDXY1->AddShift(fX, fY, fZ);
+				pPointDDYY3->AddShift(fX, fY, fZ);
+				pPointDDYZ1->AddShift(fX, fY, fZ);
+				pPointDDYZ3->AddShift(fX, fY, fZ);
+
+				result.push_back(pPointDDXZ1);
+				result.push_back(pPointDDXY1);
+				result.push_back(pPointDDYY3);
+				result.push_back(pPointDDYZ3);
+				result.push_back(pPointDDYZ1);
+				result.push_back(pPointDDXZ1);
+				result.push_back(pPointDDYZ1);
+
+				// Dots
+				PointDD* pPointDDXZ2 = new PointDD(*pPointTDXZ);
+				PointDD* pPointDDXY2 = new PointDD(*pPointTDXY);
+				PointDD* pPointDDYY2 = new PointDD(*pPointTDYY);
+				PointDD* pPointDDYZ2 = new PointDD(*pPointTDYZ);
+
+				pPointDDXZ2->fY = 0;
+				pPointDDXY2->fX = 0;
+				pPointDDYY2->fY = 0;
+				pPointDDYZ2->fX = 0;
+
+				pPointDDXZ2->AddShift(fX, fY, fZ);
+				pPointDDXY2->AddShift(fX, fY, fZ);
+				pPointDDYY2->AddShift(fX, fY, fZ);
+				pPointDDYZ2->AddShift(fX, fY, fZ);
+
+				result.push_back(pPointDDXZ2);
+				result.push_back(pPointDDXY2);
+				result.push_back(pPointDDYY2);
+				result.push_back(pPointDDYZ2);
+			}
+		}
+	}
+	for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
+		if (this->Par.iProjStyle == PROJ_DOTS) {
+			// if (pObjectTD->pPointsTD[i]->iType != TYPE_TEXT) {
+			PointDD* pPointDDXZ = Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
+			PointDD* pPointDDXY = Rotate3D(*pObjectTD->pPointsTD[i], QXY);
+			PointDD* pPointDDYY = Rotate3D(*pObjectTD->pPointsTD[i], QYY);
+			PointDD* pPointDDYZ = Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
 
 			// Dots
-			PointDD* pPointDDXZ2 = new PointDD(*pPointTDXZ);
-			PointDD* pPointDDXY2 = new PointDD(*pPointTDXY);
-			PointDD* pPointDDYY2 = new PointDD(*pPointTDYY);
-			PointDD* pPointDDYZ2 = new PointDD(*pPointTDYZ);
+			PointDD* pPointDDXZ2 = new PointDD(*pPointDDXZ);
+			PointDD* pPointDDXY2 = new PointDD(*pPointDDXY);
+			PointDD* pPointDDYY2 = new PointDD(*pPointDDYY);
+			PointDD* pPointDDYZ2 = new PointDD(*pPointDDYZ);
 
 			pPointDDXZ2->fY = 0;
-			pPointDDXZ2->AddShift(fX, fY, fZ);
 			pPointDDXY2->fX = 0;
-			pPointDDXY2->AddShift(fX, fY, fZ);
 			pPointDDYY2->fY = 0;
-			pPointDDYY2->AddShift(fX, fY, fZ);
 			pPointDDYZ2->fX = 0;
+			pPointDDXZ2->sText += "X";
+			pPointDDXY2->sText += "Y1";
+			pPointDDYY2->sText += "Y2";
+			pPointDDYZ2->sText += "Z";
+
+			pPointDDXZ2->AddShift(fX, fY, fZ);
+			pPointDDXY2->AddShift(fX, fY, fZ);
+			pPointDDYY2->AddShift(fX, fY, fZ);
 			pPointDDYZ2->AddShift(fX, fY, fZ);
+
+			result.push_back(pPointDDXZ);
+			result.push_back(pPointDDXY);
+			result.push_back(pPointDDYZ);
+
+			pPointDDXZ->sText += "1";
+			pPointDDXY->sText += "2";
+			pPointDDYZ->sText += "4";
+			pPointDDXZ->AddShift(fX, fY, fZ);
+			pPointDDXY->AddShift(fX, fY, fZ);
+			pPointDDYZ->AddShift(fX, fY, fZ);
 
 			result.push_back(pPointDDXZ2);
 			result.push_back(pPointDDXY2);
 			result.push_back(pPointDDYY2);
 			result.push_back(pPointDDYZ2);
-		}
-	}
-	for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
-		if (this->Par.iProjStyle == PROJ_DOTS) {
-			PointDD* pPointDDXZ = Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
-			PointDD* pPointDDXY = Rotate3D(*pObjectTD->pPointsTD[i], QXY);
-			PointDD* pPointDDYZ = Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
-
-			pPointDDXZ->AddShift(fX, fY, fZ);
-			pPointDDXY->AddShift(fX, fY, fZ);
-			pPointDDYZ->AddShift(fX, fY, fZ);
-
-			result.push_back(pPointDDXZ);
-			result.push_back(pPointDDXY);
-			result.push_back(pPointDDYZ);
 		}
 	}
 	return result;

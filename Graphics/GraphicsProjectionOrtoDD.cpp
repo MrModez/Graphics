@@ -38,63 +38,73 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD,
 	}
 	if (Par.iProjStyle == PROJ_LINES) {
 		for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
-			PointTD* pPointTD = new PointTD(*pObjectTD->pPointsTD[i]);
-			PointTD* pPointTDXY = new PointTD(*pObjectTD->pPointsTD[i]);
-			pPointTDXY->fZ = 0;
-			PointTD* pPointTDXZ = new PointTD(*pObjectTD->pPointsTD[i]);
-			pPointTDXZ->fY = 0;
-			PointTD* pPointTDZY = new PointTD(*pObjectTD->pPointsTD[i]);
-			pPointTDZY->fX = 0;
+			if (pObjectTD->pPointsTD[i]->iType != TYPE_TEXT) {
+				PointTD* pPointTD = new PointTD(*pObjectTD->pPointsTD[i]);
+				PointTD* pPointTDXY = new PointTD(*pObjectTD->pPointsTD[i]);
+				PointTD* pPointTDXZ = new PointTD(*pObjectTD->pPointsTD[i]);
+				PointTD* pPointTDZY = new PointTD(*pObjectTD->pPointsTD[i]);
 
-			pPointTD->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
-			pPointTDXY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-			pPointTDXZ->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-			pPointTDZY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointTDXY->fZ = 0;
+				pPointTDXZ->fY = 0;
+				pPointTDZY->fX = 0;
 
-			PointTD* pPointTD1 = Rotate3D(*pPointTD, fP, fR, fW);
-			PointTD* pPointTDXY1 = Rotate3D(*pPointTDXY, fP, fR, fW);
-			PointTD* pPointTDXZ1 = Rotate3D(*pPointTDXZ, fP, fR, fW);
-			PointTD* pPointTDZY1 = Rotate3D(*pPointTDZY, fP, fR, fW);
+				pPointTD->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
+				pPointTDXY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointTDXZ->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointTDZY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
 
-			PointDD* pPointDD1 = static_cast<PointDD*>(pPointTD1);
-			pPointDD1->AddShift(fX, fY, fZ);
-			PointDD* pPointDDXY1 = static_cast<PointDD*>(pPointTDXY1);
-			pPointDDXY1->AddShift(fX, fY, fZ);
-			PointDD* pPointDDXZ1 = static_cast<PointDD*>(pPointTDXZ1);
-			pPointDDXZ1->AddShift(fX, fY, fZ);
-			PointDD* pPointDDZY1 = static_cast<PointDD*>(pPointTDZY1);
-			pPointDDZY1->AddShift(fX, fY, fZ);
+				PointTD* pPointTD1 = Rotate3D(*pPointTD, fP, fR, fW);
+				PointTD* pPointTDXY1 = Rotate3D(*pPointTDXY, fP, fR, fW);
+				PointTD* pPointTDXZ1 = Rotate3D(*pPointTDXZ, fP, fR, fW);
+				PointTD* pPointTDZY1 = Rotate3D(*pPointTDZY, fP, fR, fW);
 
-			result.push_back(pPointDD1);
-			result.push_back(pPointDDXY1);
-			result.push_back(pPointDD1);
-			result.push_back(pPointDDXZ1);
-			result.push_back(pPointDD1);
-			result.push_back(pPointDDZY1);
+				PointDD* pPointDD1 = static_cast<PointDD*>(pPointTD1);
+				PointDD* pPointDDXY1 = static_cast<PointDD*>(pPointTDXY1);
+				PointDD* pPointDDXZ1 = static_cast<PointDD*>(pPointTDXZ1);
+				PointDD* pPointDDZY1 = static_cast<PointDD*>(pPointTDZY1);
+
+				pPointDD1->AddShift(fX, fY, fZ);
+				pPointDDXY1->AddShift(fX, fY, fZ);
+				pPointDDXZ1->AddShift(fX, fY, fZ);
+				pPointDDZY1->AddShift(fX, fY, fZ);
+
+				result.push_back(pPointDD1);
+				result.push_back(pPointDDXY1);
+				result.push_back(pPointDD1);
+				result.push_back(pPointDDXZ1);
+				result.push_back(pPointDD1);
+				result.push_back(pPointDDZY1);
+			}
 		}
 	}
 	if (Par.iProjStyle == PROJ_DOTS) {
 		for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
-			PointTD* pPointTDXY = new PointTD(*pObjectTD->pPointsTD[i]);
-			pPointTDXY->fZ = 0;
 			PointTD* pPointTDXZ = new PointTD(*pObjectTD->pPointsTD[i]);
-			pPointTDXZ->fY = 0;
+			PointTD* pPointTDXY = new PointTD(*pObjectTD->pPointsTD[i]);
 			PointTD* pPointTDZY = new PointTD(*pObjectTD->pPointsTD[i]);
+
+			pPointTDXZ->fY = 0;
+			pPointTDXY->fZ = 0;
 			pPointTDZY->fX = 0;
 
-			PointTD* pPointTDXY1 = Rotate3D(*pPointTDXY, fP, fR, fW);
+			pPointTDXZ->sText += "1";
+			pPointTDXY->sText += "2";
+			pPointTDZY->sText += "4";
+
 			PointTD* pPointTDXZ1 = Rotate3D(*pPointTDXZ, fP, fR, fW);
+			PointTD* pPointTDXY1 = Rotate3D(*pPointTDXY, fP, fR, fW);
 			PointTD* pPointTDZY1 = Rotate3D(*pPointTDZY, fP, fR, fW);
 
-			PointDD* pPointDDXY1 = static_cast<PointDD*>(pPointTDXY1);
-			pPointDDXY1->AddShift(fX, fY, fZ);
 			PointDD* pPointDDXZ1 = static_cast<PointDD*>(pPointTDXZ1);
-			pPointDDXZ1->AddShift(fX, fY, fZ);
+			PointDD* pPointDDXY1 = static_cast<PointDD*>(pPointTDXY1);
 			PointDD* pPointDDZY1 = static_cast<PointDD*>(pPointTDZY1);
+
+			pPointDDXZ1->AddShift(fX, fY, fZ);
+			pPointDDXY1->AddShift(fX, fY, fZ);
 			pPointDDZY1->AddShift(fX, fY, fZ);
 
-			result.push_back(pPointDDXY1);
 			result.push_back(pPointDDXZ1);
+			result.push_back(pPointDDXY1);
 			result.push_back(pPointDDZY1);
 		}
 	}
@@ -128,7 +138,7 @@ PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 		switch (i) {
 		case AXIS_X:
 			matrix[0][0] = cos(fYaw);
-			matrix[0][1] = sin(fYaw);
+			matrix[0][1] = sin(fYaw - 0.5);
 			matrix[0][2] = 0.0;
 			matrix[1][0] = -sin(fYaw);
 			matrix[1][1] = cos(fYaw);

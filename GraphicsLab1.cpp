@@ -126,7 +126,6 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	// LabPoint->SetDrawProj(true);
 	ObjectShared* CoordsShared = (ObjectShared*)Coords;
 	pOrtoSystem->AddObject(CoordsShared);
-	pCompSystem->AddObject(CoordsShared);
 
 	ObjectDD *TextViewTD = new ObjectDD();
 	TextViewTD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "3D view"));
@@ -138,13 +137,12 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	ObjectShared* PointViewTDShared = (ObjectShared*)PointViewTD;
 	pOrtoSystem->AddObject(PointViewTDShared);
 
+	// Point
 	LabPoint = new ObjectTD("LabaPoint");
-	// LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_TEXT, "Point3D"));
+	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_TEXT, "T"));
 	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_POINT));
 	LabPoint->SetParameters(DrawPar(clRed, psDot, 3));
-
 	LabPoint->SetDrawProj(true);
-
 	ObjectShared* PointShared = (ObjectShared*)LabPoint;
 	pOrtoSystem->AddObject(PointShared);
 	pCompSystem->AddObject(PointShared);
