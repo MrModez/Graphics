@@ -22,6 +22,8 @@ public:
 
 	virtual void Paint(DefCanvas* pCanvas, CameraDD* pCamera);
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraDD* pCamera);
+	void AddShift(std::vector<PointDD*>vectorDD, float iXShift, float iYShift,
+		float iZShift);
 	PointTD* Rotate3D(PointTD pPointTD);
 	PointDD* Rotate3D(PointTD pPointTD, Quarter Quart);
 	ObjectDD* ToObject();

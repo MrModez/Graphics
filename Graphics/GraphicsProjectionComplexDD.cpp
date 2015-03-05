@@ -29,7 +29,6 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 	if (this->Par.iProjStyle == PROJ_NONE) {
 		for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
 			PointDD* pPointDD = Rotate3D(*pObjectTD->pPointsTD[i]);
-			pPointDD->AddShift(fX, fY, fZ);
 			result.push_back(pPointDD);
 		}
 	}
@@ -42,34 +41,28 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 				PointDD* pPointTDYZ = Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
 
 				// Lines
-				PointDD* pPointDDXZ1 = new PointDD(*pPointTDXZ);
-				PointDD* pPointDDXY1 = new PointDD(*pPointTDXY);
-				PointDD* pPointDDYY3 = new PointDD(*pPointTDYY);
-				PointDD* pPointDDYZ1 = new PointDD(*pPointTDYZ);
-				PointDD* pPointDDYZ3 = new PointDD(*pPointTDYZ);
+				PointDD* pPointDDXZ = new PointDD(*pPointTDXZ);
+				PointDD* pPointDDXY = new PointDD(*pPointTDXY);
+				PointDD* pPointDDYY0 = new PointDD(*pPointTDYY);
+				PointDD* pPointDDYZ = new PointDD(*pPointTDYZ);
+				PointDD* pPointDDYZ0 = new PointDD(*pPointTDYZ);
 
-				pPointDDXZ1->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
-				pPointDDXY1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-				pPointDDYY3->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-				pPointDDYZ3->SetSettings(ACT_ARC, TYPE_OBJECT, "");
-				pPointDDYZ1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointDDXZ->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
+				pPointDDXY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointDDYY0->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+				pPointDDYZ0->SetSettings(ACT_ARC, TYPE_OBJECT, "");
+				pPointDDYZ->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
 
-				pPointDDYY3->fX = 0;
-				pPointDDYZ3->fY = 0;
+				pPointDDYY0->fX = 0;
+				pPointDDYZ0->fY = 0;
 
-				pPointDDXZ1->AddShift(fX, fY, fZ);
-				pPointDDXY1->AddShift(fX, fY, fZ);
-				pPointDDYY3->AddShift(fX, fY, fZ);
-				pPointDDYZ1->AddShift(fX, fY, fZ);
-				pPointDDYZ3->AddShift(fX, fY, fZ);
-
-				result.push_back(pPointDDXZ1);
-				result.push_back(pPointDDXY1);
-				result.push_back(pPointDDYY3);
-				result.push_back(pPointDDYZ3);
-				result.push_back(pPointDDYZ1);
-				result.push_back(pPointDDXZ1);
-				result.push_back(pPointDDYZ1);
+				result.push_back(pPointDDXZ);
+				result.push_back(pPointDDXY);
+				result.push_back(pPointDDYY0);
+				result.push_back(pPointDDYZ0);
+				result.push_back(pPointDDYZ);
+				result.push_back(pPointDDXZ);
+				result.push_back(pPointDDYZ);
 
 				// Dots
 				PointDD* pPointDDXZ2 = new PointDD(*pPointTDXZ);
@@ -81,11 +74,6 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 				pPointDDXY2->fX = 0;
 				pPointDDYY2->fY = 0;
 				pPointDDYZ2->fX = 0;
-
-				pPointDDXZ2->AddShift(fX, fY, fZ);
-				pPointDDXY2->AddShift(fX, fY, fZ);
-				pPointDDYY2->AddShift(fX, fY, fZ);
-				pPointDDYZ2->AddShift(fX, fY, fZ);
 
 				result.push_back(pPointDDXZ2);
 				result.push_back(pPointDDXY2);
@@ -117,11 +105,6 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 			pPointDDYY2->sText += "Y2";
 			pPointDDYZ2->sText += "Z";
 
-			pPointDDXZ2->AddShift(fX, fY, fZ);
-			pPointDDXY2->AddShift(fX, fY, fZ);
-			pPointDDYY2->AddShift(fX, fY, fZ);
-			pPointDDYZ2->AddShift(fX, fY, fZ);
-
 			result.push_back(pPointDDXZ);
 			result.push_back(pPointDDXY);
 			result.push_back(pPointDDYZ);
@@ -129,9 +112,6 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 			pPointDDXZ->sText += "1";
 			pPointDDXY->sText += "2";
 			pPointDDYZ->sText += "4";
-			pPointDDXZ->AddShift(fX, fY, fZ);
-			pPointDDXY->AddShift(fX, fY, fZ);
-			pPointDDYZ->AddShift(fX, fY, fZ);
 
 			result.push_back(pPointDDXZ2);
 			result.push_back(pPointDDXY2);
@@ -139,16 +119,22 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 			result.push_back(pPointDDYZ2);
 		}
 	}
+	AddShift(result, fX, fY, fZ);
 	return result;
 };
 
-ObjectDD* ProjectionComplexDD::ToObject() {
-	ObjectDD* result = new ObjectDD();
-	result->pPointsDD = this->pPointsDD;
-	result->ObjectID = this->ObjectID;
-	result->Par = this->Par;
-	return result;
-};
+void ProjectionComplexDD::AddShift(std::vector<PointDD*>vectorDD, float iXShift,
+	float iYShift, float iZShift) {
+	for (unsigned int i = 0; i < vectorDD.size(); i++) {
+		bool found = false;
+		for (int j = i; j >= 0; j--) {
+			if ((unsigned int)j != i && vectorDD[j] == vectorDD[i])
+				found = true;
+		}
+		if (!found)
+			vectorDD[i]->AddShift(iXShift, iYShift, iZShift);
+	}
+}
 
 void ProjectionComplexDD::Paint(DefCanvas* pCanvas, CameraDD* pCamera) {
 }

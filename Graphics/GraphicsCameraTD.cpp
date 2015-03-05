@@ -36,3 +36,7 @@ void CameraTD::SetPosition(int xshift, int yshift, int zshift) {
 	iYShift = yshift;
 	iZShift = zshift;
 }
+
+void CameraTD::SetAngle(int fangle) {
+	fAngle = fangle;
+}

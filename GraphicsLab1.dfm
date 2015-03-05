@@ -1,10 +1,11 @@
 object MainForm: TMainForm
   Left = 220
   Top = 83
+  ActiveControl = YShiftSpin
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'MainForm'
-  ClientHeight = 772
+  ClientHeight = 656
   ClientWidth = 1114
   Color = clBtnHighlight
   DoubleBuffered = True
@@ -24,7 +25,7 @@ object MainForm: TMainForm
     Left = 560
     Top = 0
     Width = 554
-    Height = 772
+    Height = 656
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -35,12 +36,13 @@ object MainForm: TMainForm
     OnPaint = PaintBoxDDPaint
     ExplicitLeft = 535
     ExplicitWidth = 589
+    ExplicitHeight = 772
   end
   object PaintBoxTD: TPaintBox
     Left = 0
     Top = 0
     Width = 560
-    Height = 772
+    Height = 656
     Align = alLeft
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -50,6 +52,7 @@ object MainForm: TMainForm
     ParentFont = False
     OnPaint = PaintBoxTDPaint
     ExplicitLeft = -2
+    ExplicitHeight = 772
   end
   object Label1: TLabel
     Left = 315
@@ -106,19 +109,6 @@ object MainForm: TMainForm
     Height = 17
     Caption = 'ZPos'
   end
-  object Label6: TLabel
-    Left = 215
-    Top = 31
-    Width = 48
-    Height = 17
-    Caption = 'Camera:'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-  end
   object Label7: TLabel
     Left = 49
     Top = 8
@@ -161,18 +151,12 @@ object MainForm: TMainForm
     Height = 17
     Caption = 'XPos'
   end
-  object Label15: TLabel
-    Left = 807
-    Top = 30
-    Width = 48
+  object Label6: TLabel
+    Left = 211
+    Top = 8
+    Width = 33
     Height = 17
-    Caption = 'Camera:'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
+    Caption = 'Angle'
   end
   object AACheck: TCheckBox
     Left = 1013
@@ -199,7 +183,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 1
-    Value = 250
+    Value = 270
     OnChange = XShiftSpinChange
   end
   object YShiftSpinDD: TSpinEdit
@@ -221,7 +205,7 @@ object MainForm: TMainForm
     MaxValue = 0
     MinValue = 0
     TabOrder = 3
-    Value = 14
+    Value = 16
     OnChange = XShiftSpinChange
   end
   object PitchSpin: TSpinEdit
@@ -339,6 +323,24 @@ object MainForm: TMainForm
     State = cbChecked
     TabOrder = 13
     OnClick = ProjCheckClick
+  end
+  object ASpin: TSpinEdit
+    Left = 211
+    Top = 27
+    Width = 45
+    Height = 27
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 14
+    Value = 28
+    OnChange = ASpinChange
+  end
+  object TrackBar2: TTrackBar
+    Left = 49
+    Top = 112
+    Width = 150
+    Height = 45
+    TabOrder = 15
   end
   object DrawTimer: TTimer
     Enabled = False

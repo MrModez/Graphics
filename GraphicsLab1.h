@@ -42,7 +42,6 @@ __published: // IDE-managed Components
 	TLabel *Label4;
 	TSpinEdit *ZShiftSpin;
 	TLabel *Label5;
-	TLabel *Label6;
 	TLabel *Label7;
 	TLabel *Label8;
 	TLabel *Label9;
@@ -54,9 +53,11 @@ __published: // IDE-managed Components
 	TLabel *Label12;
 	TLabel *Label13;
 	TLabel *Label14;
-	TLabel *Label15;
 	TPaintBox *PaintBoxTD;
 	TCheckBox *ProjCheck;
+	TSpinEdit *ASpin;
+	TLabel *Label6;
+	TTrackBar *TrackBar2;
 
 	void __fastcall PaintBoxDDPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);
@@ -68,6 +69,7 @@ __published: // IDE-managed Components
 	void __fastcall PaintBoxTDPaint(TObject *Sender);
 	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 	void __fastcall ProjCheckClick(TObject *Sender);
+	void __fastcall ASpinChange(TObject *Sender);
 
 
 private: // User declarations

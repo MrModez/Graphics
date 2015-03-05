@@ -28,11 +28,13 @@ TMainForm *MainForm;
 #define SHIFTXDD 		XShiftSpinDD->Value
 #define SHIFTYDD 		YShiftSpinDD->Value
 #define SHIFTZDD 		ZShiftSpinDD->Value
+#define SPINA 			ASpin->Value
 
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 	MainForm->ControlStyle << csOpaque;
 	pCameraTD = new CameraTD(SHIFTX, SHIFTY, SHIFTZ, PITCH, ROLL, YAW);
+	pCameraTD->SetAngle(SPINA);
 	pCameraDD = new CameraDD(SHIFTXDD, SHIFTYDD, SHIFTZDD);
 	pOrtoSystem = new OrtoSystem(pCameraTD);
 	pCompSystem = new ComplexSystem(pCameraDD);
@@ -148,7 +150,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	pCompSystem->AddObject(PointShared);
 
 	// 2D stuff
-	L = 200;
+	L = 150;
 	ObjectTD *CoordsDD = new ObjectTD();
 	CoordsDD->AddPoint(new PointTD(-L, 0, 0, ACT_MOVE));
 	CoordsDD->AddPoint(new PointTD(-L + 5, -5, 0, ACT_DRAW));
@@ -275,6 +277,13 @@ void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose) {
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::ProjCheckClick(TObject *Sender) {
 	LabPoint->Par.bProj = ProjCheck->Checked;
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::ASpinChange(TObject *Sender) {
+	pOrtoSystem->pCamera->SetAngle(SPINA);
 	PaintBoxTD->Refresh();
 	PaintBoxDD->Refresh();
 }

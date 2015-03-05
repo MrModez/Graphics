@@ -33,7 +33,10 @@ void ObjectDD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_DRAW:
-			pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
+			if (j > 1 && pPointsDD[j - 2] == pObjectDD)
+				pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
+			else
+				pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_NONE:
 			switch (pPointsDD[j]->iType) {

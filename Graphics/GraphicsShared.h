@@ -18,6 +18,7 @@
 #define DEFAULT_RADIUS 	2
 #define DEFAULT_COLOR 	clBlack
 #define DEFAULT_STYLE 	psSolid
+#define STAT_CAST static_cast
 
 enum Action {
 	ACT_NONE, ACT_MOVE, ACT_DRAW, ACT_ARC, ACT_COUNT

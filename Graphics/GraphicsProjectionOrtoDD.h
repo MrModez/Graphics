@@ -21,10 +21,15 @@ public:
 	virtual ~ProjectionOrtoDD();
 
 	virtual void Paint(DefCanvas* pCanvas, CameraTD* pCamera);
+	PointTD*CreatePointTD(PointTD* pPointTD, Action ACT, bool iX, bool iY,
+		bool iZ);
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraTD* pCamera);
 	PointTD Multiple(float m[AXIS_COUNT][AXIS_COUNT], PointTD m2);
-	PointTD* Rotate3D(PointTD pPointTD, float fPitch, float fRoll, float fYaw);
+	PointTD* Rotate3D(PointTD pPointTD, float fPitch, float fRoll, float fYaw,
+		float fAngle);
 	ObjectDD* ToObject();
+	void AddShift(std::vector<PointDD*>vectorDD, float iXShift, float iYShift,
+		float iZShift);
 	float DegToRad(float in);
 
 	static float matrix[AXIS_COUNT][AXIS_COUNT];

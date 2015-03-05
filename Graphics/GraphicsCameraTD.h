@@ -18,10 +18,13 @@ public:
 
 	void SetRotation(float pitch, float roll, float yaw);
 	void SetPosition(int xshift, int yshift, int zshift);
+	void SetAngle(int fangle);
 
 	float fPitch;
 	float fRoll;
 	float fYaw;
+
+	int fAngle;
 };
 
 #endif //GRAPCHICS_CAMERATD_H_
