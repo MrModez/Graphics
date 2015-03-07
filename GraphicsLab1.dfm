@@ -1,12 +1,11 @@
 object MainForm: TMainForm
   Left = 220
   Top = 83
-  ActiveControl = YShiftSpin
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'MainForm'
   ClientHeight = 656
-  ClientWidth = 1114
+  ClientWidth = 1145
   Color = clBtnHighlight
   DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
@@ -24,7 +23,7 @@ object MainForm: TMainForm
   object PaintBoxDD: TPaintBox
     Left = 560
     Top = 0
-    Width = 554
+    Width = 585
     Height = 656
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -34,9 +33,7 @@ object MainForm: TMainForm
     Font.Style = []
     ParentFont = False
     OnPaint = PaintBoxDDPaint
-    ExplicitLeft = 535
-    ExplicitWidth = 589
-    ExplicitHeight = 772
+    ExplicitLeft = 566
   end
   object PaintBoxTD: TPaintBox
     Left = 0
@@ -51,19 +48,11 @@ object MainForm: TMainForm
     Font.Style = []
     ParentFont = False
     OnPaint = PaintBoxTDPaint
-    ExplicitLeft = -2
-    ExplicitHeight = 772
-  end
-  object Label1: TLabel
-    Left = 315
-    Top = 8
-    Width = 22
-    Height = 17
-    Caption = 'Roll'
+    ExplicitLeft = -7
   end
   object Label10: TLabel
-    Left = 11
-    Top = 31
+    Left = 498
+    Top = 8
     Width = 32
     Height = 17
     Caption = 'Point:'
@@ -74,93 +63,126 @@ object MainForm: TMainForm
     Font.Style = []
     ParentFont = False
   end
-  object Label11: TLabel
-    Left = 269
-    Top = 8
-    Width = 27
-    Height = 17
-    Caption = 'Pitch'
-  end
-  object Label2: TLabel
-    Left = 361
-    Top = 8
-    Width = 23
-    Height = 17
-    Caption = 'Yaw'
-  end
-  object Label3: TLabel
-    Left = 421
-    Top = 8
-    Width = 29
-    Height = 17
-    Caption = 'XPos'
-  end
-  object Label4: TLabel
-    Left = 467
-    Top = 8
-    Width = 28
-    Height = 17
-    Caption = 'YPos'
-  end
-  object Label5: TLabel
-    Left = 513
-    Top = 8
-    Width = 28
-    Height = 17
-    Caption = 'ZPos'
-  end
   object Label7: TLabel
-    Left = 49
+    Left = 539
     Top = 8
     Width = 29
     Height = 17
     Caption = 'XPos'
   end
   object Label8: TLabel
-    Left = 95
-    Top = 8
+    Left = 540
+    Top = 31
     Width = 28
     Height = 17
     Caption = 'YPos'
   end
   object Label9: TLabel
-    Left = 141
-    Top = 8
+    Left = 540
+    Top = 54
     Width = 28
     Height = 17
     Caption = 'ZPos'
-  end
-  object Label13: TLabel
-    Left = 906
-    Top = 7
-    Width = 28
-    Height = 17
-    Caption = 'YPos'
-  end
-  object Label14: TLabel
-    Left = 953
-    Top = 7
-    Width = 28
-    Height = 17
-    Caption = 'ZPos'
-  end
-  object Label12: TLabel
-    Left = 861
-    Top = 7
-    Width = 29
-    Height = 17
-    Caption = 'XPos'
   end
   object Label6: TLabel
-    Left = 211
-    Top = 8
+    Left = 535
+    Top = 77
     Width = 33
     Height = 17
     Caption = 'Angle'
   end
-  object AACheck: TCheckBox
-    Left = 1013
+  object Label15: TLabel
+    Left = 65
+    Top = 54
+    Width = 28
+    Height = 17
+    Caption = 'ZPos'
+  end
+  object Label16: TLabel
+    Left = 65
     Top = 31
+    Width = 28
+    Height = 17
+    Caption = 'YPos'
+  end
+  object Label17: TLabel
+    Left = 64
+    Top = 8
+    Width = 29
+    Height = 17
+    Caption = 'XPos'
+  end
+  object Label18: TLabel
+    Left = 276
+    Top = 53
+    Width = 23
+    Height = 17
+    Caption = 'Yaw'
+  end
+  object Label19: TLabel
+    Left = 277
+    Top = 30
+    Width = 22
+    Height = 17
+    Caption = 'Roll'
+  end
+  object Label50: TLabel
+    Left = 272
+    Top = 7
+    Width = 27
+    Height = 17
+    Caption = 'Pitch'
+  end
+  object Label1: TLabel
+    Left = 922
+    Top = 54
+    Width = 28
+    Height = 17
+    Caption = 'ZPos'
+  end
+  object Label2: TLabel
+    Left = 922
+    Top = 31
+    Width = 28
+    Height = 17
+    Caption = 'YPos'
+  end
+  object Label3: TLabel
+    Left = 921
+    Top = 8
+    Width = 29
+    Height = 17
+    Caption = 'XPos'
+  end
+  object Label4: TLabel
+    Left = 8
+    Top = 8
+    Width = 50
+    Height = 17
+    Caption = '3D View:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label5: TLabel
+    Left = 865
+    Top = 8
+    Width = 50
+    Height = 17
+    Caption = '2D View:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object AACheck: TCheckBox
+    Left = 956
+    Top = 77
     Width = 97
     Height = 17
     Caption = 'Anti-Aliasing'
@@ -175,141 +197,9 @@ object MainForm: TMainForm
     TabOrder = 0
     OnClick = AACheckClick
   end
-  object XShiftSpinDD: TSpinEdit
-    Left = 861
-    Top = 26
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 1
-    Value = 270
-    OnChange = XShiftSpinChange
-  end
-  object YShiftSpinDD: TSpinEdit
-    Left = 907
-    Top = 26
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 2
-    Value = 400
-    OnChange = XShiftSpinChange
-  end
-  object ZShiftSpinDD: TSpinEdit
-    Left = 953
-    Top = 26
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 3
-    Value = 16
-    OnChange = XShiftSpinChange
-  end
-  object PitchSpin: TSpinEdit
-    Left = 269
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 4
-    Value = 0
-    OnChange = PitchSpinChange
-  end
-  object RollSpin: TSpinEdit
-    Left = 315
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 5
-    Value = -46
-    OnChange = PitchSpinChange
-  end
-  object XShiftSpin: TSpinEdit
-    Left = 421
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 6
-    Value = 200
-    OnChange = XShiftSpinChange
-  end
-  object XSpin: TSpinEdit
-    Left = 49
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 7
-    Value = 100
-    OnChange = XSpinChange
-  end
-  object YawSpin: TSpinEdit
-    Left = 361
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 8
-    Value = 0
-    OnChange = PitchSpinChange
-  end
-  object YShiftSpin: TSpinEdit
-    Left = 467
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 9
-    Value = 400
-    OnChange = XShiftSpinChange
-  end
-  object YSpin: TSpinEdit
-    Left = 95
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 10
-    Value = 80
-    OnChange = XSpinChange
-  end
-  object ZShiftSpin: TSpinEdit
-    Left = 513
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 11
-    Value = 12
-    OnChange = XShiftSpinChange
-  end
-  object ZSpin: TSpinEdit
-    Left = 141
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 12
-    Value = 80
-    OnChange = XSpinChange
-  end
   object ProjCheck: TCheckBox
-    Left = 49
-    Top = 60
+    Left = 774
+    Top = 8
     Width = 86
     Height = 17
     Caption = 'Projection'
@@ -321,32 +211,159 @@ object MainForm: TMainForm
     Font.Style = []
     ParentFont = False
     State = cbChecked
-    TabOrder = 13
+    TabOrder = 1
     OnClick = ProjCheckClick
   end
-  object ASpin: TSpinEdit
-    Left = 211
-    Top = 27
-    Width = 45
-    Height = 27
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 14
-    Value = 28
+  object XScroll: TScrollBar
+    Left = 574
+    Top = 8
+    Width = 176
+    Height = 17
+    PageSize = 0
+    Position = 80
+    TabOrder = 2
+    OnChange = XSpinChange
+  end
+  object YScroll: TScrollBar
+    Left = 574
+    Top = 31
+    Width = 176
+    Height = 17
+    PageSize = 0
+    Position = 60
+    TabOrder = 3
+    OnChange = XSpinChange
+  end
+  object ZScroll: TScrollBar
+    Left = 574
+    Top = 54
+    Width = 176
+    Height = 17
+    PageSize = 0
+    Position = 70
+    TabOrder = 4
+    OnChange = XSpinChange
+  end
+  object AScroll: TScrollBar
+    Left = 574
+    Top = 77
+    Width = 176
+    Height = 17
+    Max = 60
+    Min = -60
+    PageSize = 0
+    Position = 25
+    TabOrder = 5
     OnChange = ASpinChange
   end
-  object TrackBar2: TTrackBar
-    Left = 49
-    Top = 112
-    Width = 150
-    Height = 45
-    TabOrder = 15
+  object ZShiftScroll: TScrollBar
+    Left = 99
+    Top = 54
+    Width = 166
+    Height = 17
+    Max = 50
+    Min = 5
+    PageSize = 0
+    Position = 12
+    TabOrder = 6
+    OnChange = XShiftSpinChange
+  end
+  object YShiftScroll: TScrollBar
+    Left = 99
+    Top = 31
+    Width = 166
+    Height = 17
+    Max = 600
+    Min = 300
+    PageSize = 0
+    Position = 400
+    TabOrder = 7
+    OnChange = XShiftSpinChange
+  end
+  object XShiftScroll: TScrollBar
+    Left = 99
+    Top = 8
+    Width = 166
+    Height = 17
+    Max = 300
+    Min = 100
+    PageSize = 0
+    Position = 200
+    TabOrder = 8
+    OnChange = XShiftSpinChange
+  end
+  object YawScroll: TScrollBar
+    Left = 305
+    Top = 53
+    Width = 166
+    Height = 17
+    Min = -100
+    PageSize = 0
+    TabOrder = 9
+    OnChange = PitchSpinChange
+  end
+  object RollScroll: TScrollBar
+    Left = 305
+    Top = 30
+    Width = 166
+    Height = 17
+    Min = -100
+    PageSize = 0
+    Position = -46
+    TabOrder = 10
+    OnChange = PitchSpinChange
+  end
+  object PitchScroll: TScrollBar
+    Left = 305
+    Top = 7
+    Width = 166
+    Height = 17
+    Min = -100
+    PageSize = 0
+    TabOrder = 11
+    OnChange = PitchSpinChange
+  end
+  object ZShiftScrollDD: TScrollBar
+    Left = 956
+    Top = 54
+    Width = 176
+    Height = 17
+    Max = 50
+    Min = 5
+    PageSize = 0
+    Position = 16
+    TabOrder = 12
+    OnChange = XShiftSpinChange
+  end
+  object YShiftScrollDD: TScrollBar
+    Left = 956
+    Top = 31
+    Width = 176
+    Height = 17
+    Max = 600
+    Min = 300
+    PageSize = 0
+    Position = 400
+    TabOrder = 13
+    OnChange = XShiftSpinChange
+  end
+  object XShiftScrollDD: TScrollBar
+    Left = 956
+    Top = 8
+    Width = 176
+    Height = 17
+    Max = 300
+    Min = 100
+    PageSize = 0
+    Position = 270
+    TabOrder = 14
+    OnChange = XShiftSpinChange
   end
   object DrawTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = DrawTimerTimer
-    Left = 1072
+    Left = 1088
     Top = 56
   end
 end

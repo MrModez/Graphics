@@ -16,19 +16,19 @@ TMainForm *MainForm;
 #define STR				IntToStr
 #define COS 			cos
 #define SIN 			sin
-#define PITCH 			PitchSpin->Value
-#define ROLL 			RollSpin->Value
-#define YAW 			YawSpin->Value
-#define SPINX 			XSpin->Value
-#define SPINY 			YSpin->Value
-#define SPINZ 			ZSpin->Value
-#define SHIFTX 			XShiftSpin->Value
-#define SHIFTY 			YShiftSpin->Value
-#define SHIFTZ 			ZShiftSpin->Value
-#define SHIFTXDD 		XShiftSpinDD->Value
-#define SHIFTYDD 		YShiftSpinDD->Value
-#define SHIFTZDD 		ZShiftSpinDD->Value
-#define SPINA 			ASpin->Value
+#define PITCH 			PitchScroll->Position
+#define ROLL 			RollScroll->Position
+#define YAW 			YawScroll->Position
+#define SPINX 			XScroll->Position
+#define SPINY 			YScroll->Position
+#define SPINZ 			ZScroll->Position
+#define SHIFTX 			XShiftScroll->Position
+#define SHIFTY 			YShiftScroll->Position
+#define SHIFTZ 			ZShiftScroll->Position
+#define SHIFTXDD 		XShiftScrollDD->Position
+#define SHIFTYDD 		YShiftScrollDD->Position
+#define SHIFTZDD 		ZShiftScrollDD->Position
+#define SPINA 			AScroll->Position
 
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
