@@ -249,8 +249,7 @@ object MainForm: TMainForm
     Top = 77
     Width = 176
     Height = 17
-    Max = 60
-    Min = -60
+    Max = 57
     PageSize = 0
     Position = 25
     TabOrder = 5

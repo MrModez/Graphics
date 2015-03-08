@@ -165,26 +165,30 @@ ObjectDD* ProjectionOrtoDD::ToObject() {
 void ProjectionOrtoDD::Paint(DefCanvas* pCanvas, CameraTD* pCamera) {
 }
 
-PointTD ProjectionOrtoDD::Multiple(float mat[AXIS_COUNT][AXIS_COUNT],
+PointTD ProjectionOrtoDD::Multiple(float mat[AXIS_COUNT + 1][AXIS_COUNT + 1],
 	PointTD pPTD) {
 	float X = mat[0][0] * pPTD.fX + mat[0][1] * pPTD.fY + mat[0][2] * pPTD.fZ;
 	float Y = mat[1][0] * pPTD.fX + mat[1][1] * pPTD.fY + mat[1][2] * pPTD.fZ;
-	float Z = mat[2][0] * pPTD.fX + mat[2][1] * pPTD.fY + mat[2][2] * pPTD.fZ;
+	float Z = mat[2][0] * pPTD.fX + mat[2][1] * pPTD.fY + mat[2][2] * pPTD.fZ +
+		mat[2][3];
 	PointTD Result(X, Y, Z, pPTD.iAction, pPTD.iType, pPTD.sText);
 	return Result;
 }
 
 PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 	float fYaw, float fAngle) {
-	for (int i = AXIS_X; i < AXIS_COUNT; i++) {
-		float matrix[AXIS_COUNT][AXIS_COUNT];
+	int C = AXIS_COUNT;
+	if (fAngle > 0)
+		C++;
+	for (int i = AXIS_X; i < C; i++) {
+		float matrix[AXIS_COUNT + 1][AXIS_COUNT + 1];
 		switch (i) {
 		case AXIS_X:
 			matrix[0][0] = cos(fYaw);
-			matrix[0][1] = sin(fYaw - fAngle);
+			matrix[0][1] = sin(fYaw); // - fAngle);
 			matrix[0][2] = 0.0;
 			matrix[1][0] = -sin(fYaw);
-			matrix[1][1] = cos(fYaw);
+			matrix[1][1] = cos(fYaw); // - fAngle);
 			matrix[1][2] = 0.0;
 			matrix[2][0] = 0.0;
 			matrix[2][1] = 0.0;
@@ -211,6 +215,18 @@ PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 			matrix[2][0] = 0.0;
 			matrix[2][1] = -sin(fRoll);
 			matrix[2][2] = cos(fRoll);
+			break;
+		case AXIS_COUNT:
+			matrix[0][0] = 1.0;
+			matrix[0][1] = 0.0;
+			matrix[0][2] = 0.0;
+			matrix[1][0] = 0.0;
+			matrix[1][1] = 1.0;
+			matrix[1][2] = 0.0;
+			matrix[2][0] = 0.0;
+			matrix[2][1] = 0.0;
+			matrix[2][2] = 0.0;
+			matrix[2][3] = -1.0 / fAngle;
 			break;
 		default:
 			break;
