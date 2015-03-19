@@ -13,6 +13,17 @@ ProjectionComplexDD::ProjectionComplexDD(ObjectTD* pObjectTD, CameraDD* pCamera)
 	pPointsDD = Projection(pObjectTD, pCamera);
 }
 
+PointTD*ProjectionComplexDD::CreatePointTD(PointTD* pPointTD, Action ACT,
+	bool iX, bool iY, bool iZ) {
+	PointTD* result = new PointTD(*pPointTD);
+	result->SetSettings(ACT, pPointTD->iType, pPointTD->sText);
+	float X = (iX ? pPointTD->fX : 0);
+	float Y = (iY ? pPointTD->fY : 0);
+	float Z = (iZ ? pPointTD->fZ : 0);
+	result->SetPos(X, Y, Z);
+	return result;
+}
+
 ProjectionComplexDD::~ProjectionComplexDD() {
 	for (unsigned int i = 0; i < pPointsDD.size(); i++) {
 		delete pPointsDD[i];

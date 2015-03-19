@@ -177,18 +177,15 @@ PointTD ProjectionOrtoDD::Multiple(float mat[AXIS_COUNT + 1][AXIS_COUNT + 1],
 
 PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 	float fYaw, float fAngle) {
-	int C = AXIS_COUNT;
-	if (fAngle > 0)
-		C++;
-	for (int i = AXIS_X; i < C; i++) {
+	for (int i = AXIS_X; i < AXIS_COUNT; i++) {
 		float matrix[AXIS_COUNT + 1][AXIS_COUNT + 1];
 		switch (i) {
 		case AXIS_X:
 			matrix[0][0] = cos(fYaw);
-			matrix[0][1] = sin(fYaw); // - fAngle);
+			matrix[0][1] = sin(fYaw - fAngle);
 			matrix[0][2] = 0.0;
 			matrix[1][0] = -sin(fYaw);
-			matrix[1][1] = cos(fYaw); // - fAngle);
+			matrix[1][1] = cos(fYaw - fAngle);
 			matrix[1][2] = 0.0;
 			matrix[2][0] = 0.0;
 			matrix[2][1] = 0.0;
@@ -215,18 +212,6 @@ PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 			matrix[2][0] = 0.0;
 			matrix[2][1] = -sin(fRoll);
 			matrix[2][2] = cos(fRoll);
-			break;
-		case AXIS_COUNT:
-			matrix[0][0] = 1.0;
-			matrix[0][1] = 0.0;
-			matrix[0][2] = 0.0;
-			matrix[1][0] = 0.0;
-			matrix[1][1] = 1.0;
-			matrix[1][2] = 0.0;
-			matrix[2][0] = 0.0;
-			matrix[2][1] = 0.0;
-			matrix[2][2] = 0.0;
-			matrix[2][3] = -1.0 / fAngle;
 			break;
 		default:
 			break;

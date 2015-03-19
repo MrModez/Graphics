@@ -21,6 +21,8 @@ public:
 	virtual ~ProjectionComplexDD();
 
 	virtual void Paint(DefCanvas* pCanvas, CameraDD* pCamera);
+	PointTD*CreatePointTD(PointTD* pPointTD, Action ACT, bool iX, bool iY,
+		bool iZ);
 	std::vector<PointDD*>Projection(ObjectTD* pObjectTD, CameraDD* pCamera);
 	void AddShift(std::vector<PointDD*>vectorDD, float iXShift, float iYShift,
 		float iZShift);

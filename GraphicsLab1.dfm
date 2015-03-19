@@ -48,10 +48,10 @@ object MainForm: TMainForm
     Font.Style = []
     ParentFont = False
     OnPaint = PaintBoxTDPaint
-    ExplicitLeft = -7
+    ExplicitLeft = 8
   end
   object Label10: TLabel
-    Left = 498
+    Left = 282
     Top = 8
     Width = 32
     Height = 17
@@ -64,29 +64,29 @@ object MainForm: TMainForm
     ParentFont = False
   end
   object Label7: TLabel
-    Left = 539
+    Left = 323
     Top = 8
     Width = 29
     Height = 17
     Caption = 'XPos'
   end
   object Label8: TLabel
-    Left = 540
+    Left = 324
     Top = 31
     Width = 28
     Height = 17
     Caption = 'YPos'
   end
   object Label9: TLabel
-    Left = 540
+    Left = 324
     Top = 54
     Width = 28
     Height = 17
     Caption = 'ZPos'
   end
   object Label6: TLabel
-    Left = 535
-    Top = 77
+    Left = 556
+    Top = 8
     Width = 33
     Height = 17
     Caption = 'Angle'
@@ -113,25 +113,28 @@ object MainForm: TMainForm
     Caption = 'XPos'
   end
   object Label18: TLabel
-    Left = 276
-    Top = 53
+    Left = 566
+    Top = 77
     Width = 23
     Height = 17
     Caption = 'Yaw'
+    Visible = False
   end
   object Label19: TLabel
-    Left = 277
-    Top = 30
+    Left = 567
+    Top = 54
     Width = 22
     Height = 17
     Caption = 'Roll'
+    Visible = False
   end
   object Label50: TLabel
-    Left = 272
-    Top = 7
+    Left = 562
+    Top = 31
     Width = 27
     Height = 17
     Caption = 'Pitch'
+    Visible = False
   end
   object Label1: TLabel
     Left = 922
@@ -215,7 +218,7 @@ object MainForm: TMainForm
     OnClick = ProjCheckClick
   end
   object XScroll: TScrollBar
-    Left = 574
+    Left = 358
     Top = 8
     Width = 176
     Height = 17
@@ -225,7 +228,7 @@ object MainForm: TMainForm
     OnChange = XSpinChange
   end
   object YScroll: TScrollBar
-    Left = 574
+    Left = 358
     Top = 31
     Width = 176
     Height = 17
@@ -235,7 +238,7 @@ object MainForm: TMainForm
     OnChange = XSpinChange
   end
   object ZScroll: TScrollBar
-    Left = 574
+    Left = 358
     Top = 54
     Width = 176
     Height = 17
@@ -245,9 +248,9 @@ object MainForm: TMainForm
     OnChange = XSpinChange
   end
   object AScroll: TScrollBar
-    Left = 574
-    Top = 77
-    Width = 176
+    Left = 595
+    Top = 8
+    Width = 166
     Height = 17
     Max = 57
     PageSize = 0
@@ -292,34 +295,37 @@ object MainForm: TMainForm
     OnChange = XShiftSpinChange
   end
   object YawScroll: TScrollBar
-    Left = 305
-    Top = 53
+    Left = 595
+    Top = 77
     Width = 166
     Height = 17
     Min = -100
     PageSize = 0
     TabOrder = 9
+    Visible = False
     OnChange = PitchSpinChange
   end
   object RollScroll: TScrollBar
-    Left = 305
-    Top = 30
+    Left = 595
+    Top = 54
     Width = 166
     Height = 17
     Min = -100
     PageSize = 0
     Position = -46
     TabOrder = 10
+    Visible = False
     OnChange = PitchSpinChange
   end
   object PitchScroll: TScrollBar
-    Left = 305
-    Top = 7
+    Left = 595
+    Top = 31
     Width = 166
     Height = 17
     Min = -100
     PageSize = 0
     TabOrder = 11
+    Visible = False
     OnChange = PitchSpinChange
   end
   object ZShiftScrollDD: TScrollBar
