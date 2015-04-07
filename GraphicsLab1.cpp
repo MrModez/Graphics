@@ -18,7 +18,7 @@ TMainForm *MainForm;
 #define SIN 			sin
 #define PITCH 			PitchScroll->Position
 #define ROLL 			RollScroll->Position
-#define YAW 			YawScroll->Position
+#define YAW 			YawScroll->Position - 0.5
 #define SPINX 			XScroll->Position
 #define SPINY 			YScroll->Position
 #define SPINZ 			ZScroll->Position
@@ -28,7 +28,7 @@ TMainForm *MainForm;
 #define SHIFTXDD 		XShiftScrollDD->Position
 #define SHIFTYDD 		YShiftScrollDD->Position
 #define SHIFTZDD 		ZShiftScrollDD->Position
-#define SPINA 			AScroll->Position
+#define SPINA 			AScroll->Position   / 2.0
 
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
@@ -38,6 +38,143 @@ __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 	pCameraDD = new CameraDD(SHIFTXDD, SHIFTYDD, SHIFTZDD);
 	pOrtoSystem = new OrtoSystem(pCameraTD);
 	pCompSystem = new ComplexSystem(pCameraDD);
+
+	///label shit
+	AddLabels(XShiftScroll);
+	AddLabels(YShiftScroll);
+	AddLabels(ZShiftScroll);
+
+	AddLabels(XScroll);
+	AddLabels(YScroll);
+	AddLabels(ZScroll);
+	AddLabels(AScroll);
+
+	AddLabels(ZShiftScrollDD);
+	AddLabels(YShiftScrollDD);
+	AddLabels(XShiftScrollDD);
+
+	// AddLabels(YawScroll);
+	// AddLabels(RollScroll);
+	// AddLabels(PitchScroll);
+}
+
+void __fastcall TMainForm::AddLabels(TScrollBar* Scroll) {
+	TLabel *ScrollLeft = new TLabel(this);
+	ScrollLeft->SetParentComponent(this);
+	ScrollLeft->Left = Scroll->Left - 25;
+	ScrollLeft->Top = Scroll->Top - 0;
+	ScrollLeft->Caption = Scroll->Min;
+	TLabel *ScrollRight = new TLabel(this);
+	ScrollRight->SetParentComponent(this);
+	ScrollRight->Left = Scroll->Left + Scroll->Width + 3;
+	ScrollRight->Top = Scroll->Top - 0;
+	ScrollRight->Caption = Scroll->Max;
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::PaintBoxDDPaint(TObject *Sender) {
+	TDirect2DCanvas* LCanvas;
+	LCanvas = new TDirect2DCanvas(PaintBoxDD->Canvas, PaintBoxDD->ClientRect);
+	if (AACheck->Checked)
+		LCanvas->RenderTarget->SetAntialiasMode
+			(D2D1_ANTIALIAS_MODE_FORCE_DWORD);
+	else
+		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	LCanvas->BeginDraw();
+	try {
+		pCompSystem->Paint(LCanvas);
+	}
+	__finally {
+		LCanvas->EndDraw();
+		LCanvas->Free();
+	}
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::PaintBoxTDPaint(TObject *Sender) {
+	TDirect2DCanvas* LCanvas;
+	LCanvas = new TDirect2DCanvas(PaintBoxTD->Canvas, PaintBoxTD->ClientRect);
+	if (AACheck->Checked)
+		LCanvas->RenderTarget->SetAntialiasMode
+			(D2D1_ANTIALIAS_MODE_FORCE_DWORD);
+	else
+		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	LCanvas->BeginDraw();
+	try {
+		pOrtoSystem->Paint(LCanvas); // (TCanvas*)
+	}
+	__finally {
+		LCanvas->EndDraw();
+		LCanvas->Free();
+	}
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::DrawTimerTimer(TObject *Sender) {
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::PitchSpinChange(TObject *Sender) {
+	pOrtoSystem->pCamera->SetRotation(PITCH, ROLL, YAW);
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+
+void __fastcall TMainForm::AACheckClick(TObject *Sender) {
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::XShiftSpinChange(TObject *Sender) {
+	pOrtoSystem->pCamera->SetPosition(SHIFTX, SHIFTY, SHIFTZ);
+	pCompSystem->pCamera->SetPosition(SHIFTXDD, SHIFTYDD, SHIFTZDD);
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::XSpinChange(TObject *Sender) {
+	LabPoint->SetPos(SPINX, SPINY, SPINZ);
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose) {
+	delete pOrtoSystem;
+	delete pCompSystem;
+	delete pCameraTD;
+	delete pCameraDD;
+	delete LabPoint;
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::ProjCheckClick(TObject *Sender) {
+	LabPoint->Par.bProj = ProjCheck->Checked;
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::ASpinChange(TObject *Sender) {
+	pOrtoSystem->pCamera->SetAngle(SPINA);
+	PaintBoxTD->Refresh();
+	PaintBoxDD->Refresh();
+}
+
+// ---------------------------------------------------------------------------
+void __fastcall TMainForm::Button1Click(TObject *Sender) {
+	delete pOrtoSystem;
+	delete pCompSystem;
+	delete pCameraTD;
+	delete pCameraDD;
+	delete LabPoint;
+	MainForm->Close();
 }
 
 // ---------------------------------------------------------------------------
@@ -189,102 +326,5 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	PointViewDD->AddPoint(new PointDD(45, 107, TYPE_POINT));
 	ObjectShared* PointViewDDShared = (ObjectShared*)PointViewDD;
 	pCompSystem->AddObject(PointViewDDShared);
-
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::PaintBoxDDPaint(TObject *Sender) {
-	TDirect2DCanvas* LCanvas;
-	LCanvas = new TDirect2DCanvas(PaintBoxDD->Canvas, PaintBoxDD->ClientRect);
-	if (AACheck->Checked)
-		LCanvas->RenderTarget->SetAntialiasMode
-			(D2D1_ANTIALIAS_MODE_FORCE_DWORD);
-	else
-		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
-	LCanvas->BeginDraw();
-	try {
-		pCompSystem->Paint(LCanvas);
-	}
-	__finally {
-		LCanvas->EndDraw();
-		LCanvas->Free();
-	}
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::PaintBoxTDPaint(TObject *Sender) {
-	TDirect2DCanvas* LCanvas;
-	LCanvas = new TDirect2DCanvas(PaintBoxTD->Canvas, PaintBoxTD->ClientRect);
-	if (AACheck->Checked)
-		LCanvas->RenderTarget->SetAntialiasMode
-			(D2D1_ANTIALIAS_MODE_FORCE_DWORD);
-	else
-		LCanvas->RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
-	LCanvas->BeginDraw();
-	try {
-		pOrtoSystem->Paint(LCanvas); // (TCanvas*)
-	}
-	__finally {
-		LCanvas->EndDraw();
-		LCanvas->Free();
-	}
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::DrawTimerTimer(TObject *Sender) {
-	PaintBoxTD->Refresh();
-	PaintBoxDD->Refresh();
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::PitchSpinChange(TObject *Sender) {
-	pOrtoSystem->pCamera->SetRotation(PITCH, ROLL, YAW);
-	PaintBoxTD->Refresh();
-	PaintBoxDD->Refresh();
-}
-
-// ---------------------------------------------------------------------------
-
-void __fastcall TMainForm::AACheckClick(TObject *Sender) {
-	PaintBoxTD->Refresh();
-	PaintBoxDD->Refresh();
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::XShiftSpinChange(TObject *Sender) {
-	pOrtoSystem->pCamera->SetPosition(SHIFTX, SHIFTY, SHIFTZ);
-	pCompSystem->pCamera->SetPosition(SHIFTXDD, SHIFTYDD, SHIFTZDD);
-	PaintBoxTD->Refresh();
-	PaintBoxDD->Refresh();
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::XSpinChange(TObject *Sender) {
-	LabPoint->SetPos(SPINX, SPINY, SPINZ);
-	PaintBoxTD->Refresh();
-	PaintBoxDD->Refresh();
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose) {
-	delete pOrtoSystem;
-	delete pCompSystem;
-	delete pCameraTD;
-	delete pCameraDD;
-	delete LabPoint;
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::ProjCheckClick(TObject *Sender) {
-	LabPoint->Par.bProj = ProjCheck->Checked;
-	PaintBoxTD->Refresh();
-	PaintBoxDD->Refresh();
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TMainForm::ASpinChange(TObject *Sender) {
-	pOrtoSystem->pCamera->SetAngle(SPINA);
-	PaintBoxTD->Refresh();
-	PaintBoxDD->Refresh();
 }
 // ---------------------------------------------------------------------------

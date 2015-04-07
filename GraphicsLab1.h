@@ -25,6 +25,7 @@
 // ---------------------------------------------------------------------------
 class TMainForm : public TForm {
 __published: // IDE-managed Components
+
 	TTimer *DrawTimer;
 	TCheckBox *AACheck;
 	TLabel *Label7;
@@ -59,11 +60,11 @@ __published: // IDE-managed Components
 	TScrollBar *XShiftScrollDD;
 	TLabel *Label4;
 	TLabel *Label5;
+	TButton *Button1;
 
 	void __fastcall PaintBoxDDPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);
 	void __fastcall PitchSpinChange(TObject * Sender);
-	void __fastcall FormShow(TObject *Sender);
 	void __fastcall AACheckClick(TObject *Sender);
 	void __fastcall XShiftSpinChange(TObject *Sender);
 	void __fastcall XSpinChange(TObject *Sender);
@@ -71,7 +72,8 @@ __published: // IDE-managed Components
 	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 	void __fastcall ProjCheckClick(TObject *Sender);
 	void __fastcall ASpinChange(TObject *Sender);
-
+	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall FormShow(TObject *Sender);
 
 private: // User declarations
 
@@ -80,6 +82,8 @@ private: // User declarations
 	CameraTD *pCameraTD;
 	CameraDD *pCameraDD;
 	ObjectTD *LabPoint;
+
+	void __fastcall TMainForm::AddLabels(TScrollBar* Scroll);
 
 public: // User declarations
 

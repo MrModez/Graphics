@@ -67,7 +67,7 @@ void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 	for (unsigned int j = 0; j < pPointsDD.size(); j++) {
 		PointDD* pObjectDDL = pPointsDD[j - 1];
 		PointDD* pObjectDD = pPointsDD[j];
-		TPoint arc[] = {
+		TPoint points[] = {
 			Point(pObjectDDL->fX, pObjectDDL->fY),
 				Point(pObjectDD->fX, pObjectDDL->fY),
 				Point(pObjectDD->fX, pObjectDDL->fY),
@@ -81,7 +81,7 @@ void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 			pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_ARC:
-			pCanvas->PolyBezier(arc, 3);
+			pCanvas->PolyBezier(points, 3);
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_NONE:
@@ -121,6 +121,7 @@ void ObjectDD::SetCanvasSettings(DefCanvas* pCanvas) {
 	pCanvas->Pen->Width = Par.iWidth;
 	pCanvas->Pen->Color = Par.iColor;
 	pCanvas->Pen->Style = Par.iStyle;
+	pCanvas->Brush->Style = bsClear;
 }
 
 void ObjectDD::SetCanvasDefaults(DefCanvas* pCanvas) {

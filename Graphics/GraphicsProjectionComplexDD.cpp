@@ -13,17 +13,6 @@ ProjectionComplexDD::ProjectionComplexDD(ObjectTD* pObjectTD, CameraDD* pCamera)
 	pPointsDD = Projection(pObjectTD, pCamera);
 }
 
-PointTD*ProjectionComplexDD::CreatePointTD(PointTD* pPointTD, Action ACT,
-	bool iX, bool iY, bool iZ) {
-	PointTD* result = new PointTD(*pPointTD);
-	result->SetSettings(ACT, pPointTD->iType, pPointTD->sText);
-	float X = (iX ? pPointTD->fX : 0);
-	float Y = (iY ? pPointTD->fY : 0);
-	float Z = (iZ ? pPointTD->fZ : 0);
-	result->SetPos(X, Y, Z);
-	return result;
-}
-
 ProjectionComplexDD::~ProjectionComplexDD() {
 	for (unsigned int i = 0; i < pPointsDD.size(); i++) {
 		delete pPointsDD[i];
@@ -111,9 +100,9 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 			pPointDDXY2->fX = 0;
 			pPointDDYY2->fY = 0;
 			pPointDDYZ2->fX = 0;
-			pPointDDXZ2->sText += "X";
-			pPointDDXY2->sText += "Y1";
-			pPointDDYY2->sText += "Y2";
+			pPointDDXZ2->sText += "Y";
+			pPointDDXY2->sText += "X1";
+			pPointDDYY2->sText += "X2";
 			pPointDDYZ2->sText += "Z";
 
 			result.push_back(pPointDDXZ);
@@ -122,7 +111,7 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 
 			pPointDDXZ->sText += "1";
 			pPointDDXY->sText += "2";
-			pPointDDYZ->sText += "4";
+			pPointDDYZ->sText += "3";
 
 			result.push_back(pPointDDXZ2);
 			result.push_back(pPointDDXY2);
@@ -159,19 +148,19 @@ PointTD* ProjectionComplexDD::Rotate3D(PointTD pPointTD) {
 PointDD* ProjectionComplexDD::Rotate3D(PointTD pPointTD, Quarter Quart) {
 	float X, Y;
 	switch (Quart) {
-	case QXZ:
+	case QYZ:
 		X = pPointTD.fX;
 		Y = -1.0 * pPointTD.fZ;
 		break;
-	case QXY:
+	case QYY:
 		X = pPointTD.fX;
 		Y = pPointTD.fY;
 		break;
-	case QYY:
+	case QXY:
 		X = -1.0 * pPointTD.fY;
 		Y = pPointTD.fY;
 		break;
-	case QYZ:
+	case QXZ:
 		X = -1.0 * pPointTD.fY;
 		Y = -1.0 * pPointTD.fZ;
 		break;

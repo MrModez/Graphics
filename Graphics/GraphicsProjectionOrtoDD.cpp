@@ -121,9 +121,17 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD,
 			PointTD* pPointTDXY = CreatePointTD(pPoint, ACT_NONE, 1, 1, 0);
 			PointTD* pPointTDZY = CreatePointTD(pPoint, ACT_NONE, 0, 1, 1);
 
+			PointTD* pPointTDX = CreatePointTD(pPoint, ACT_NONE, 1, 0, 0);
+			PointTD* pPointTDY = CreatePointTD(pPoint, ACT_NONE, 0, 1, 0);
+			PointTD* pPointTDZ = CreatePointTD(pPoint, ACT_NONE, 0, 0, 1);
+
 			pPointTDXZ->sText += "1";
 			pPointTDXY->sText += "2";
-			pPointTDZY->sText += "4";
+			pPointTDZY->sText += "3";
+
+			pPointTDX->sText += "X";
+			pPointTDY->sText += "Y";
+			pPointTDZ->sText += "Z";
 
 			PointDD* pPointDDXZ =
 				static_cast<PointDD*>(Rotate3D(*pPointTDXZ, fP, fR, fW, fA));
@@ -132,9 +140,20 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD,
 			PointDD* pPointDDZY =
 				static_cast<PointDD*>(Rotate3D(*pPointTDZY, fP, fR, fW, fA));
 
+			PointDD* pPointDDX =
+				static_cast<PointDD*>(Rotate3D(*pPointTDX, fP, fR, fW, fA));
+			PointDD* pPointDDY =
+				static_cast<PointDD*>(Rotate3D(*pPointTDY, fP, fR, fW, fA));
+			PointDD* pPointDDZ =
+				static_cast<PointDD*>(Rotate3D(*pPointTDZ, fP, fR, fW, fA));
+
 			result.push_back(pPointDDXZ);
 			result.push_back(pPointDDXY);
 			result.push_back(pPointDDZY);
+
+			result.push_back(pPointDDX);
+			result.push_back(pPointDDY);
+			result.push_back(pPointDDZ);
 		}
 	}
 	AddShift(result, fX, fY, fZ);
@@ -181,11 +200,11 @@ PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 		float matrix[AXIS_COUNT + 1][AXIS_COUNT + 1];
 		switch (i) {
 		case AXIS_X:
-			matrix[0][0] = cos(fYaw);
-			matrix[0][1] = sin(fYaw - fAngle);
+			matrix[0][0] = cos(fYaw + fAngle);
+			matrix[0][1] = sin(fYaw);
 			matrix[0][2] = 0.0;
-			matrix[1][0] = -sin(fYaw);
-			matrix[1][1] = cos(fYaw - fAngle);
+			matrix[1][0] = -sin(fYaw + fAngle);
+			matrix[1][1] = cos(fYaw);
 			matrix[1][2] = 0.0;
 			matrix[2][0] = 0.0;
 			matrix[2][1] = 0.0;
@@ -213,6 +232,18 @@ PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 			matrix[2][1] = -sin(fRoll);
 			matrix[2][2] = cos(fRoll);
 			break;
+			/* case AXIS_COUNT:
+			 matrix[0][0] = 1.0;
+			 matrix[0][1] = 0.0;
+			 matrix[0][2] = 0.0;
+			 matrix[1][0] = 0.0;
+			 matrix[1][1] = 1.0;
+			 matrix[1][2] = 0.0;
+			 matrix[2][0] = 0.0;
+			 matrix[2][1] = 0.0;
+			 matrix[2][2] = 0.0;
+			 matrix[2][3] = -1.0 / fAngle;
+			 break; */
 		default:
 			break;
 		}
