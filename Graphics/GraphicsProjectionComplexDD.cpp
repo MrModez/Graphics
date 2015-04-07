@@ -109,8 +109,8 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 			result.push_back(pPointDDXY);
 			result.push_back(pPointDDYZ);
 
-			pPointDDXZ->sText += "1";
-			pPointDDXY->sText += "2";
+			pPointDDXZ->sText += "2";
+			pPointDDXY->sText += "1";
 			pPointDDYZ->sText += "3";
 
 			result.push_back(pPointDDXZ2);

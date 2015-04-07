@@ -267,7 +267,8 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	pOrtoSystem->AddObject(CoordsShared);
 
 	ObjectDD *TextViewTD = new ObjectDD();
-	TextViewTD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "3D view"));
+	TextViewTD->AddPoint(new PointDD(50, 100, TYPE_TEXT,
+		"Пространственный чертеж"));
 	ObjectShared* TextViewTDShared = (ObjectShared*)TextViewTD;
 	pOrtoSystem->AddObject(TextViewTDShared);
 
@@ -310,15 +311,15 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	CoordsDD->AddPoint(new PointTD(5, L - 5, 0, ACT_DRAW));
 
 	CoordsDD->AddPoint(new PointTD(L + 15, 0, 0, TYPE_TEXT, "X"));
+	CoordsDD->AddPoint(new PointTD(0, L + 15, 0, TYPE_TEXT, "X"));
 	CoordsDD->AddPoint(new PointTD(-L - 15, 0, 0, TYPE_TEXT, "Y"));
-	CoordsDD->AddPoint(new PointTD(0, L + 15, 0, TYPE_TEXT, "Y"));
 	CoordsDD->AddPoint(new PointTD(0, -L - 15, 0, TYPE_TEXT, "Z"));
 	CoordsDD->AddPoint(new PointTD(0, 0, 0, TYPE_POINT));
 	ObjectShared* CoordsDDShared = (ObjectShared*)CoordsDD;
 	pCompSystem->AddObject(CoordsDDShared);
 
 	ObjectDD *TextViewDD = new ObjectDD();
-	TextViewDD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "2D view"));
+	TextViewDD->AddPoint(new PointDD(50, 100, TYPE_TEXT, "Комплексный чертеж"));
 	ObjectShared* TextViewDDShared = (ObjectShared*)TextViewDD;
 	pCompSystem->AddObject(TextViewDDShared);
 

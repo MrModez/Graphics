@@ -125,9 +125,9 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD,
 			PointTD* pPointTDY = CreatePointTD(pPoint, ACT_NONE, 0, 1, 0);
 			PointTD* pPointTDZ = CreatePointTD(pPoint, ACT_NONE, 0, 0, 1);
 
-			pPointTDXZ->sText += "1";
-			pPointTDXY->sText += "2";
-			pPointTDZY->sText += "3";
+			pPointTDXZ->sText += "3";
+			pPointTDXY->sText += "1";
+			pPointTDZY->sText += "2";
 
 			pPointTDX->sText += "X";
 			pPointTDY->sText += "Y";
