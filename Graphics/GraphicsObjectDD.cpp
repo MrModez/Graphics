@@ -69,8 +69,10 @@ void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 		PointDD* pObjectDD = pPointsDD[j];
 		TPoint points[] = {
 			Point(pObjectDDL->fX, pObjectDDL->fY),
-				Point(pObjectDD->fX, pObjectDDL->fY),
-				Point(pObjectDD->fX, pObjectDDL->fY),
+				Point((pObjectDDL->fX + pObjectDDL->fX) / 2,
+				(pObjectDDL->fY + pObjectDD->fY) / 2),
+				Point((pObjectDDL->fX + pObjectDD->fX) / 2,
+				(pObjectDD->fY + pObjectDD->fY) / 2),
 				Point(pObjectDD->fX, pObjectDD->fY)};
 		SetCanvasSettings(pCanvas);
 		switch (pObjectDD->iAction) {

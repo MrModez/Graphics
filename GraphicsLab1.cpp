@@ -18,7 +18,7 @@ TMainForm *MainForm;
 #define SIN 			sin
 #define PITCH 			PitchScroll->Position
 #define ROLL 			RollScroll->Position
-#define YAW 			YawScroll->Position - 0.5
+#define YAW 			YawScroll->Position - 1.7
 #define SPINX 			XScroll->Position
 #define SPINY 			YScroll->Position
 #define SPINZ 			ZScroll->Position
@@ -28,7 +28,7 @@ TMainForm *MainForm;
 #define SHIFTXDD 		XShiftScrollDD->Position
 #define SHIFTYDD 		YShiftScrollDD->Position
 #define SHIFTZDD 		ZShiftScrollDD->Position
-#define SPINA 			AScroll->Position   / 2.0
+#define SPINA 			AScroll->Position   / 2.0    + 1.0
 
 // ---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
@@ -310,9 +310,9 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	CoordsDD->AddPoint(new PointTD(0, L, 0, ACT_MOVE));
 	CoordsDD->AddPoint(new PointTD(5, L - 5, 0, ACT_DRAW));
 
-	CoordsDD->AddPoint(new PointTD(L + 15, 0, 0, TYPE_TEXT, "X"));
-	CoordsDD->AddPoint(new PointTD(0, L + 15, 0, TYPE_TEXT, "X"));
-	CoordsDD->AddPoint(new PointTD(-L - 15, 0, 0, TYPE_TEXT, "Y"));
+	CoordsDD->AddPoint(new PointTD(L + 15, 0, 0, TYPE_TEXT, "Y"));
+	CoordsDD->AddPoint(new PointTD(0, L + 15, 0, TYPE_TEXT, "Y"));
+	CoordsDD->AddPoint(new PointTD(-L - 15, 0, 0, TYPE_TEXT, "X"));
 	CoordsDD->AddPoint(new PointTD(0, -L - 15, 0, TYPE_TEXT, "Z"));
 	CoordsDD->AddPoint(new PointTD(0, 0, 0, TYPE_POINT));
 	ObjectShared* CoordsDDShared = (ObjectShared*)CoordsDD;

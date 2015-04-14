@@ -22,9 +22,10 @@ ProjectionOrtoDD::~ProjectionOrtoDD() {
 PointTD*ProjectionOrtoDD::CreatePointTD(PointTD* pPointTD, Action ACT, bool iX,
 	bool iY, bool iZ) {
 	PointTD* result = new PointTD(*pPointTD);
-	result->SetSettings(ACT, pPointTD->iType, pPointTD->sText);
+	result->SetSettings((ACT == ACT_NONE ? pPointTD->iAction : ACT),
+		pPointTD->iType, pPointTD->sText);
 	float X = (iX ? pPointTD->fX : 0);
-	float Y = (iY ? pPointTD->fY : 0);
+	float Y = -1 * (iY ? pPointTD->fY : 0);
 	float Z = (iZ ? pPointTD->fZ : 0);
 	result->SetPos(X, Y, Z);
 	return result;
@@ -42,9 +43,14 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD,
 	float fA = DegToRad(pCamera->fAngle);
 	if (Par.iProjStyle == PROJ_NONE) {
 		for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
-			PointTD* pPointTD = Rotate3D(*pObjectTD->pPointsTD[i], fP, fR,
-				fW, fA);
-			PointDD* pPointDD = static_cast<PointDD*>(pPointTD);
+			PointTD* pPoint = pObjectTD->pPointsTD[i];
+			// PointTD* pPointTD = Rotate3D(*pObjectTD->pPointsTD[i], fP, fR,
+			// fW, fA);
+			PointTD* pPointTD = CreatePointTD(pPoint, ACT_NONE, pPoint->fX,
+				pPoint->fY, pPoint->fZ);
+			// PointDD* pPointDD = static_cast<PointDD*>(pPointTD);
+			PointDD* pPointDD =
+				static_cast<PointDD*>(Rotate3D(*pPointTD, fP, fR, fW, fA));
 			result.push_back(pPointDD);
 		}
 	}
@@ -125,9 +131,9 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD,
 			PointTD* pPointTDY = CreatePointTD(pPoint, ACT_NONE, 0, 1, 0);
 			PointTD* pPointTDZ = CreatePointTD(pPoint, ACT_NONE, 0, 0, 1);
 
-			pPointTDXZ->sText += "3";
+			pPointTDXZ->sText += "2";
 			pPointTDXY->sText += "1";
-			pPointTDZY->sText += "2";
+			pPointTDZY->sText += "3";
 
 			pPointTDX->sText += "X";
 			pPointTDY->sText += "Y";
@@ -200,11 +206,11 @@ PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll,
 		float matrix[AXIS_COUNT + 1][AXIS_COUNT + 1];
 		switch (i) {
 		case AXIS_X:
-			matrix[0][0] = cos(fYaw + fAngle);
-			matrix[0][1] = sin(fYaw);
+			matrix[0][0] = cos(fYaw);
+			matrix[0][1] = sin(fYaw + fAngle);
 			matrix[0][2] = 0.0;
-			matrix[1][0] = -sin(fYaw + fAngle);
-			matrix[1][1] = cos(fYaw);
+			matrix[1][0] = -sin(fYaw);
+			matrix[1][1] = cos(fYaw + fAngle);
 			matrix[1][2] = 0.0;
 			matrix[2][0] = 0.0;
 			matrix[2][1] = 0.0;

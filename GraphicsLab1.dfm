@@ -3,7 +3,9 @@ object MainForm: TMainForm
   Top = 15
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = #1051#1072#1073#1072#1088#1072#1090#1086#1088#1085#1072#1103' '#1088#1072#1073#1086#1090#1072' '#8470'1 '#1050#1086#1084#1087#1100#1102#1090#1077#1088#1085#1072#1103' '#1043#1088#1072#1092#1080#1082#1072', '#1060#1072#1073#1072#1088#1080#1089#1086#1074' '#1047#1072#1075#1080#1088
+  Caption = 
+    #1051#1072#1073#1072#1088#1072#1090#1086#1088#1085#1072#1103' '#1088#1072#1073#1086#1090#1072' '#8470'1 '#1050#1086#1084#1087#1100#1102#1090#1077#1088#1085#1072#1103' '#1043#1088#1072#1092#1080#1082#1072', '#1060#1072#1073#1072#1088#1080#1089#1086#1074#1099' '#1047#1072#1075#1080#1088' '#1080' ' +
+    #1058#1072#1075#1080#1088'. '#1052#1054'-303'
   ClientHeight = 656
   ClientWidth = 1145
   Color = clBtnHighlight
@@ -222,6 +224,7 @@ object MainForm: TMainForm
     Top = 8
     Width = 153
     Height = 17
+    Min = -100
     PageSize = 0
     Position = 80
     TabOrder = 2
@@ -232,6 +235,7 @@ object MainForm: TMainForm
     Top = 31
     Width = 153
     Height = 17
+    Min = -100
     PageSize = 0
     Position = 60
     TabOrder = 3
@@ -242,6 +246,7 @@ object MainForm: TMainForm
     Top = 54
     Width = 153
     Height = 17
+    Min = -100
     PageSize = 0
     Position = 70
     TabOrder = 4
@@ -301,7 +306,7 @@ object MainForm: TMainForm
     Height = 17
     Min = -100
     PageSize = 0
-    Position = -57
+    Position = 74
     TabOrder = 9
     Visible = False
     OnChange = PitchSpinChange
