@@ -43,9 +43,17 @@ void ObjectTD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 
 		Par.iProjStyle = PROJ_LINES;
 		pProjection = new ProjectionOrtoDD(this, pCamera);
-		pProjection->Par.iColor = clSilver;
+		pProjection->Par.iColor = clGray;
 		pProjection->Par.iStyle = psDash;
 		pProjection->Par.iWidth = 2;
+		pProjection->PaintTD(pCanvas, pCamera);
+		delete pProjection;
+
+		Par.iProjStyle = PROJ_LINES_NIGGA;
+		pProjection = new ProjectionOrtoDD(this, pCamera);
+		pProjection->Par.iColor = clSilver;
+		pProjection->Par.iStyle = psDash;
+		pProjection->Par.iWidth = 1;
 		pProjection->PaintTD(pCanvas, pCamera);
 		delete pProjection;
 
@@ -54,6 +62,14 @@ void ObjectTD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 		pProjection->Par.iColor = clRed;
 		pProjection->Par.iStyle = psDash;
 		pProjection->Par.iWidth = 3;
+		pProjection->PaintTD(pCanvas, pCamera);
+		delete pProjection;
+
+		Par.iProjStyle = PROJ_DOTS_NIGGA;
+		pProjection = new ProjectionOrtoDD(this, pCamera);
+		pProjection->Par.iColor = clBlack;
+		pProjection->Par.iStyle = psDash;
+		pProjection->Par.iWidth = 2;
 		pProjection->PaintTD(pCanvas, pCamera);
 		delete pProjection;
 	}

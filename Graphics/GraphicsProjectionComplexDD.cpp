@@ -32,83 +32,66 @@ std::vector<PointDD*>ProjectionComplexDD::Projection(ObjectTD* pObjectTD,
 			result.push_back(pPointDD);
 		}
 	}
-	if (this->Par.iProjStyle == PROJ_LINES) {
+	if (this->Par.iProjStyle == PROJ_LINES || this->Par.iProjStyle ==
+		PROJ_LINES_NIGGA) {
 		for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
 			if (pObjectTD->pPointsTD[i]->iType != TYPE_TEXT) {
-				PointDD* pPointTDXZ = Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
-				PointDD* pPointTDZY = Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
-				PointDD* pPointTDYY = Rotate3D(*pObjectTD->pPointsTD[i], QYY);
-				PointDD* pPointTDXY = Rotate3D(*pObjectTD->pPointsTD[i], QXY);
 
-				// Lines
-				PointDD* pPointDDXZ = new PointDD(*pPointTDXZ);
-				PointDD* pPointDDZY = new PointDD(*pPointTDZY);
-				PointDD* pPointDDYY0 = new PointDD(*pPointTDYY);
-				PointDD* pPointDDXY = new PointDD(*pPointTDXY);
-				PointDD* pPointDDXZ0 = new PointDD(*pPointTDXZ);
+			 /*	if ((PROJ_LINES && pObjectTD->pPointsTD[i]->fX >=
+					0 && pObjectTD->pPointsTD[i]->fY >= 0) ||
+					(PROJ_LINES_NIGGA && (pObjectTD->pPointsTD[i]->fX <=
+					0 || pObjectTD->pPointsTD[i]->fY <= 0))) {
+			 */
+					PointDD* pPointTDXZ =
+						Rotate3D(*pObjectTD->pPointsTD[i], QXZ);
+					PointDD* pPointTDZY =
+						Rotate3D(*pObjectTD->pPointsTD[i], QYZ);
+					PointDD* pPointTDYY =
+						Rotate3D(*pObjectTD->pPointsTD[i], QYY);
+					PointDD* pPointTDXY =
+						Rotate3D(*pObjectTD->pPointsTD[i], QXY);
 
-				PointDD* pPointDDXZ1 = new PointDD(*pPointTDXZ);
-				PointDD* pPointDDZY1 = new PointDD(*pPointTDZY);
-				PointDD* pPointDDXY1 = new PointDD(*pPointTDXY);
-				pPointDDXZ1->fX = 0;
-				pPointDDZY1->fY = 0;
-				pPointDDXY1->fY = 0;
+					// Lines
+					PointDD* pPointDDXZ = new PointDD(*pPointTDXZ);
+					PointDD* pPointDDZY = new PointDD(*pPointTDZY);
+					PointDD* pPointDDYY0 = new PointDD(*pPointTDYY);
+					PointDD* pPointDDXY = new PointDD(*pPointTDXY);
+					PointDD* pPointDDXZ0 = new PointDD(*pPointTDXZ);
 
-				pPointDDXZ->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
-				pPointDDXZ1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+					PointDD* pPointDDXZ1 = new PointDD(*pPointTDXZ);
+					PointDD* pPointDDZY1 = new PointDD(*pPointTDZY);
+					PointDD* pPointDDXY1 = new PointDD(*pPointTDXY);
+					pPointDDXZ1->fX = 0;
+					pPointDDZY1->fY = 0;
+					pPointDDXY1->fY = 0;
 
-				pPointDDZY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-				pPointDDZY1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+					pPointDDXZ->SetSettings(ACT_MOVE, TYPE_OBJECT, "");
+					pPointDDXZ1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
 
-				pPointDDYY0->SetSettings(ACT_ARC, TYPE_OBJECT, "");
+					pPointDDZY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+					pPointDDZY1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
 
-				pPointDDXY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
-				pPointDDXY1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+					pPointDDYY0->SetSettings(ACT_ARC, TYPE_OBJECT, "");
 
-				pPointDDXZ0->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+					pPointDDXY->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
+					pPointDDXY1->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
 
-				pPointDDYY0->fX = 0;
+					pPointDDXZ0->SetSettings(ACT_DRAW, TYPE_OBJECT, "");
 
-				result.push_back(pPointDDXZ);
-				result.push_back(pPointDDXZ1);
-				result.push_back(pPointDDZY);
-				result.push_back(pPointDDZY1);
+					pPointDDYY0->fX = 0;
 
-				result.push_back(pPointDDYY0);
+					result.push_back(pPointDDXZ);
+					result.push_back(pPointDDXZ1);
+					result.push_back(pPointDDZY);
+					result.push_back(pPointDDZY1);
 
-				result.push_back(pPointDDXY);
-				result.push_back(pPointDDXY1);
+					result.push_back(pPointDDYY0);
 
-				result.push_back(pPointDDXZ0);
+					result.push_back(pPointDDXY);
+					result.push_back(pPointDDXY1);
 
-				// result.push_back(pPointDDXY0);
-				// result.push_back(pPointDDXY1);
-
-				// result.push_back(pPointDDYY1);
-				// result.push_back(pPointDDYY1);
-				// result.push_back(pPointDDZY);
-				/* result.push_back(pPointDDXY);
-				 result.push_back(pPointDDXY1);
-				 result.push_back(pPointDDXZ);
-				 */
-
-				// Dots
-				/*
-				 PointDD* pPointDDXZ2 = new PointDD(*pPointTDXZ);
-				 PointDD* pPointDDXY2 = new PointDD(*pPointTDXY);
-				 PointDD* pPointDDYY2 = new PointDD(*pPointTDYY);
-				 PointDD* pPointDDYZ2 = new PointDD(*pPointTDYZ);
-
-				 pPointDDXZ2->fY = 0;
-				 pPointDDXY2->fX = 0;
-				 pPointDDYY2->fY = 0;
-				 pPointDDYZ2->fX = 0;
-
-				 result.push_back(pPointDDXZ2);
-				 result.push_back(pPointDDXY2);
-				 result.push_back(pPointDDYY2);
-				 result.push_back(pPointDDYZ2);
-				 */
+					result.push_back(pPointDDXZ0);
+			//	}
 			}
 		}
 	}

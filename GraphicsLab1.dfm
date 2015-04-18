@@ -43,11 +43,13 @@ object MainForm: TMainForm
     Width = 560
     Height = 656
     Align = alLeft
+    Color = clBtnHighlight
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'Segoe UI'
     Font.Style = []
+    ParentColor = False
     ParentFont = False
     OnPaint = PaintBoxTDPaint
     ExplicitLeft = -2
@@ -371,10 +373,10 @@ object MainForm: TMainForm
     OnChange = XShiftSpinChange
   end
   object Button1: TButton
-    Left = 1043
-    Top = 616
-    Width = 81
-    Height = 33
+    Left = 984
+    Top = 576
+    Width = 137
+    Height = 64
     Caption = #1042#1099#1093#1086#1076
     TabOrder = 15
     OnClick = Button1Click

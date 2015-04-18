@@ -37,7 +37,7 @@ enum Type {
 };
 
 enum ProjStyle {
-	PROJ_NONE, PROJ_LINES, PROJ_DOTS
+	PROJ_NONE, PROJ_LINES, PROJ_LINES_NIGGA, PROJ_DOTS, PROJ_DOTS_NIGGA
 };
 
 enum Quarter {

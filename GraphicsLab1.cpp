@@ -234,7 +234,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 		if (i == 0)
 			Cube->SetParameters(DrawPar(clBlue, psDashDot, 2));
 		else
-			Cube->SetParameters(DrawPar(clMenu, psSolid, 1));
+			Cube->SetParameters(DrawPar(clGradientInactiveCaption, psSolid, 1));
 		ObjectShared* CubeShared = (ObjectShared*)Cube;
 		pOrtoSystem->AddObject(CubeShared);
 	}
