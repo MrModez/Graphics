@@ -8,8 +8,8 @@
 #define GRAPCHICS_OTROSYSTEM_H_
 
 #include "GraphicsShared.h"
-#include "GraphicsCameraTD.h"
-#include "GraphicsObjectTD.h"
+
+class CameraTD;
 
 class OrtoSystem {
 public:

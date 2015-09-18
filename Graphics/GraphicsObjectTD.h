@@ -8,9 +8,8 @@
 #define GRAPCHICS_OBJECTTD_H_
 
 #include "GraphicsShared.h"
-#include "GraphicsPointTD.h"
-#include "GraphicsCameraDD.h"
-#include "GraphicsCameraTD.h"
+
+class PointTD;
 
 class ObjectTD : public ObjectShared {
 public:

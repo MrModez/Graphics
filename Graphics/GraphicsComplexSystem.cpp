@@ -5,6 +5,8 @@
 // =============================================================================
 
 #include "GraphicsComplexSystem.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsObjectTD.h"
 
 ComplexSystem::ComplexSystem(CameraDD* Camera) {
 	pCamera = Camera;

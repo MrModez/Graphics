@@ -8,12 +8,12 @@
 #define GRAPCHICS_PROJECTIONCOMPLEXDD_H_
 
 #include "GraphicsShared.h"
-#include "GraphicsCameraDD.h"
-#include "GraphicsCameraTD.h"
-#include "GraphicsObjectTD.h"
 #include "GraphicsObjectDD.h"
-#include "GraphicsPointTD.h"
-#include "GraphicsPointDD.h"
+
+class ObjectTD;
+class CameraDD;
+class PointDD;
+class PointTD;
 
 class ProjectionComplexDD : public ObjectDD {
 public:

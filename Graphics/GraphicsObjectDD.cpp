@@ -5,6 +5,10 @@
 // =============================================================================
 
 #include "GraphicsObjectDD.h"
+#include "GraphicsCameraTD.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsObjectTD.h"
+#include "GraphicsPointDD.h"
 
 ObjectDD::ObjectDD(std::vector<PointDD*>Object) {
 	pPointsDD = Object;
@@ -41,15 +45,12 @@ void ObjectDD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 		case ACT_NONE:
 			switch (pPointsDD[j]->iType) {
 			case TYPE_TEXT:
-				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY,
-					pPointsDD[j]->sText);
+				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, pPointsDD[j]->sText);
 				pCanvas->Font->Size = 8 + pCamera->iZShift / 10.0;
 				break;
 			case TYPE_POINT:
-				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS,
-					pObjectDD->fY - DEFAULT_RADIUS,
-					pObjectDD->fX + DEFAULT_RADIUS,
-					pObjectDD->fY + DEFAULT_RADIUS);
+				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS, pObjectDD->fY - DEFAULT_RADIUS,
+					pObjectDD->fX + DEFAULT_RADIUS, pObjectDD->fY + DEFAULT_RADIUS);
 				break;
 			default:
 				// pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, this->ObjectID);
@@ -76,24 +77,20 @@ void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 			pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_ARC:
-			pCanvas->Arc(2 * pObjectDD->fX - pObjectDDL->fX,
-				2 * pObjectDDL->fY - pObjectDD->fY, pObjectDDL->fX,
-				pObjectDD->fY, pObjectDD->fX, pObjectDD->fY, pObjectDDL->fX,
+			pCanvas->Arc(2 * pObjectDD->fX - pObjectDDL->fX, 2 * pObjectDDL->fY - pObjectDD->fY,
+				pObjectDDL->fX, pObjectDD->fY, pObjectDD->fX, pObjectDD->fY, pObjectDDL->fX,
 				pObjectDDL->fY);
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_NONE:
 			switch (pPointsDD[j]->iType) {
 			case TYPE_TEXT:
-				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY,
-					pPointsDD[j]->sText);
+				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, pPointsDD[j]->sText);
 				pCanvas->Font->Size = 8 + pCamera->iZShift / 10.0;
 				break;
 			case TYPE_POINT:
-				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS,
-					pObjectDD->fY - DEFAULT_RADIUS,
-					pObjectDD->fX + DEFAULT_RADIUS,
-					pObjectDD->fY + DEFAULT_RADIUS);
+				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS, pObjectDD->fY - DEFAULT_RADIUS,
+					pObjectDD->fX + DEFAULT_RADIUS, pObjectDD->fY + DEFAULT_RADIUS);
 				break;
 			default:
 				// pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, this->ObjectID);

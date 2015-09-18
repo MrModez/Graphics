@@ -8,8 +8,8 @@
 #define GRAPCHICS_COMPLEXSYSTEM_H_
 
 #include "GraphicsShared.h"
-#include "GraphicsCameraDD.h"
-#include "GraphicsObjectTD.h"
+
+class CameraDD;
 
 class ComplexSystem {
 public:

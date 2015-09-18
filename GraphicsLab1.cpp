@@ -10,6 +10,16 @@
 
 TMainForm *MainForm;
 
+#include "GraphicsPointTD.h"
+#include "GraphicsPointDD.h"
+#include "GraphicsObjectDD.h"
+#include "GraphicsObjectTD.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsCameraTD.h"
+#include "GraphicsOrtoSystem.h"
+#include "GraphicsComplexSystem.h"
+#include "GraphicsShared.h"
+
 #define Point(X, Y)		Ellipse(X-5, Y-5, X+5, Y+5)
 #define DEBUG			ShowMessage
 #define INT				StrToInt
@@ -18,7 +28,7 @@ TMainForm *MainForm;
 #define SIN 			sin
 #define PITCH 			PitchScroll->Position
 #define ROLL 			RollScroll->Position
-#define YAW 			YawScroll->Position - 1.7
+#define YAW 			YawScroll->Position
 #define SPINX 			XScroll->Position
 #define SPINY 			YScroll->Position
 #define SPINZ 			ZScroll->Position
@@ -53,6 +63,9 @@ __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 	AddLabels(YShiftScrollDD);
 	AddLabels(XShiftScrollDD);
 
+	AddLabels(YawScroll);
+	AddLabels(RollScroll);
+	AddLabels(PitchScroll);
 	// AddLabels(YawScroll);
 	// AddLabels(RollScroll);
 	// AddLabels(PitchScroll);
@@ -61,7 +74,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner) {
 void __fastcall TMainForm::AddLabels(TScrollBar* Scroll) {
 	TLabel *ScrollLeft = new TLabel(this);
 	ScrollLeft->SetParentComponent(this);
-	ScrollLeft->Left = Scroll->Left - 25;
+	ScrollLeft->Left = Scroll->Left - 28;
 	ScrollLeft->Top = Scroll->Top - 0;
 	ScrollLeft->Caption = Scroll->Min;
 	TLabel *ScrollRight = new TLabel(this);
@@ -69,6 +82,15 @@ void __fastcall TMainForm::AddLabels(TScrollBar* Scroll) {
 	ScrollRight->Left = Scroll->Left + Scroll->Width + 3;
 	ScrollRight->Top = Scroll->Top - 0;
 	ScrollRight->Caption = Scroll->Max;
+	if (Scroll->Max > 0 && Scroll->Min < 0) {
+		TLabel *ScrollCenter = new TLabel(this);
+		ScrollCenter->SetParentComponent(this);
+		// int size = Scroll->Max + Scroll->Min;
+		ScrollCenter->Left = // Scroll->Left + size / 2.0;
+			Scroll->Left - 2.0 + (Scroll->Width / 2.0);
+		ScrollCenter->Top = Scroll->Top - 10;
+		ScrollCenter->Caption = "|";
+	}
 }
 
 // ---------------------------------------------------------------------------
@@ -142,6 +164,10 @@ void __fastcall TMainForm::XSpinChange(TObject *Sender) {
 	LabPoint->SetPos(SPINX, SPINY, SPINZ);
 	PaintBoxTD->Refresh();
 	PaintBoxDD->Refresh();
+	TPointLabel->Caption = "Точка T - X: " + STR(SPINX) + " Y: " + STR(SPINY) + " Z: " +
+		STR(SPINZ);
+	CPointLabel->Caption = "Точка C - X: " + STR(PITCH) + " Y: " + STR(ROLL) + " Z: " +
+		STR(YAW);
 }
 
 // ---------------------------------------------------------------------------
@@ -179,12 +205,24 @@ void __fastcall TMainForm::Button1Click(TObject *Sender) {
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormShow(TObject *Sender) {
+
+	// Point
+	LabPoint = new ObjectTD("LabaPoint");
+	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_TEXT, "T"));
+	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_POINT));
+	LabPoint->SetParameters(DrawPar(clRed, psDot, 3));
+	LabPoint->SetDrawProj(true);
+	ObjectShared* PointShared = (ObjectShared*)LabPoint;
+	pOrtoSystem->AddObject(PointShared);
+	pCompSystem->AddObject(PointShared);
+
 	// 3D stuff
 	float L = 250;
 	for (int i = 7; i >= 0; i--) {
 		float lX, lY, lZ;
 		switch (i) {
 		case 0:
+			continue;
 			lX = 1, lY = 1, lZ = 1;
 			break;
 		case 1:
@@ -277,15 +315,6 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	ObjectShared* PointViewTDShared = (ObjectShared*)PointViewTD;
 	pOrtoSystem->AddObject(PointViewTDShared);
 
-	// Point
-	LabPoint = new ObjectTD("LabaPoint");
-	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_TEXT, "T"));
-	LabPoint->AddPoint(new PointTD(SPINX, SPINY, SPINZ, TYPE_POINT));
-	LabPoint->SetParameters(DrawPar(clRed, psDot, 3));
-	LabPoint->SetDrawProj(true);
-	ObjectShared* PointShared = (ObjectShared*)LabPoint;
-	pOrtoSystem->AddObject(PointShared);
-	pCompSystem->AddObject(PointShared);
 
 	// 2D stuff
 	L = 150;
@@ -327,5 +356,21 @@ void __fastcall TMainForm::FormShow(TObject *Sender) {
 	PointViewDD->AddPoint(new PointDD(45, 107, TYPE_POINT));
 	ObjectShared* PointViewDDShared = (ObjectShared*)PointViewDD;
 	pCompSystem->AddObject(PointViewDDShared);
+
+	XSpinChange(this);
 }
 // ---------------------------------------------------------------------------
+void __fastcall TMainForm::OProjClick(TObject *Sender)
+{
+	pCameraTD->SetMod(CAM_ORTO);
+	PaintBoxTD->Refresh();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::CProjClick(TObject *Sender)
+{
+	pCameraTD->SetMod(CAM_CENTRAL);
+	PaintBoxTD->Refresh();
+}
+//---------------------------------------------------------------------------
+

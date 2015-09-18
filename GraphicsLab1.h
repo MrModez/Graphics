@@ -14,13 +14,11 @@
 #include <vector>
 #define Pi 3.1415926536
 
-#include "GraphicsObjectDD.h"
-#include "GraphicsObjectTD.h"
-#include "GraphicsCameraDD.h"
-#include "GraphicsCameraTD.h"
-#include "GraphicsOrtoSystem.h"
-#include "GraphicsComplexSystem.h"
-#include "GraphicsShared.h"
+class OrtoSystem;
+class ComplexSystem;
+class CameraTD;
+class CameraDD;
+class ObjectTD;
 
 // ---------------------------------------------------------------------------
 class TMainForm : public TForm {
@@ -61,6 +59,12 @@ __published: // IDE-managed Components
 	TLabel *Label4;
 	TLabel *Label5;
 	TButton *Button1;
+	TRadioGroup *RadioGroup1;
+	TRadioButton *OProj;
+	TRadioButton *CProj;
+	TLabel *Label11;
+	TLabel *TPointLabel;
+	TLabel *CPointLabel;
 
 	void __fastcall PaintBoxDDPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);
@@ -74,6 +78,8 @@ __published: // IDE-managed Components
 	void __fastcall ASpinChange(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
+	void __fastcall OProjClick(TObject *Sender);
+	void __fastcall CProjClick(TObject *Sender);
 
 private: // User declarations
 

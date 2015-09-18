@@ -8,7 +8,6 @@
 #define GRAPCHICS_POINTDD_H_
 
 #include "GraphicsShared.h"
-// #include "GraphicsPointTD.h"
 
 class PointDD {
 public:

@@ -5,6 +5,8 @@
 // =============================================================================
 
 #include "GraphicsOrtoSystem.h"
+#include "GraphicsCameraTD.h"
+#include "GraphicsObjectTD.h"
 
 OrtoSystem::OrtoSystem(CameraTD* Camera) {
 	pCamera = Camera;

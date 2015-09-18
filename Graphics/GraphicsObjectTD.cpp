@@ -5,6 +5,9 @@
 // =============================================================================
 
 #include "GraphicsObjectTD.h"
+#include "GraphicsPointTD.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsCameraTD.h"
 #include "GraphicsProjectionOrtoDD.h"
 #include "GraphicsProjectionComplexDD.h"
 
@@ -29,9 +32,8 @@ ObjectTD::~ObjectTD() {
 ObjectTD* ObjectTD::CopyObjectTD() {
 	ObjectTD* CopyTD = new ObjectTD(ObjectID);
 	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
-		CopyTD->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY,
-			pPointsTD[i]->fZ, pPointsTD[i]->iAction, pPointsTD[i]->iType,
-			pPointsTD[i]->sText));
+		CopyTD->AddPoint(new PointTD(pPointsTD[i]->fX, pPointsTD[i]->fY, pPointsTD[i]->fZ,
+			pPointsTD[i]->iAction, pPointsTD[i]->iType, pPointsTD[i]->sText));
 	}
 	CopyTD->SetParameters(this->Par);
 	return CopyTD;
@@ -101,8 +103,7 @@ void ObjectTD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 	}
 	else {
 		Par.iProjStyle = PROJ_NONE;
-		ProjectionComplexDD* pProjection =
-			new ProjectionComplexDD(this, pCamera);
+		ProjectionComplexDD* pProjection = new ProjectionComplexDD(this, pCamera);
 		pProjection->PaintDD(pCanvas, pCamera);
 		delete pProjection;
 	}
@@ -134,8 +135,7 @@ void ObjectTD::SetCanvasDefaults(DefCanvas* pCanvas) {
 
 void ObjectTD::SetPos(float X, float Y, float Z) {
 	for (unsigned int i = 0; i < pPointsTD.size(); i++) {
-		if (pPointsTD[i]->iType == TYPE_POINT ||
-			pPointsTD[i]->iType == TYPE_TEXT) {
+		if (pPointsTD[i]->iType == TYPE_POINT || pPointsTD[i]->iType == TYPE_TEXT) {
 			pPointsTD[i]->SetPos(X, Y, Z);
 		}
 	}

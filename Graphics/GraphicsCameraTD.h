@@ -20,11 +20,15 @@ public:
 	void SetPosition(int xshift, int yshift, int zshift);
 	void SetAngle(int fangle);
 
+	void SetMod(int imode);
+
 	float fPitch;
 	float fRoll;
 	float fYaw;
 
 	int fAngle;
+	CameraMode iMode;
+	double TCheck[N];
 };
 
 #endif //GRAPCHICS_CAMERATD_H_

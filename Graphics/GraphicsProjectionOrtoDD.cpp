@@ -5,10 +5,17 @@
 // =============================================================================
 
 #include "GraphicsProjectionOrtoDD.h"
+#include "GraphicsCameraDD.h"
+#include "GraphicsCameraTD.h"
+#include "GraphicsObjectTD.h"
+#include "GraphicsPointTD.h"
+#include "GraphicsPointDD.h"
 
 ProjectionOrtoDD::ProjectionOrtoDD(ObjectTD* pObjectTD, CameraTD* pCamera) {
+	pObject = pObjectTD;
 	Par = pObjectTD->Par;
 	ObjectID = pObjectTD->ObjectID;
+	ComputeAres(pCamera);
 	pPointsDD = Projection(pObjectTD, pCamera);
 }
 
@@ -35,15 +42,14 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD, CameraTD*
 	float fX = pCamera->iXShift;
 	float fY = pCamera->iYShift;
 	float fZ = pCamera->iZShift;
-	float fP = DegToRad(pCamera->fPitch);
-	float fR = DegToRad(pCamera->fRoll);
-	float fW = DegToRad(pCamera->fYaw);
-	float fA = DegToRad(pCamera->fAngle);
 	if (Par.iProjStyle == PROJ_NONE) {
 		for (unsigned int i = 0; i < pObjectTD->pPointsTD.size(); i++) {
 			PointTD* pPoint = pObjectTD->pPointsTD[i];
+			// PointTD* pPointTD = Rotate3D(*pObjectTD->pPointsTD[i], fP, fR,
+			// fW, fA);
 			PointTD* pPointTD = CreatePointTD(pPoint, ACT_NONE, pPoint->fX, pPoint->fY, pPoint->fZ);
-			PointDD* pPointDD = static_cast<PointDD*>(Rotate3D(*pPointTD, fP, fR, fW, fA));
+			// PointDD* pPointDD = static_cast<PointDD*>(pPointTD);
+			PointDD* pPointDD = static_cast<PointDD*>(Rotate3D(*pPointTD, pCamera));
 			result.push_back(pPointDD);
 		}
 	}
@@ -69,25 +75,16 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD, CameraTD*
 					PointTD* pPointTDZYZ = CreatePointTD(pPoint, ACT_DRAW, 0, 1, 0);
 					PointTD* pPointTDZYY = CreatePointTD(pPoint, ACT_DRAW, 0, 0, 1);
 
-					PointDD* pPointDD = static_cast<PointDD*>(Rotate3D(*pPointTD, fP, fR, fW, fA));
-					PointDD* pPointDDXY =
-						static_cast<PointDD*>(Rotate3D(*pPointTDXY, fP, fR, fW, fA));
-					PointDD* pPointDDXZ =
-						static_cast<PointDD*>(Rotate3D(*pPointTDXZ, fP, fR, fW, fA));
-					PointDD* pPointDDZY =
-						static_cast<PointDD*>(Rotate3D(*pPointTDZY, fP, fR, fW, fA));
-					PointDD* pPointDDXYX =
-						static_cast<PointDD*>(Rotate3D(*pPointTDXYX, fP, fR, fW, fA));
-					PointDD* pPointDDXYY =
-						static_cast<PointDD*>(Rotate3D(*pPointTDXYY, fP, fR, fW, fA));
-					PointDD* pPointDDXZX =
-						static_cast<PointDD*>(Rotate3D(*pPointTDXZX, fP, fR, fW, fA));
-					PointDD* pPointDDXZZ =
-						static_cast<PointDD*>(Rotate3D(*pPointTDXZZ, fP, fR, fW, fA));
-					PointDD* pPointDDZYZ =
-						static_cast<PointDD*>(Rotate3D(*pPointTDZYZ, fP, fR, fW, fA));
-					PointDD* pPointDDZYY =
-						static_cast<PointDD*>(Rotate3D(*pPointTDZYY, fP, fR, fW, fA));
+					PointDD* pPointDD = static_cast<PointDD*>(Rotate3D(*pPointTD, pCamera));
+					PointDD* pPointDDXY = static_cast<PointDD*>(Rotate3D(*pPointTDXY, pCamera));
+					PointDD* pPointDDXZ = static_cast<PointDD*>(Rotate3D(*pPointTDXZ, pCamera));
+					PointDD* pPointDDZY = static_cast<PointDD*>(Rotate3D(*pPointTDZY, pCamera));
+					PointDD* pPointDDXYX = static_cast<PointDD*>(Rotate3D(*pPointTDXYX, pCamera));
+					PointDD* pPointDDXYY = static_cast<PointDD*>(Rotate3D(*pPointTDXYY, pCamera));
+					PointDD* pPointDDXZX = static_cast<PointDD*>(Rotate3D(*pPointTDXZX, pCamera));
+					PointDD* pPointDDXZZ = static_cast<PointDD*>(Rotate3D(*pPointTDXZZ, pCamera));
+					PointDD* pPointDDZYZ = static_cast<PointDD*>(Rotate3D(*pPointTDZYZ, pCamera));
+					PointDD* pPointDDZYY = static_cast<PointDD*>(Rotate3D(*pPointTDZYY, pCamera));
 
 					result.push_back(pPointDD);
 					result.push_back(pPointDDXY);
@@ -114,6 +111,7 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD, CameraTD*
 				0 && pObjectTD->pPointsTD[i]->fY >= 0 && pObjectTD->pPointsTD[i]->fZ >= 0) ||
 				(Par.iProjStyle == PROJ_DOTS_NIGGA && (pObjectTD->pPointsTD[i]->fX <=
 				0 || pObjectTD->pPointsTD[i]->fY <= 0 || pObjectTD->pPointsTD[i]->fZ <= 0))) {
+
 				PointTD* pPoint = pObjectTD->pPointsTD[i];
 
 				PointTD* pPointTDXZ = CreatePointTD(pPoint, ACT_NONE, 1, 0, 1);
@@ -132,13 +130,13 @@ std::vector<PointDD*>ProjectionOrtoDD::Projection(ObjectTD* pObjectTD, CameraTD*
 				pPointTDY->sText += "Y";
 				pPointTDZ->sText += "Z";
 
-				PointDD* pPointDDXZ = static_cast<PointDD*>(Rotate3D(*pPointTDXZ, fP, fR, fW, fA));
-				PointDD* pPointDDXY = static_cast<PointDD*>(Rotate3D(*pPointTDXY, fP, fR, fW, fA));
-				PointDD* pPointDDZY = static_cast<PointDD*>(Rotate3D(*pPointTDZY, fP, fR, fW, fA));
+				PointDD* pPointDDXZ = static_cast<PointDD*>(Rotate3D(*pPointTDXZ, pCamera));
+				PointDD* pPointDDXY = static_cast<PointDD*>(Rotate3D(*pPointTDXY, pCamera));
+				PointDD* pPointDDZY = static_cast<PointDD*>(Rotate3D(*pPointTDZY, pCamera));
 
-				PointDD* pPointDDX = static_cast<PointDD*>(Rotate3D(*pPointTDX, fP, fR, fW, fA));
-				PointDD* pPointDDY = static_cast<PointDD*>(Rotate3D(*pPointTDY, fP, fR, fW, fA));
-				PointDD* pPointDDZ = static_cast<PointDD*>(Rotate3D(*pPointTDZ, fP, fR, fW, fA));
+				PointDD* pPointDDX = static_cast<PointDD*>(Rotate3D(*pPointTDX, pCamera));
+				PointDD* pPointDDY = static_cast<PointDD*>(Rotate3D(*pPointTDY, pCamera));
+				PointDD* pPointDDZ = static_cast<PointDD*>(Rotate3D(*pPointTDZ, pCamera));
 
 				result.push_back(pPointDDXZ);
 				result.push_back(pPointDDXY);
@@ -186,65 +184,118 @@ PointTD ProjectionOrtoDD::Multiple(float mat[AXIS_COUNT + 1][AXIS_COUNT + 1], Po
 	return Result;
 }
 
-PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, float fPitch, float fRoll, float fYaw,
-	float fAngle) {
-	for (int i = AXIS_X; i < AXIS_COUNT; i++) {
-		float matrix[AXIS_COUNT + 1][AXIS_COUNT + 1];
-		switch (i) {
-		case AXIS_X:
-			matrix[0][0] = cos(fYaw);
-			matrix[0][1] = sin(fYaw + fAngle);
-			matrix[0][2] = 0.0;
-			matrix[1][0] = -sin(fYaw);
-			matrix[1][1] = cos(fYaw + fAngle);
-			matrix[1][2] = 0.0;
-			matrix[2][0] = 0.0;
-			matrix[2][1] = 0.0;
-			matrix[2][2] = 1.0;
-			break;
-		case AXIS_Y:
-			matrix[0][0] = cos(fPitch);
-			matrix[0][1] = 0.0;
-			matrix[0][2] = -sin(fPitch);
-			matrix[1][0] = 0.0;
-			matrix[1][1] = 1.0;
-			matrix[1][2] = 0.0;
-			matrix[2][0] = sin(fPitch);
-			matrix[2][1] = 0.0;
-			matrix[2][2] = cos(fPitch);
-			break;
-		case AXIS_Z:
-			matrix[0][0] = 1.0;
-			matrix[0][1] = 0.0;
-			matrix[0][2] = 0.0;
-			matrix[1][0] = 0.0;
-			matrix[1][1] = cos(fRoll);
-			matrix[1][2] = sin(fRoll);
-			matrix[2][0] = 0.0;
-			matrix[2][1] = -sin(fRoll);
-			matrix[2][2] = cos(fRoll);
-			break;
-			/* case AXIS_COUNT:
-			 matrix[0][0] = 1.0;
-			 matrix[0][1] = 0.0;
-			 matrix[0][2] = 0.0;
-			 matrix[1][0] = 0.0;
-			 matrix[1][1] = 1.0;
-			 matrix[1][2] = 0.0;
-			 matrix[2][0] = 0.0;
-			 matrix[2][1] = 0.0;
-			 matrix[2][2] = 0.0;
-			 matrix[2][3] = -1.0 / fAngle;
-			 break; */
-		default:
-			break;
-		}
-		pPointTD = Multiple(matrix, pPointTD);
+PointTD* ProjectionOrtoDD::Rotate3D(PointTD pPointTD, CameraTD* pCamera) {
+	double X[N] = {pPointTD.fX, pPointTD.fY, pPointTD.fZ, 1};
+	double Xm[N] = {0, 0, 0, 1};
+	Multiply(X, Ares, Xm);
+
+	if (pCamera->iMode == CAM_CENTRAL) {
+		Xm[0] = Xm[0] / (fabs(Xm[3]) + inac);
+		Xm[1] = Xm[1] / (fabs(Xm[3]) + inac);
 	}
-	return new PointTD(pPointTD);
+	else {
+		Xm[0] = Xm[0];
+		Xm[1] = Xm[1];
+	}
+	double Tm[N] = {0, 0, 0, 1};
+	if (ObjectID == "LabaPoint") {
+		Tm[0] = Xm[0];
+		Tm[1] = Xm[1];
+	}
+	if (c <= inac && pCamera->iMode == CAM_ORTO)
+		return new PointTD(0, 0, 0, pPointTD.iAction, pPointTD.iType, pPointTD.sText);
+	else if (c / 2.0 <= pCamera->TCheck[2] && pCamera->iMode == CAM_CENTRAL)
+		return new PointTD(0, 0, 0, pPointTD.iAction, pPointTD.iType, pPointTD.sText);
+	else
+		return new PointTD(Xm[0], Xm[1], Xm[2], pPointTD.iAction, pPointTD.iType, pPointTD.sText);   
 }
 
 float ProjectionOrtoDD::DegToRad(float fDeg) {
 	float fRad = fDeg * Pi / 180.0;
 	return tan(fRad);
 };
+
+// ---------------------------------------------------------------------------
+void ProjectionOrtoDD::Multiply(double Matrix1[][N], double Matrix2[][N], double Matrix3[][N]) {
+	double Tmp = 0;
+	for (int i = 0; i < N; i++)
+		for (int j = 0; j < N; j++) {
+			for (int k = 0; k < N; k++)
+				Tmp += Matrix1[i][k] * Matrix2[k][j];
+			Matrix3[i][j] = Tmp;
+			Tmp = 0;
+		}
+}
+
+// -------
+void ProjectionOrtoDD::Multiply(double String1[N], double Matrix[][N], double String2[N]) {
+	double Tmp = 0;
+	for (int j = 0; j < N; j++) {
+		for (int k = 0; k < N; k++)
+			Tmp += String1[k] * Matrix[k][j];
+		String2[j] = Tmp;
+		Tmp = 0;
+	}
+}
+
+// ---------------------------------------------------------------------------
+void ProjectionOrtoDD::ComputeAres(CameraTD* pCamera) {
+	float C[N] = {pCamera->fPitch, pCamera->fRoll, pCamera->fYaw, 1};
+	sinT = C[0] / sqrt(C[0] * C[0] + C[2] * C[2] + 0.001);
+	sinP = C[1] / sqrt(C[0] * C[0] + C[1] * C[1] + C[2] * C[2] + inac);
+	cosT = sqrt(1 - sinT * sinT);
+	cosP = sqrt(1 - sinP * sinP);
+	
+	Ry[0][0] = cosT;
+	Ry[0][1] = 0;
+	Ry[0][2] = sinT;
+	Ry[0][3] = 0;
+	Ry[1][0] = -sinT;
+	Ry[1][1] = 0;
+	Ry[1][2] = cosT;
+	Ry[1][3] = 0;
+	Ry[2][0] = 0;
+	Ry[2][1] = 1;
+	Ry[2][2] = 0;
+	Ry[2][3] = 0;
+	Ry[3][0] = 0;
+	Ry[3][1] = 0;
+	Ry[3][2] = 0;
+	Ry[3][3] = 1;
+
+	Rx[0][0] = 0;
+	Rx[0][1] = cosP;
+	Rx[0][2] = sinP;
+	Rx[0][3] = 0;
+	Rx[1][0] = 0;
+	Rx[1][1] = -sinP;
+	Rx[1][2] = cosP;
+	Rx[1][3] = 0;
+	Rx[2][0] = 1;
+	Rx[2][1] = 0;
+	Rx[2][2] = 0;
+	Rx[2][3] = 0;
+	Rx[3][0] = 0;
+	Rx[3][1] = 0;
+	Rx[3][2] = 0;
+	Rx[3][3] = 1;
+	c = sqrt(C[0] * C[0] + C[1] * C[1] + C[2] * C[2]);
+	double Acentre[N][N] = { {1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 0, -1}, {0, 0, 0, 1}};
+	Acentre[2][3] = -1 / (c + inac);
+
+	double A[N][N] = { {1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+
+	Multiply(Ry, Rx, RyRx);
+	if (ObjectID == "LabaPoint") {
+		double T[N] = {
+			pObject->pPointsTD[0]->fX, pObject->pPointsTD[0]->fY, pObject->pPointsTD[0]->fZ, 1};
+		Multiply(T, RyRx, pCamera->TCheck);
+	}
+
+	if (pCamera->iMode == CAM_CENTRAL) {
+		Multiply(RyRx, Acentre, Ares);
+	}
+	else {
+		Multiply(RyRx, A, Ares);
+	}
+}

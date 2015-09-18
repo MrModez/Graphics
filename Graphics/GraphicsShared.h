@@ -19,6 +19,10 @@
 #define DEFAULT_COLOR 	clBlack
 #define DEFAULT_STYLE 	psSolid
 #define STAT_CAST static_cast
+#define N 4     // Размерность матриц
+#define inac 0.0000000000000001
+#define x0 250  // абсцисса центра ск
+#define y0 250  // ордината центра ск
 
 enum Action {
 	ACT_NONE, ACT_MOVE, ACT_DRAW, ACT_ARC, ACT_COUNT
@@ -42,6 +46,10 @@ enum ProjStyle {
 
 enum Quarter {
 	QXZ, QXY, QYY, QYZ
+};
+
+enum CameraMode {
+	CAM_ORTO, CAM_CENTRAL
 };
 
 class DrawPar {

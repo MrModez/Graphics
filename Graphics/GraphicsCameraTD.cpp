@@ -13,6 +13,7 @@ CameraTD::CameraTD() {
 	iXShift = 0;
 	iYShift = 0;
 	iZShift = 0;
+	iMode = CAM_ORTO;
 }
 
 CameraTD::CameraTD(int xshift, int yshift, int zshift, float pitch, float roll,
@@ -23,6 +24,7 @@ CameraTD::CameraTD(int xshift, int yshift, int zshift, float pitch, float roll,
 	iXShift = xshift;
 	iYShift = yshift;
 	iZShift = zshift;
+	iMode = CAM_ORTO;
 }
 
 void CameraTD::SetRotation(float pitch, float roll, float yaw) {
@@ -39,4 +41,8 @@ void CameraTD::SetPosition(int xshift, int yshift, int zshift) {
 
 void CameraTD::SetAngle(int fangle) {
 	fAngle = fangle;
+}
+
+void CameraTD::SetMod(int imode) {
+	iMode = imode;
 }
