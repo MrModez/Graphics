@@ -10,29 +10,40 @@
 #include "GraphicsObjectTD.h"
 #include "GraphicsPointDD.h"
 
-ObjectDD::ObjectDD(std::vector<PointDD*>Object) {
+ObjectDD::ObjectDD(std::vector<PointDD*>Object)
+{
 	pPointsDD = Object;
 }
 
-ObjectDD::ObjectDD() {
+ObjectDD::ObjectDD()
+{
 }
 
-ObjectDD::ObjectDD(String ID) {
+ObjectDD::ObjectDD(String ID)
+{
 	ObjectID = ID;
 }
 
-ObjectDD::~ObjectDD() {
-	for (unsigned int i = 0; i < pPointsDD.size(); i++) {
+ObjectDD::~ObjectDD()
+{
+	for (unsigned int i = 0; i < pPointsDD.size(); i++)
+	{
 		delete pPointsDD[i];
 	}
 	pPointsDD.clear();
 }
 
-void ObjectDD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
-	for (unsigned int j = 0; j < pPointsDD.size(); j++) {
+float qwe;
+void ObjectDD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera)
+{
+	qwe = 0;
+	for (unsigned int j = 0; j < pPointsDD.size(); j++)
+	{
+		qwe = pPointsDD[j]->fX * 0.55 + 220;
 		PointDD* pObjectDD = pPointsDD[j];
 		SetCanvasSettings(pCanvas);
-		switch (pObjectDD->iAction) {
+		switch (pObjectDD->iAction)
+		{
 		case ACT_MOVE:
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
 			break;
@@ -43,14 +54,18 @@ void ObjectDD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 				pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_NONE:
-			switch (pPointsDD[j]->iType) {
+			switch (pPointsDD[j]->iType)
+			{
 			case TYPE_TEXT:
-				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, pPointsDD[j]->sText);
+				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY,
+					pPointsDD[j]->sText);
 				pCanvas->Font->Size = 8 + pCamera->iZShift / 10.0;
 				break;
 			case TYPE_POINT:
-				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS, pObjectDD->fY - DEFAULT_RADIUS,
-					pObjectDD->fX + DEFAULT_RADIUS, pObjectDD->fY + DEFAULT_RADIUS);
+				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS,
+					pObjectDD->fY - DEFAULT_RADIUS,
+					pObjectDD->fX + DEFAULT_RADIUS,
+					pObjectDD->fY + DEFAULT_RADIUS);
 				break;
 			default:
 				// pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, this->ObjectID);
@@ -64,12 +79,16 @@ void ObjectDD::PaintTD(DefCanvas* pCanvas, CameraTD* pCamera) {
 	}
 }
 
-void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
-	for (unsigned int j = 0; j < pPointsDD.size(); j++) {
+void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera)
+{
+	for (unsigned int j = 0; j < pPointsDD.size(); j++)
+	{
+		qwe = pPointsDD[j]->fX * 0.55 + 220;
 		PointDD* pObjectDDL = pPointsDD[j - 1];
 		PointDD* pObjectDD = pPointsDD[j];
 		SetCanvasSettings(pCanvas);
-		switch (pObjectDD->iAction) {
+		switch (pObjectDD->iAction)
+		{
 		case ACT_MOVE:
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
 			break;
@@ -77,20 +96,25 @@ void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 			pCanvas->LineTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_ARC:
-			pCanvas->Arc(2 * pObjectDD->fX - pObjectDDL->fX, 2 * pObjectDDL->fY - pObjectDD->fY,
-				pObjectDDL->fX, pObjectDD->fY, pObjectDD->fX, pObjectDD->fY, pObjectDDL->fX,
+			pCanvas->Arc(2 * pObjectDD->fX - pObjectDDL->fX,
+				2 * pObjectDDL->fY - pObjectDD->fY, pObjectDDL->fX,
+				pObjectDD->fY, pObjectDD->fX, pObjectDD->fY, pObjectDDL->fX,
 				pObjectDDL->fY);
 			pCanvas->MoveTo(pObjectDD->fX, pObjectDD->fY);
 			break;
 		case ACT_NONE:
-			switch (pPointsDD[j]->iType) {
+			switch (pPointsDD[j]->iType)
+			{
 			case TYPE_TEXT:
-				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, pPointsDD[j]->sText);
+				pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY,
+					pPointsDD[j]->sText);
 				pCanvas->Font->Size = 8 + pCamera->iZShift / 10.0;
 				break;
 			case TYPE_POINT:
-				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS, pObjectDD->fY - DEFAULT_RADIUS,
-					pObjectDD->fX + DEFAULT_RADIUS, pObjectDD->fY + DEFAULT_RADIUS);
+				pCanvas->Ellipse(pObjectDD->fX - DEFAULT_RADIUS,
+					pObjectDD->fY - DEFAULT_RADIUS,
+					pObjectDD->fX + DEFAULT_RADIUS,
+					pObjectDD->fY + DEFAULT_RADIUS);
 				break;
 			default:
 				// pCanvas->TextOutW(pObjectDD->fX, pObjectDD->fY, this->ObjectID);
@@ -104,22 +128,27 @@ void ObjectDD::PaintDD(DefCanvas* pCanvas, CameraDD* pCamera) {
 	}
 }
 
-void ObjectDD::SetParameters(DrawPar P) {
+void ObjectDD::SetParameters(DrawPar P)
+{
 	Par = P;
 };
 
-void ObjectDD::AddPoint(PointDD * Point) {
+void ObjectDD::AddPoint(PointDD * Point)
+{
 	pPointsDD.push_back(Point);
 }
 
-void ObjectDD::SetCanvasSettings(DefCanvas* pCanvas) {
+
+void ObjectDD::SetCanvasSettings(DefCanvas* pCanvas)
+{
 	pCanvas->Pen->Width = Par.iWidth;
-	pCanvas->Pen->Color = Par.iColor;
+	pCanvas->Pen->Color = Par.iColor + qwe;
 	pCanvas->Pen->Style = Par.iStyle;
 	pCanvas->Brush->Style = bsClear;
 }
 
-void ObjectDD::SetCanvasDefaults(DefCanvas* pCanvas) {
+void ObjectDD::SetCanvasDefaults(DefCanvas* pCanvas)
+{
 	pCanvas->Pen->Width = DEFAULT_WIDTH;
 	pCanvas->Pen->Color = DEFAULT_COLOR;
 	pCanvas->Pen->Style = DEFAULT_STYLE;

@@ -8,6 +8,7 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Samples.Spin.hpp>
 #include <Direct2D.hpp>
 #include <Vcl.ComCtrls.hpp>
@@ -26,17 +27,9 @@ __published: // IDE-managed Components
 
 	TTimer *DrawTimer;
 	TCheckBox *AACheck;
-	TLabel *Label7;
-	TLabel *Label8;
-	TLabel *Label9;
-	TLabel *Label10;
-	TPaintBox *PaintBoxDD;
 	TPaintBox *PaintBoxTD;
 	TCheckBox *ProjCheck;
 	TLabel *Label6;
-	TScrollBar *XScroll;
-	TScrollBar *YScroll;
-	TScrollBar *ZScroll;
 	TScrollBar *AScroll;
 	TLabel *Label15;
 	TScrollBar *ZShiftScroll;
@@ -50,14 +43,7 @@ __published: // IDE-managed Components
 	TScrollBar *RollScroll;
 	TLabel *Label50;
 	TScrollBar *PitchScroll;
-	TScrollBar *ZShiftScrollDD;
-	TLabel *Label1;
-	TLabel *Label2;
-	TScrollBar *YShiftScrollDD;
-	TLabel *Label3;
-	TScrollBar *XShiftScrollDD;
 	TLabel *Label4;
-	TLabel *Label5;
 	TButton *Button1;
 	TRadioGroup *RadioGroup1;
 	TRadioButton *OProj;
@@ -65,8 +51,6 @@ __published: // IDE-managed Components
 	TLabel *Label11;
 	TLabel *TPointLabel;
 	TLabel *CPointLabel;
-
-	void __fastcall PaintBoxDDPaint(TObject * Sender);
 	void __fastcall DrawTimerTimer(TObject * Sender);
 	void __fastcall PitchSpinChange(TObject * Sender);
 	void __fastcall AACheckClick(TObject *Sender);
@@ -84,10 +68,11 @@ __published: // IDE-managed Components
 private: // User declarations
 
 	OrtoSystem *pOrtoSystem;
-	ComplexSystem *pCompSystem;
+	//ComplexSystem *pCompSystem;
 	CameraTD *pCameraTD;
-	CameraDD *pCameraDD;
+	//CameraDD *pCameraDD;
 	ObjectTD *LabPoint;
+	ObjectTD *CamPoint;
 
 	void __fastcall TMainForm::AddLabels(TScrollBar* Scroll);
 

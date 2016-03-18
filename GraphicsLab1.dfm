@@ -22,10 +22,10 @@ object MainForm: TMainForm
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 17
-  object PaintBoxDD: TPaintBox
-    Left = 560
+  object PaintBoxTD: TPaintBox
+    Left = 0
     Top = 0
-    Width = 585
+    Width = 1145
     Height = 656
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -34,57 +34,9 @@ object MainForm: TMainForm
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    OnPaint = PaintBoxDDPaint
-    ExplicitLeft = 566
-  end
-  object PaintBoxTD: TPaintBox
-    Left = 0
-    Top = 0
-    Width = 560
-    Height = 656
-    Align = alLeft
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
     OnPaint = PaintBoxTDPaint
     ExplicitLeft = -6
-  end
-  object Label10: TLabel
-    Left = 268
-    Top = 8
-    Width = 49
-    Height = 17
-    Caption = #1058#1086#1095#1082#1072' T:'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-  end
-  object Label7: TLabel
-    Left = 268
-    Top = 31
-    Width = 8
-    Height = 17
-    Caption = 'X'
-  end
-  object Label8: TLabel
-    Left = 269
-    Top = 54
-    Width = 7
-    Height = 17
-    Caption = 'Y'
-  end
-  object Label9: TLabel
-    Left = 269
-    Top = 77
-    Width = 7
-    Height = 17
-    Caption = 'Z'
+    ExplicitWidth = 560
   end
   object Label6: TLabel
     Left = 830
@@ -136,46 +88,12 @@ object MainForm: TMainForm
     Height = 17
     Caption = 'X'
   end
-  object Label1: TLabel
-    Left = 912
-    Top = 77
-    Width = 7
-    Height = 17
-    Caption = 'Z'
-  end
-  object Label2: TLabel
-    Left = 912
-    Top = 54
-    Width = 7
-    Height = 17
-    Caption = 'Y'
-  end
-  object Label3: TLabel
-    Left = 911
-    Top = 31
-    Width = 8
-    Height = 17
-    Caption = 'X'
-  end
   object Label4: TLabel
     Left = 8
     Top = 8
     Width = 44
     Height = 17
     Caption = '3D '#1042#1080#1076':'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-  end
-  object Label5: TLabel
-    Left = 911
-    Top = 8
-    Width = 44
-    Height = 17
-    Caption = '2D '#1042#1080#1076':'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -244,47 +162,14 @@ object MainForm: TMainForm
     TabOrder = 1
     OnClick = ProjCheckClick
   end
-  object XScroll: TScrollBar
-    Left = 303
-    Top = 31
-    Width = 130
-    Height = 17
-    Min = -100
-    PageSize = 0
-    Position = 80
-    TabOrder = 2
-    OnChange = XSpinChange
-  end
-  object YScroll: TScrollBar
-    Left = 303
-    Top = 54
-    Width = 130
-    Height = 17
-    Min = -100
-    PageSize = 0
-    Position = 60
-    TabOrder = 3
-    OnChange = XSpinChange
-  end
-  object ZScroll: TScrollBar
-    Left = 303
-    Top = 77
-    Width = 130
-    Height = 17
-    Min = -100
-    PageSize = 0
-    Position = 70
-    TabOrder = 4
-    OnChange = XSpinChange
-  end
   object AScroll: TScrollBar
     Left = 885
     Top = 631
-    Width = 137
+    Width = 84
     Height = 17
     Max = 115
     PageSize = 0
-    TabOrder = 5
+    TabOrder = 2
     Visible = False
     OnChange = ASpinChange
   end
@@ -297,7 +182,7 @@ object MainForm: TMainForm
     Min = 5
     PageSize = 0
     Position = 12
-    TabOrder = 6
+    TabOrder = 3
     OnChange = XShiftSpinChange
   end
   object YShiftScroll: TScrollBar
@@ -309,7 +194,7 @@ object MainForm: TMainForm
     Min = 300
     PageSize = 0
     Position = 420
-    TabOrder = 7
+    TabOrder = 4
     OnChange = XShiftSpinChange
   end
   object XShiftScroll: TScrollBar
@@ -321,7 +206,7 @@ object MainForm: TMainForm
     Min = 100
     PageSize = 0
     Position = 280
-    TabOrder = 8
+    TabOrder = 5
     OnChange = XShiftSpinChange
   end
   object YawScroll: TScrollBar
@@ -332,7 +217,7 @@ object MainForm: TMainForm
     Max = 300
     PageSize = 0
     Position = 55
-    TabOrder = 9
+    TabOrder = 6
     OnChange = PitchSpinChange
   end
   object RollScroll: TScrollBar
@@ -343,7 +228,7 @@ object MainForm: TMainForm
     Max = 300
     PageSize = 0
     Position = 280
-    TabOrder = 10
+    TabOrder = 7
     OnChange = PitchSpinChange
   end
   object PitchScroll: TScrollBar
@@ -354,44 +239,8 @@ object MainForm: TMainForm
     Max = 300
     PageSize = 0
     Position = 50
-    TabOrder = 11
+    TabOrder = 8
     OnChange = PitchSpinChange
-  end
-  object ZShiftScrollDD: TScrollBar
-    Left = 950
-    Top = 77
-    Width = 130
-    Height = 17
-    Max = 50
-    Min = 5
-    PageSize = 0
-    Position = 16
-    TabOrder = 12
-    OnChange = XShiftSpinChange
-  end
-  object YShiftScrollDD: TScrollBar
-    Left = 950
-    Top = 54
-    Width = 130
-    Height = 17
-    Max = 600
-    Min = 300
-    PageSize = 0
-    Position = 350
-    TabOrder = 13
-    OnChange = XShiftSpinChange
-  end
-  object XShiftScrollDD: TScrollBar
-    Left = 950
-    Top = 31
-    Width = 130
-    Height = 17
-    Max = 300
-    Min = 100
-    PageSize = 0
-    Position = 270
-    TabOrder = 14
-    OnChange = XShiftSpinChange
   end
   object Button1: TButton
     Left = 1043
@@ -399,16 +248,16 @@ object MainForm: TMainForm
     Width = 81
     Height = 33
     Caption = #1042#1099#1093#1086#1076
-    TabOrder = 15
+    TabOrder = 9
     OnClick = Button1Click
   end
   object RadioGroup1: TRadioGroup
-    Left = 724
+    Left = 737
     Top = 8
     Width = 133
     Height = 63
     Caption = #1055#1088#1086#1077#1094#1080#1088#1086#1074#1072#1085#1080#1077
-    TabOrder = 16
+    TabOrder = 10
   end
   object OProj: TRadioButton
     Left = 737
@@ -417,7 +266,7 @@ object MainForm: TMainForm
     Height = 17
     Caption = #1054#1088#1090#1086#1075#1086#1085#1072#1083#1100#1085#1086#1077
     Checked = True
-    TabOrder = 17
+    TabOrder = 11
     TabStop = True
     OnClick = OProjClick
   end
@@ -427,7 +276,7 @@ object MainForm: TMainForm
     Width = 107
     Height = 17
     Caption = #1062#1077#1085#1090#1088#1072#1083#1100#1085#1086#1077
-    TabOrder = 18
+    TabOrder = 12
     OnClick = CProjClick
   end
   object DrawTimer: TTimer

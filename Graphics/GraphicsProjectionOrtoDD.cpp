@@ -240,12 +240,20 @@ void ProjectionOrtoDD::Multiply(double String1[N], double Matrix[][N], double St
 
 // ---------------------------------------------------------------------------
 void ProjectionOrtoDD::ComputeAres(CameraTD* pCamera) {
+	// Косинусы и синусы углов поворота
+	double cosT, cosP, sinT, sinP;
+	// Матрицы элементараных преобразований
+	double Rx[N][N];
+	double Ry[N][N];
+	double Rz[N][N];
+	double RyRx[N][N];
 	float C[N] = {pCamera->fPitch, pCamera->fRoll, pCamera->fYaw, 1};
+
 	sinT = C[0] / sqrt(C[0] * C[0] + C[2] * C[2] + 0.001);
 	sinP = C[1] / sqrt(C[0] * C[0] + C[1] * C[1] + C[2] * C[2] + inac);
 	cosT = sqrt(1 - sinT * sinT);
 	cosP = sqrt(1 - sinP * sinP);
-	
+
 	Ry[0][0] = cosT;
 	Ry[0][1] = 0;
 	Ry[0][2] = sinT;

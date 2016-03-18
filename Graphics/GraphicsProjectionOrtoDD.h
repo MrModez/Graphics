@@ -31,12 +31,6 @@ public:
 	static float matrix[AXIS_COUNT][AXIS_COUNT];
 
 	ObjectTD *pObject;
-	// Косинусы и синусы углов поворота
-	double cosT, cosP, sinT, sinP;
-	// Матрицы элементараных преобразований
-	double Rx[N][N];
-	double Ry[N][N];
-	double RyRx[N][N];
 	// double Acentre[N][N];
 	// Результирующая матрица
 	double Ares[N][N];
